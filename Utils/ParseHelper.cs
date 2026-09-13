@@ -90,10 +90,10 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             if (options.HasFlag(ParseFlags.SpecialTokens))
             {
-                if (self != null && string.Equals(input, "me", comparison))
+                if (self != null && input.Equals("me", comparison))
                     return [self];
 
-                if (string.Equals(input, "*", comparison))
+                if (input.Equals("*", comparison) || input.Equals("all", comparison))
                     return users;
             }
 

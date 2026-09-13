@@ -9,5 +9,11 @@ public abstract class GameScriptInterfaceExtended : GameScriptInterface
 
 public partial class GameScript : GameScriptInterfaceExtended
 {
-    // ...
+    public void OnStartup()
+    {
+        CommandHandler.GlobalCommands.Add(new CommandHandler.Command("cfx", CommandHandler.DisplayHelp));
+        ModuleRegistry.RegisterAll();
+
+        Game.ShowChatMessage("Commands++", Color.Yellow);
+    }
 }
