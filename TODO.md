@@ -54,7 +54,7 @@ Interact with players. Moderator-only.
 - [ ] `/fly <player>`: Toggles flying for a player.
 - [x] `/kill <player> [gib|remove]`: Kills a player, optionally gibbing them or removing them from the game.
 - [ ] `/revive <player>`: Revives a dead player.
-- [ ] `/input <player>`: Toggles whether a player can provide input, effectively freezing or unfreezing them.
+- [x] `/input <player>`: Toggles whether a player can provide input, effectively freezing or unfreezing them.
 - [x] `/tp <from> [to]`: Teleports a player to another player. If no target is provided, teleports them to your position.
 - [ ] `/team <player> <team>`: Sets the team of a player.
 - [x] `/trip <player>`: Trips a player, knocking them down.
