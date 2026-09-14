@@ -60,7 +60,7 @@ Interact with players. Moderator-only.
 - [x] `/trip <player>`: Trips a player, knocking them down.
 - [ ] `/setmodifier <player> <modifier> <value>`: Sets a player modifier to the given value.
 - [ ] `/spawn <id>`: Spawns an object with the given ID at your position.
-- [ ] `/burn <player>`: Toggles whether a player is burning.
+- [x] `/burn <player>`: Toggles whether a player is burning.
 
 ## Fun
 
