@@ -35,7 +35,7 @@ Custom gameplay rules. Host-only, persisted unless noted otherwise.
 - [ ] `/auto_victory [true|false]`: Toggles or explicitly sets automatic victory condition detection. Used to make a map custom or versus. Moderator-only, not persisted.
 - [ ] `/weapon_spawn [true|false]`: Toggles or explicitly sets whether weapons spawn on the map. Moderator-only, not persisted.
 - [ ] `/tags [true|false]`: Toggles or explicitly sets nametag and status bar visibility for all players. Moderator-only, not persisted.
-- [ ] `/reset_winratio`: Resets the stored win ratio statistics. Moderator-only.
+- [x] `/reset_winratio`: Resets the stored win ratio statistics. Moderator-only.
 - [ ] `/refill_ammo`: Toggles whether ammo is constantly refilled for all players.
 - [ ] `/regen <hp>`: Sets health regenerated per second for all players. Set to 0 to disable.
 - [ ] `/gravity <multiplier>`: Sets a multiplier applied to gravity. Set to 0 to disable custom gravity.
