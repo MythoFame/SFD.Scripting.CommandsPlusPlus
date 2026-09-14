@@ -53,6 +53,9 @@ public partial class GameScript : GameScriptInterfaceExtended
             AddCommand("skin", Skin,
                 "<from> <to> - Copies one player's profile onto another player",
                 moderatorOnly: true);
+            AddCommand("user", User,
+                "<from> <to> - Swaps the users of two players",
+                moderatorOnly: true);
         }
 
         public override void OnEnable()
