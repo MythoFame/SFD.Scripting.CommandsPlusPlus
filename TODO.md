@@ -93,7 +93,7 @@ Interact with players. Moderator-only.
 - [x] `/swap_skin <from> <to>`: Swap one player's profile onto another player.
 - [x] `/user <from> <to>`: Swaps the users of two players.
 - [ ] `/wear <name> <type> [primary_color] [secondary_color]`: Gives your profile a cosmetic item of the given type and colors.
-- [ ] `/action <player> <action>`: Queues an action for a player whose input is disabled.
+- [x] `/action <player> <action>`: Queues an action for a player whose input is disabled.
 - [x] `/refill <player>`: Refills a player's ammo as if they used an ammo stash.
 - [ ] `/magnet <player> [area_size] [players|objects]`: Toggles attraction of nearby players and/or objects toward a player.
 - [ ] `/repulse <player> [area_size] [players|objects]`: Toggles repulsion of nearby players and/or objects away from a player.

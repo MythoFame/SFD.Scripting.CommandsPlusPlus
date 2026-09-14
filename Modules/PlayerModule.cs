@@ -59,6 +59,9 @@ public partial class GameScript : GameScriptInterfaceExtended
             AddCommand("user", User,
                 "<from> <to> - Swaps the users of two players",
                 moderatorOnly: true);
+            AddCommand("action", ActionCommand,
+                "<player> <action> - Queues an action for a player whose input is disabled",
+                moderatorOnly: true);
         }
 
         public override void OnEnable()
