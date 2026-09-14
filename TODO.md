@@ -107,7 +107,7 @@ Lightweight fun commands for everyone unless noted otherwise.
 - [x] `/bot [team] [ai] [name]`: Spawns a robot, optionally on a given team with the given AI and name. Moderator-only.
 - [ ] `/bullet <player> <id>`: Sets custom bullets for a player. Moderator-only.
 - [ ] `/noreload <player> <slot>`: Attempts to toggle no reload for the specified weapon. Only works for some specific weapons. Moderator-only.
-- [ ] `/anvil <player>`: Drops a heavy object onto a player. Moderator-only.
+- [x] `/anvil <player>`: Drops a heavy object onto a player. Moderator-only.
 - [x] `/clone <player> [team] [ai]`: Spawns a clone of a player, optionally on a given team with the given AI. Moderator-only.
 - [x] `/fart`: Makes you fart.
 - [x] `/suicide`: Die dramatically.
