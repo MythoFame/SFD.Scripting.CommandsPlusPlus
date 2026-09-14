@@ -12,7 +12,7 @@ public partial class GameScript : GameScriptInterfaceExtended
     public static void OnStartup()
     {
         // Temporary debug help command. Will replace later with display help function that supports modules.
-        CommandHandler.ActiveCommands.Add(new CommandHandler.Command("cfx", CommandHandler.DisplayHelp));
+        CommandHandler.ActiveCommands.Add(new("cfx", CommandHandler.DisplayHelp));
 
         ModuleRegistry.RegisterAll();
 

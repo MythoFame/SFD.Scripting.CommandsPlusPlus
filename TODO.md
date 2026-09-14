@@ -52,7 +52,7 @@ Interact with players. Moderator-only.
 
 - [ ] `/noclip <player>`: Toggles noclip for a player, allowing them to pass through walls.
 - [ ] `/fly <player>`: Toggles flying for a player.
-- [ ] `/kill <player> [gib|remove]`: Kills a player, optionally gibbing them or removing them from the game.
+- [x] `/kill <player> [gib|remove]`: Kills a player, optionally gibbing them or removing them from the game.
 - [ ] `/revive <player>`: Revives a dead player.
 - [ ] `/input <player>`: Toggles whether a player can provide input, effectively freezing or unfreezing them.
 - [ ] `/tp <from> [to]`: Teleports a player to another player. If no target is provided, teleports them to your position.
