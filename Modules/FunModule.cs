@@ -29,6 +29,9 @@ public partial class GameScript : GameScriptInterfaceExtended
             AddCommand("clone", Clone,
                 "<player> [team] [ai] - Spawns a clone of a player, optionally on a given team with the given AI",
                 moderatorOnly: true);
+            AddCommand("bot", Bot,
+                "[team] [ai] [name] - Spawns a robot, optionally on a given team with the given AI and name",
+                moderatorOnly: true);
         }
 
         public override void OnEnable()
