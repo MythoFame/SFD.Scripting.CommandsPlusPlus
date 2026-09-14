@@ -9,6 +9,8 @@ public abstract class GameScriptInterfaceExtended : GameScriptInterface
 
 public partial class GameScript : GameScriptInterfaceExtended
 {
+    private static readonly Random _random = Random.Shared;
+
     public static void OnStartup()
     {
         // Temporary debug help command. Will replace later with display help function that supports modules.

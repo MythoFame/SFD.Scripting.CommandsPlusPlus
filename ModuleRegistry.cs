@@ -73,6 +73,7 @@ public partial class GameScript : GameScriptInterfaceExtended
         {
             Register(new PlayerModule());
             Register(new GameplayModule());
+            Register(new FunModule());
 
             foreach (CommandsModule module in _cachedModules)
             {
