@@ -6,11 +6,7 @@ namespace SFD.Scripting.CommandsPlusPlus;
 public partial class GameScript : GameScriptInterfaceExtended
 {
     /// <summary>
-    /// Tracks registered chat commands and dispatches incoming user messages to
-    /// their associated callbacks. The handler auto-subscribes to user message
-    /// events the moment a command is added to <see cref="ActiveCommands"/>, and
-    /// auto-unsubscribes once the list is emptied — no manual Initialize/Destroy
-    /// calls required.
+    /// Player interaction commands (kill, revive, teleport, ...).
     /// </summary>
     public sealed class PlayerModule : CommandsModule
     {
@@ -33,7 +29,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
         private static void Kill(UserMessageCallbackArgs args)
         {
-            IPlayer[] players = ParseHelper.ParsePlayers(args.CommandArguments).ToArray();
+            IPlayer[] players = [.. ParseHelper.ParsePlayers(args.CommandArguments)];
 
             foreach (IPlayer player in players)
                 player.Kill();
