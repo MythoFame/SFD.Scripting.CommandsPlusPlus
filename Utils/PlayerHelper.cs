@@ -150,17 +150,18 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             if (user != null)
             {
-                if (user.IsBot)
-                {
-                    revived.SetBotBehavior(new(true, user.BotPredefinedAIType));
-                }
-
                 revived.SetUser(user);
+            }
+
+            if (player.IsBot)
+            {
+                revived.SetBotBehavior(player.GetBotBehavior());
             }
 
             revived.SetProfile(player.GetProfile());
             revived.SetTeam(player.GetTeam());
             revived.SetInputMode(player.InputMode);
+            revived.SetBotName(player.Name);
 
             if (player.IsFalling)
             {
