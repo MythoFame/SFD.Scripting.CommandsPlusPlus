@@ -20,6 +20,8 @@ public partial class GameScript : GameScriptInterfaceExtended
             AddCommand("lightning", Lightning,
                 "<player> - Summons a lightning strike upon a player",
                 moderatorOnly: true);
+            AddCommand("graffiti", Graffiti,
+                "<text> - Creates floating graffiti text at your position");
         }
 
         public override void OnEnable()

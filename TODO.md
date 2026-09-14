@@ -76,7 +76,7 @@ Interact with players. Moderator-only.
 
 Lightweight fun commands for everyone unless noted otherwise.
 
-- [ ] `/graffiti <text>`: Creates floating graffiti text at your position.
+- [x] `/graffiti <text>`: Creates floating graffiti text at your position.
 - [x] `/lightning <player>`: Summons a lightning strike upon a player. Moderator-only.
 - [ ] `/bot [team] [ai] [name]`: Spawns a robot, optionally on a given team with the given AI and name. Moderator-only.
 - [ ] `/bullet <player> <id>`: Sets custom bullets for a player. Moderator-only.
