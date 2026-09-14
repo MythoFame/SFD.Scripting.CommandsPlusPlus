@@ -12,7 +12,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             if (tokens.Length == 0 || tokens.Length > 2)
             {
-                Game.ShowChatMessage("Usage: /kill <player> [gib|remove]", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage("Usage: /kill <player> [gib|rm]", Color.Red, args.User.UserIdentifier);
                 return;
             }
 
@@ -20,9 +20,9 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             if (mode.Length != 0
                 && !string.Equals(mode, "gib", StringComparison.OrdinalIgnoreCase)
-                && !string.Equals(mode, "remove", StringComparison.OrdinalIgnoreCase))
+                && !string.Equals(mode, "rm", StringComparison.OrdinalIgnoreCase))
             {
-                Game.ShowChatMessage("Usage: /kill <player> [gib|remove]", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage("Usage: /kill <player> [gib|rm]", Color.Red, args.User.UserIdentifier);
                 return;
             }
 
@@ -42,7 +42,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
                 if (string.Equals(mode, "gib", StringComparison.OrdinalIgnoreCase))
                     player.Gib();
-                else if (string.Equals(mode, "remove", StringComparison.OrdinalIgnoreCase))
+                else if (string.Equals(mode, "rm", StringComparison.OrdinalIgnoreCase))
                     player.Remove();
                 else
                     player.Kill();
@@ -51,7 +51,7 @@ public partial class GameScript : GameScriptInterfaceExtended
             }
 
             string verb = string.Equals(mode, "gib", StringComparison.OrdinalIgnoreCase) ? "Gibbed"
-                : string.Equals(mode, "remove", StringComparison.OrdinalIgnoreCase) ? "Removed"
+                : string.Equals(mode, "rm", StringComparison.OrdinalIgnoreCase) ? "Removed"
                 : "Killed";
 
             Game.ShowChatMessage($"{verb} {affected} player(s).", Color.Green, args.User.UserIdentifier);

@@ -18,7 +18,7 @@ public partial class GameScript : GameScriptInterfaceExtended
         public PlayerModule()
         {
             AddCommand("kill", Kill,
-                "<player> [gib|remove] - Kills a player, optionally gibbing or removing them",
+                "<player> [gib|rm] - Kills a player, optionally gibbing them or removing them",
                 moderatorOnly: true);
             AddCommand("tp", Tp,
                 "<from> [to] - Teleports a player to another player, or to you if no target is given",
@@ -50,8 +50,11 @@ public partial class GameScript : GameScriptInterfaceExtended
             AddCommand("noclip", Noclip,
                 "<player> - Toggles noclip for a player, allowing them to pass through walls",
                 moderatorOnly: true);
-            AddCommand("skin", Skin,
+            AddCommand("copy_skin", CopySkin,
                 "<from> <to> - Copies one player's profile onto another player",
+                moderatorOnly: true);
+            AddCommand("swap_skin", SwapSkin,
+                "<from> <to> - Swaps the profiles of two players",
                 moderatorOnly: true);
             AddCommand("user", User,
                 "<from> <to> - Swaps the users of two players",

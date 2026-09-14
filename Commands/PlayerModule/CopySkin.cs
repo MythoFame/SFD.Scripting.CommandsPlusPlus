@@ -6,7 +6,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 {
     public sealed partial class PlayerModule
     {
-        private static void Skin(UserMessageCallbackArgs args)
+        private static void CopySkin(UserMessageCallbackArgs args)
         {
             string[] tokens = [.. ParseHelper.SplitArguments(args.CommandArguments)];
 
