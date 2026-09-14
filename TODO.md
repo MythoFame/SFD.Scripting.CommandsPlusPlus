@@ -59,7 +59,7 @@ Interact with players. Moderator-only.
 - [x] `/team <player> <team>`: Sets the team of a player.
 - [x] `/trip <player>`: Trips a player, knocking them down.
 - [ ] `/setmodifier <player> <modifier> <value>`: Sets a player modifier to the given value.
-- [ ] `/spawn <id>`: Spawns an object with the given ID at your position.
+- [x] `/spawn <id>`: Spawns an object with the given ID at your position.
 - [x] `/burn <player>`: Toggles whether a player is burning.
 
 ## Fun
