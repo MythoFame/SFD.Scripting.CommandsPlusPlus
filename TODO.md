@@ -33,10 +33,10 @@ Use `/modules` to list all modules with their state and `/commands [module]` to 
 
 Required core module for managing all other modules. Always enabled and cannot be disabled.
 
-- [ ] `/modules`: Display all modules along with whether they are enabled or disabled.
-- [ ] `/commands [module]`: Display all commands along with their help. If a module is provided, then display only that module's commands and help.
-- [ ] `/toggle_module <module>`: Toggles whether a module is enabled. Host-only, persisted. Argument cannot be the management module.
-- [ ] `/reset_modules`: Resets all modules to their default enabled state. Host-only, persisted.
+- [x] `/modules`: Display all modules along with whether they are enabled or disabled.
+- [x] `/commands [module]`: Display all commands along with their help. If a module is provided, then display only that module's commands and help.
+- [x] `/toggle_module <module>`: Toggles whether a module is enabled. Host-only, persisted. Argument cannot be the management module.
+- [x] `/reset_modules`: Resets all modules to their default enabled state. Host-only, persisted.
 
 ### Automation
 
