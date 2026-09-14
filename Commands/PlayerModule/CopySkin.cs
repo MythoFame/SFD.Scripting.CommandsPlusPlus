@@ -12,7 +12,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             if (tokens.Length != 2)
             {
-                Game.ShowChatMessage("Usage: /skin <from> <to>", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage("Usage: /copy_skin <from> <to>", Color.Red, args.User.UserIdentifier);
                 return;
             }
 
