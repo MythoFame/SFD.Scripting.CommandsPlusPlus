@@ -56,7 +56,7 @@ Interact with players. Moderator-only.
 - [ ] `/revive <player>`: Revives a dead player.
 - [x] `/input <player>`: Toggles whether a player can provide input, effectively freezing or unfreezing them.
 - [x] `/tp <from> [to]`: Teleports a player to another player. If no target is provided, teleports them to your position.
-- [ ] `/team <player> <team>`: Sets the team of a player.
+- [x] `/team <player> <team>`: Sets the team of a player.
 - [x] `/trip <player>`: Trips a player, knocking them down.
 - [ ] `/setmodifier <player> <modifier> <value>`: Sets a player modifier to the given value.
 - [ ] `/spawn <id>`: Spawns an object with the given ID at your position.
