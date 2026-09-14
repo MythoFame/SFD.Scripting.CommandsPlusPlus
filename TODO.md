@@ -50,7 +50,7 @@ Control who spectates and who plays.
 
 Interact with players. Moderator-only.
 
-- [ ] `/noclip <player>`: Toggles noclip for a player, allowing them to pass through walls.
+- [x] `/noclip <player>`: Toggles noclip for a player, allowing them to pass through walls.
 - [x] `/fly <player>`: Toggles flying for a player.
 - [x] `/kill <player> [gib|remove]`: Kills a player, optionally gibbing them or removing them from the game.
 - [x] `/revive <player>`: Revives a dead player.
