@@ -17,16 +17,16 @@ public partial class GameScript : GameScriptInterfaceExtended
         public PlayerModule()
         {
             AddCommand("kill", Kill,
-                "- Kills a player, optionally gibbing or removing them",
+                "<player> [gib|remove] - Kills a player, optionally gibbing or removing them",
                 moderatorOnly: true);
             AddCommand("tp", Tp,
-                "- Teleports a player to another player, or to you if no target is given",
+                "<from> [to] - Teleports a player to another player, or to you if no target is given",
                 moderatorOnly: true);
             AddCommand("trip", Trip,
-                "- Trips a player, knocking them down",
+                "<player> - Trips a player, knocking them down",
                 moderatorOnly: true);
             AddCommand("input", Input,
-                "- Toggles whether a player can provide input",
+                "<player> - Toggles whether a player can provide input",
                 moderatorOnly: true);
         }
 
