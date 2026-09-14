@@ -7,9 +7,13 @@ public partial class GameScript : GameScriptInterfaceExtended
     /// <summary>
     /// Tracks registered chat commands and dispatches incoming user messages to
     /// their associated callbacks. The handler auto-subscribes to user message
-    /// events the moment a command is added to <see cref="GlobalCommands"/>, and
+    /// events the moment a command is added to <see cref="ActiveCommands"/>, and
     /// auto-unsubscribes once the list is emptied — no manual Initialize/Destroy
     /// calls required.
+    ///
+    /// Modules own their commands and expose them here via Register/Unregister
+    /// only while enabled, so dispatch stays a flat lookup with no
+    /// module-scanning or per-message overhead.
     /// </summary>
     public static class CommandHandler
     {
@@ -20,7 +24,7 @@ public partial class GameScript : GameScriptInterfaceExtended
         /// mutable (Add, Remove, Clear, indexer, foreach, LINQ, etc. all work as
         /// normal) — the collection itself manages the subscription lifecycle.
         /// </summary>
-        public static readonly CommandCollection GlobalCommands = [];
+        public static readonly CommandCollection ActiveCommands = [];
 
         /// <summary>
         /// Create a command instance using this function as a parameter for an automatic help command.
@@ -31,7 +35,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             Game.ShowChatMessage("Available commands:", Color.Green, user.UserIdentifier);
 
-            IOrderedEnumerable<Command> commands = GlobalCommands
+            IOrderedEnumerable<Command> commands = ActiveCommands
                 .OrderBy(cmd => cmd.ModeratorOnly)
                 .ThenBy(cmd => cmd.HostOnly)
                 .ThenBy(cmd => cmd.Name);
@@ -56,55 +60,24 @@ public partial class GameScript : GameScriptInterfaceExtended
 
         /// <summary>
         /// Invoked for every user message. When the message is a command, locates the
-        /// matching <see cref="Command"/> in <see cref="GlobalCommands"/>, enforces its
+        /// matching <see cref="Command"/> in <see cref="ActiveCommands"/>, enforces its
         /// <see cref="Command.ModeratorOnly"/> and <see cref="Command.HostOnly"/>
-        /// permissions, and fires its callback.
+        /// permissions, and fires its callback. Modules register their commands
+        /// here while enabled, so no module awareness is needed at dispatch time.
         /// </summary>
         private static void OnUserMessage(UserMessageCallbackArgs args)
         {
             if (!args.IsCommand) return;
 
-            Command activatedCommand = null;
+            Command commandActivated = ActiveCommands
+                .FirstOrDefault(c => c.Name == args.Command);
 
-            // check for global commands first
-            foreach (Command command in GlobalCommands)
-            {
-                if (command.Name == args.Command)
-                {
-                    activatedCommand = command;
-                    break;
-                }
-            }
+            if (commandActivated == null) return;
 
-            // if no command found, proceed to scan all commands in enabled modules recursively
-            if (activatedCommand == null)
-            {
-                foreach (CommandsModule module in ModuleRegistry.CachedModules)
-                {
-                    Game.ShowChatMessage(module.Name);
-                    if (module.IsEnabled)
-                    {
-                        Game.ShowChatMessage("Enabled");
-                        foreach (Command command in module.Commands)
-                        {
-                            Game.ShowChatMessage(command.Name);
-                            if (command.Name == args.Command)
-                            {
-                                activatedCommand = command;
-                                break;
-                            }
-                        }
-                    }
-                }
-            }
-
-            if (activatedCommand == null) return;
-
-
-            // command finally found...
             IUser user = args.User;
-            if ((!user.IsModerator && activatedCommand.ModeratorOnly)
-                || (!user.IsHost && activatedCommand.HostOnly))
+
+            if ((!user.IsModerator && commandActivated.ModeratorOnly)
+                || (!user.IsHost && commandActivated.HostOnly))
             {
                 Game.ShowChatMessage("You don't have permission to use this command.",
                     Color.Red, user.UserIdentifier);
@@ -112,7 +85,7 @@ public partial class GameScript : GameScriptInterfaceExtended
                 return;
             }
 
-            activatedCommand.OnCommand.Invoke(args);
+            commandActivated.OnCommand.Invoke(args);
         }
 
         private static void Subscribe()
