@@ -50,6 +50,9 @@ public partial class GameScript : GameScriptInterfaceExtended
             AddCommand("noclip", Noclip,
                 "<player> - Toggles noclip for a player, allowing them to pass through walls",
                 moderatorOnly: true);
+            AddCommand("skin", Skin,
+                "<from> <to> - Copies one player's profile onto another player",
+                moderatorOnly: true);
         }
 
         public override void OnEnable()

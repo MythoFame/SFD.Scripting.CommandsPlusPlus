@@ -64,7 +64,7 @@ Interact with players. Moderator-only.
 - [ ] `/setmodifier <player> <modifier> <value>`: Sets a player modifier to the given value.
 - [x] `/spawn <id>`: Spawns an object with the given ID at your position.
 - [x] `/burn <player>`: Toggles whether a player is burning.
-- [ ] `/skin <from> <to>`: Copies one player's profile onto another player.
+- [x] `/skin <from> <to>`: Copies one player's profile onto another player.
 - [ ] `/user <from> <to>`: Sets one player's user to another player's user.
 - [ ] `/wear <name> <type> [primary_color] [secondary_color]`: Gives your profile a cosmetic item of the given type and colors.
 - [ ] `/action <player> <action>`: Queues an action for a player whose input is disabled.
