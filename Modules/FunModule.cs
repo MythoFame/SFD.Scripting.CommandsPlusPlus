@@ -22,6 +22,8 @@ public partial class GameScript : GameScriptInterfaceExtended
                 moderatorOnly: true);
             AddCommand("graffiti", Graffiti,
                 "<text> - Creates floating graffiti text at your position");
+            AddCommand("fart", Fart,
+                "- Makes you fart");
         }
 
         public override void OnEnable()
