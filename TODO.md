@@ -2,9 +2,29 @@
 
 This is the markdown TODO file for Commands++. It consists mainly of commands and their modules.
 
-Required options are shown with <>, optional parameters are shown with [].
+## Specification
 
-## Management
+### Parameters
+
+The brackets `<>`, `[]`, `{}` for parameters have different meanings.
+
+- `<type>`: required parameter.
+- `[type]`: optional parameter.
+- `{type1|type2}`: choice from a set.
+
+### Types
+
+- `bool`: can be `true`/`false` or `yes`/`no`.
+- `string`: any text.
+- `word`: any text without spaces.
+- `int`: integer value like `1`, `-20`, `0`, `520`.
+- `float`: floating value like `1`, `-20`, `0`, `520`.
+
+---
+
+## Global Commands
+
+### Management
 
 Required core module for managing all other modules. Always enabled and cannot be disabled.
 
@@ -13,7 +33,7 @@ Required core module for managing all other modules. Always enabled and cannot b
 - [ ] `/toggle_module <module>`: Toggles whether a module is enabled. Host-only, persisted. Argument cannot be the management module.
 - [ ] `/reset_modules`: Resets all modules to their default enabled state. Host-only, persisted.
 
-## Automation
+### Automation
 
 Run commands automatically on events. Host-only, persisted.
 
@@ -22,19 +42,19 @@ Run commands automatically on events. Host-only, persisted.
 - [ ] `/remove_job <index>`: Removes the job with the given index.
 - [ ] `/clear_jobs`: Removes all jobs.
 
-## Gameplay
+## Gameplay Module
 
 Custom gameplay rules. Host-only, persisted unless noted otherwise.
 
 - [ ] `/respawn <delay>`: Toggles custom respawn and sets the respawn delay in seconds.
 - [ ] `/speech`: Toggles custom speech bubbles above players.
 - [ ] `/grab`: Toggles whether players are able to grab and throw each other.
-- [ ] `/dmg_numbers`: Toggles whether damage is displayed with floating numbers.
+- [ ] `/feedback`: Toggles whether damage is displayed with floating numbers.
 - [ ] `/drop_in`: Toggles whether joining players spawn instantly instead of waiting for the next round.
 - [ ] `/no_bot_gameover`: Toggles whether the game ends when only bots are left alive.
-- [ ] `/auto_victory [true|false]`: Toggles or explicitly sets automatic victory condition detection. Used to make a map custom or versus. Moderator-only, not persisted.
-- [ ] `/weapon_spawn [true|false]`: Toggles or explicitly sets whether weapons spawn on the map. Moderator-only, not persisted.
-- [ ] `/tags [true|false]`: Toggles or explicitly sets nametag and status bar visibility for all players. Moderator-only, not persisted.
+- [ ] `/auto_victory <bool>`: Toggles or explicitly sets automatic victory condition detection. Used to make a map custom or versus. Moderator-only, not persisted.
+- [ ] `/weapon_spawn <bool>`: Toggles or explicitly sets whether weapons spawn on the map. Moderator-only, not persisted.
+- [ ] `/tags <bool>`: Toggles or explicitly sets nametag and status bar visibility for all players. Moderator-only, not persisted.
 - [ ] `/reset_winratio`: Resets the stored win ratio statistics. Moderator-only.
 
 ## Spectation
@@ -46,7 +66,7 @@ Control who spectates and who plays.
 - [ ] `/spectate_add_whitelist <player>`: Adds a player to the spectate whitelist, allowing them to play. Moderator-only.
 - [ ] `/spectate_rm_whitelist <player>`: Removes a player from the spectate whitelist. Moderator-only.
 
-## Players
+## Player Module
 
 Interact with players. Moderator-only.
 
@@ -62,7 +82,7 @@ Interact with players. Moderator-only.
 - [ ] `/spawn <id>`: Spawns an object with the given ID at your position.
 - [ ] `/burn <player>`: Toggles whether a player is burning.
 
-## Fun
+## Fun Module
 
 Lightweight fun commands for everyone unless noted otherwise.
 
