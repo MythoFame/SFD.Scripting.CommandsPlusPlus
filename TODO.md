@@ -18,7 +18,7 @@ Required core module for managing all other modules. Always enabled and cannot b
 Run commands automatically on events. Host-only, persisted.
 
 - [ ] `/jobs`: Lists all jobs along with their index, trigger, arguments and command.
-- [ ] `/add_job <trigger> <args> <command...>`: Adds a job that runs a command on a certain trigger. Supported triggers are `startup`, `shutdown`, `gameover` and `time`. Arguments depend on the trigger.
+- [ ] `/add_job <trigger> <args> <command...>`: Adds a job that runs a command on a certain trigger. Supported triggers are `startup`, `shutdown`, `gameover`, `spawn` and `time`. Arguments depend on the trigger.
 - [ ] `/remove_job <index>`: Removes the job with the given index.
 - [ ] `/clear_jobs`: Removes all jobs.
 
@@ -36,6 +36,9 @@ Custom gameplay rules. Host-only, persisted unless noted otherwise.
 - [ ] `/weapon_spawn [true|false]`: Toggles or explicitly sets whether weapons spawn on the map. Moderator-only, not persisted.
 - [ ] `/tags [true|false]`: Toggles or explicitly sets nametag and status bar visibility for all players. Moderator-only, not persisted.
 - [ ] `/reset_winratio`: Resets the stored win ratio statistics. Moderator-only.
+- [ ] `/refill_ammo`: Toggles whether ammo is constantly refilled for all players.
+- [ ] `/regen <hp>`: Sets health regenerated per second for all players. Set to 0 to disable.
+- [ ] `/gravity <multiplier>`: Sets a multiplier applied to gravity. Set to 0 to disable custom gravity.
 
 ## Spectation
 
@@ -61,6 +64,13 @@ Interact with players. Moderator-only.
 - [ ] `/setmodifier <player> <modifier> <value>`: Sets a player modifier to the given value.
 - [x] `/spawn <id>`: Spawns an object with the given ID at your position.
 - [x] `/burn <player>`: Toggles whether a player is burning.
+- [ ] `/skin <from> <to>`: Copies one player's profile onto another player.
+- [ ] `/user <from> <to>`: Sets one player's user to another player's user.
+- [ ] `/wear <name> <type> [primary_color] [secondary_color]`: Gives your profile a cosmetic item of the given type and colors.
+- [ ] `/action <player>`: Queues an action for a player whose input is disabled.
+- [ ] `/refill <player>`: Refills a player's ammo as if they used an ammo stash.
+- [ ] `/magnet <player> [area_size] [players|objects]`: Toggles attraction of nearby players and/or objects toward a player.
+- [ ] `/repulse <player> [area_size] [players|objects]`: Toggles repulsion of nearby players and/or objects away from a player.
 
 ## Fun
 
@@ -70,3 +80,5 @@ Lightweight fun commands for everyone unless noted otherwise.
 - [ ] `/lightning <player>`: Summons a lightning strike upon a player. Moderator-only.
 - [ ] `/bot [team]`: Spawns a randomized bot, optionally on a given team. Moderator-only.
 - [ ] `/bullet <player> <id>`: Sets custom bullets for a player. Moderator-only.
+- [ ] `/anvil <player>`: Drops a heavy object onto a player. Moderator-only.
+- [ ] `/clone <player> [team] [ai]`: Spawns a clone of a player, optionally on a given team with the given AI. Moderator-only.
