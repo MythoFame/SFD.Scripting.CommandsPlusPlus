@@ -26,6 +26,9 @@ public partial class GameScript : GameScriptInterfaceExtended
                 "- Makes you fart");
             AddCommand("suicide", Suicide,
                 "- Die dramatically");
+            AddCommand("clone", Clone,
+                "<player> [team] [ai] - Spawns a clone of a player, optionally on a given team with the given AI",
+                moderatorOnly: true);
         }
 
         public override void OnEnable()
