@@ -146,8 +146,11 @@ public partial class GameScript : GameScriptInterfaceExtended
             {
                 if (player == null || player.IsRemoved) continue;
 
+                Vector2 from = player.GetWorldPosition();
                 player.SetWorldPosition(targetPos);
                 affected++;
+
+                PointShape.Trail(pos => Game.PlayEffect(EffectName.ItemGleam, pos), from, targetPos, 15f);
             }
 
             Game.ShowChatMessage($"Teleported {affected} player(s) to {targetLabel}.", Color.Green, args.User.UserIdentifier);
