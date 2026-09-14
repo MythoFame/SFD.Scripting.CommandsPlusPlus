@@ -23,7 +23,11 @@ The brackets `<>`, `[]`, `{}` for parameters have different meanings.
 
 ---
 
-## Global Commands
+## Modules
+
+Commands are organized into modules, each grouping related commands. Every module can be independently enabled or disabled with `/toggle_module`, and the state persists between sessions. 
+
+Use `/modules` to list all modules with their state and `/commands [module]` to view command help. The Management module is required and cannot be disabled.
 
 ### Management
 
@@ -43,14 +47,14 @@ Run commands automatically on events. Host-only, persisted.
 - [ ] `/remove_job <index>`: Removes the job with the given index.
 - [ ] `/clear_jobs`: Removes all jobs.
 
-## Gameplay Module
+## Gameplay
 
 Custom gameplay rules. Host-only, persisted unless noted otherwise.
 
 - [ ] `/respawn <delay>`: Toggles custom respawn and sets the respawn delay in seconds.
 - [ ] `/speech`: Toggles custom speech bubbles above players.
 - [ ] `/grab`: Toggles whether players are able to grab and throw each other.
-- [ ] `/feedback`: Toggles whether damage is displayed with floating numbers.
+- [ ] `/dmg_numbers`: Toggles whether damage is displayed with floating numbers.
 - [ ] `/drop_in`: Toggles whether joining players spawn instantly instead of waiting for the next round.
 - [ ] `/no_bot_gameover`: Toggles whether the game ends when only bots are left alive.
 - [ ] `/auto_victory [bool]`: Toggles or explicitly sets automatic victory condition detection. Used to make a map custom or versus. Moderator-only, not persisted.
@@ -70,15 +74,13 @@ Control who spectates and who plays.
 - [ ] `/spectate_add_whitelist <player>`: Adds a player to the spectate whitelist, allowing them to play. Moderator-only.
 - [ ] `/spectate_rm_whitelist <player>`: Removes a player from the spectate whitelist. Moderator-only.
 
-## Player Module
+## Player
 
 Interact with players. Moderator-only.
 
 - [x] `/noclip <player>`: Toggles noclip for a player, allowing them to pass through walls.
 - [x] `/fly <player>`: Toggles flying for a player.
-- [x] `/kill <player>`: Kills a player and keeps its corpose.
-- [x] `/gib <player>`: Gibs a player.
-- [x] `/remove <player>`: Kills a player by removing its body.
+- [x] `/kill <player> [gib|rm]`: Kills a player, optionally gibbing them or removing them.
 - [x] `/revive <player>`: Revives a dead player.
 - [x] `/input <player>`: Toggles whether a player can provide input, effectively freezing or unfreezing them.
 - [x] `/tp <from> [to]`: Teleports a player to another player. If no target is provided, teleports them to your position.
@@ -96,7 +98,7 @@ Interact with players. Moderator-only.
 - [ ] `/magnet <player> [area_size] [players|objects]`: Toggles attraction of nearby players and/or objects toward a player.
 - [ ] `/repulse <player> [area_size] [players|objects]`: Toggles repulsion of nearby players and/or objects away from a player.
 
-## Fun Module
+## Fun
 
 Lightweight fun commands for everyone unless noted otherwise.
 
@@ -104,6 +106,8 @@ Lightweight fun commands for everyone unless noted otherwise.
 - [x] `/lightning <player>`: Summons a lightning strike upon a player. Moderator-only.
 - [ ] `/bot [team] [ai] [name]`: Spawns a robot, optionally on a given team with the given AI and name. Moderator-only.
 - [ ] `/bullet <player> <id>`: Sets custom bullets for a player. Moderator-only.
-- [ ] `/noreload <player> <slot> [bool]`: Attempts to enable no reload for the specified weapon. Only works for some specific weapons.
+- [ ] `/noreload <player> <slot>`: Attempts to toggle no reload for the specified weapon. Only works for some specific weapons.
 - [ ] `/anvil <player>`: Drops a heavy object onto a player. Moderator-only.
 - [ ] `/clone <player> [team] [ai]`: Spawns a clone of a player, optionally on a given team with the given AI. Moderator-only.
+- [ ] `/fart`: Makes you fart.
+- [ ] `/suicide`: Die dramatically.
