@@ -68,7 +68,7 @@ Interact with players. Moderator-only.
 - [ ] `/user <from> <to>`: Sets one player's user to another player's user.
 - [ ] `/wear <name> <type> [primary_color] [secondary_color]`: Gives your profile a cosmetic item of the given type and colors.
 - [ ] `/action <player>`: Queues an action for a player whose input is disabled.
-- [ ] `/refill <player>`: Refills a player's ammo as if they used an ammo stash.
+- [x] `/refill <player>`: Refills a player's ammo as if they used an ammo stash.
 - [ ] `/magnet <player> [area_size] [players|objects]`: Toggles attraction of nearby players and/or objects toward a player.
 - [ ] `/repulse <player> [area_size] [players|objects]`: Toggles repulsion of nearby players and/or objects away from a player.
 
