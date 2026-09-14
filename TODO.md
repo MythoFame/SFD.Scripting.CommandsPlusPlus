@@ -38,7 +38,7 @@ Required core module for managing all other modules. Always enabled and cannot b
 Run commands automatically on events. Host-only, persisted.
 
 - [ ] `/jobs`: Lists all jobs along with their index, trigger, arguments and command.
-- [ ] `/add_job <trigger> <args> <command...>`: Adds a job that runs a command on a certain trigger. Supported triggers are `startup`, `shutdown`, `gameover` and `time`. Arguments depend on the trigger.
+- [ ] `/add_job <trigger> <args> <command...>`: Adds a job that runs a command on a certain trigger. Supported triggers are `startup`, `shutdown`, `gameover`, `spawn` and `time`. Arguments depend on the trigger.
 - [ ] `/remove_job <index>`: Removes the job with the given index.
 - [ ] `/clear_jobs`: Removes all jobs.
 
@@ -52,10 +52,13 @@ Custom gameplay rules. Host-only, persisted unless noted otherwise.
 - [ ] `/feedback`: Toggles whether damage is displayed with floating numbers.
 - [ ] `/drop_in`: Toggles whether joining players spawn instantly instead of waiting for the next round.
 - [ ] `/no_bot_gameover`: Toggles whether the game ends when only bots are left alive.
-- [ ] `/auto_victory <bool>`: Toggles or explicitly sets automatic victory condition detection. Used to make a map custom or versus. Moderator-only, not persisted.
-- [ ] `/weapon_spawn <bool>`: Toggles or explicitly sets whether weapons spawn on the map. Moderator-only, not persisted.
-- [ ] `/tags <bool>`: Toggles or explicitly sets nametag and status bar visibility for all players. Moderator-only, not persisted.
-- [ ] `/reset_winratio`: Resets the stored win ratio statistics. Moderator-only.
+- [ ] `/auto_victory [true|false]`: Toggles or explicitly sets automatic victory condition detection. Used to make a map custom or versus. Moderator-only, not persisted.
+- [ ] `/weapon_spawn [true|false]`: Toggles or explicitly sets whether weapons spawn on the map. Moderator-only, not persisted.
+- [ ] `/tags [true|false]`: Toggles or explicitly sets nametag and status bar visibility for all players. Moderator-only, not persisted.
+- [x] `/reset_winratio`: Resets the stored win ratio statistics. Moderator-only.
+- [ ] `/refill_ammo`: Toggles whether ammo is constantly refilled for all players.
+- [ ] `/regen <hp>`: Sets health regenerated per second for all players. Set to 0 to disable.
+- [ ] `/gravity <multiplier>`: Sets a multiplier applied to gravity. Set to 0 to disable custom gravity.
 
 ## Spectation
 
@@ -70,23 +73,32 @@ Control who spectates and who plays.
 
 Interact with players. Moderator-only.
 
-- [ ] `/noclip <player>`: Toggles noclip for a player, allowing them to pass through walls.
-- [ ] `/fly <player>`: Toggles flying for a player.
-- [ ] `/kill <player> [gib|remove]`: Kills a player, optionally gibbing them or removing them from the game.
-- [ ] `/revive <player>`: Revives a dead player.
-- [ ] `/input <player>`: Toggles whether a player can provide input, effectively freezing or unfreezing them.
-- [ ] `/tp <from> [to]`: Teleports a player to another player. If no target is provided, teleports them to your position.
-- [ ] `/team <player> <team>`: Sets the team of a player.
-- [ ] `/trip <player>`: Trips a player, knocking them down.
+- [x] `/noclip <player>`: Toggles noclip for a player, allowing them to pass through walls.
+- [x] `/fly <player>`: Toggles flying for a player.
+- [x] `/kill <player> [gib|remove]`: Kills a player, optionally gibbing them or removing them from the game.
+- [x] `/revive <player>`: Revives a dead player.
+- [x] `/input <player>`: Toggles whether a player can provide input, effectively freezing or unfreezing them.
+- [x] `/tp <from> [to]`: Teleports a player to another player. If no target is provided, teleports them to your position.
+- [x] `/team <player> <team>`: Sets the team of a player.
+- [x] `/trip <player>`: Trips a player, knocking them down.
 - [ ] `/setmodifier <player> <modifier> <value>`: Sets a player modifier to the given value.
-- [ ] `/spawn <id>`: Spawns an object with the given ID at your position.
-- [ ] `/burn <player>`: Toggles whether a player is burning.
+- [x] `/spawn <id>`: Spawns an object with the given ID at your position.
+- [x] `/burn <player>`: Toggles whether a player is burning.
+- [x] `/skin <from> <to>`: Copies one player's profile onto another player.
+- [x] `/user <from> <to>`: Swaps the users of two players.
+- [ ] `/wear <name> <type> [primary_color] [secondary_color]`: Gives your profile a cosmetic item of the given type and colors.
+- [ ] `/action <player> <action>`: Queues an action for a player whose input is disabled.
+- [x] `/refill <player>`: Refills a player's ammo as if they used an ammo stash.
+- [ ] `/magnet <player> [area_size] [players|objects]`: Toggles attraction of nearby players and/or objects toward a player.
+- [ ] `/repulse <player> [area_size] [players|objects]`: Toggles repulsion of nearby players and/or objects away from a player.
 
 ## Fun Module
 
 Lightweight fun commands for everyone unless noted otherwise.
 
-- [ ] `/graffiti <text>`: Creates floating graffiti text at your position.
-- [ ] `/lightning <player>`: Summons a lightning strike upon a player. Moderator-only.
-- [ ] `/bot [team]`: Spawns a randomized bot, optionally on a given team. Moderator-only.
+- [x] `/graffiti <text>`: Creates floating graffiti text at your position.
+- [x] `/lightning <player>`: Summons a lightning strike upon a player. Moderator-only.
+- [ ] `/bot [team] [ai] [name]`: Spawns a robot, optionally on a given team with the given AI and name. Moderator-only.
 - [ ] `/bullet <player> <id>`: Sets custom bullets for a player. Moderator-only.
+- [ ] `/anvil <player>`: Drops a heavy object onto a player. Moderator-only.
+- [ ] `/clone <player> [team] [ai]`: Spawns a clone of a player, optionally on a given team with the given AI. Moderator-only.

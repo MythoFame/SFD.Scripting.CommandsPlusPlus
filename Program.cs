@@ -9,11 +9,15 @@ public abstract class GameScriptInterfaceExtended : GameScriptInterface
 
 public partial class GameScript : GameScriptInterfaceExtended
 {
-    public void OnStartup()
+    private static readonly Random _random = Random.Shared;
+
+    public static void OnStartup()
     {
-        CommandHandler.GlobalCommands.Add(new CommandHandler.Command("cfx", CommandHandler.DisplayHelp));
+        // Temporary debug help command. Will replace later with display help function that supports modules.
+        CommandHandler.ActiveCommands.Add(new("cfx", CommandHandler.DisplayHelp));
+
         ModuleRegistry.RegisterAll();
 
-        Game.ShowChatMessage("Commands++", Color.Yellow);
+        //Game.ShowChatMessage("Commands++", Color.Yellow);
     }
 }
