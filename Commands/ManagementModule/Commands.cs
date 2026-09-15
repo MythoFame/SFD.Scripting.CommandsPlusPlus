@@ -6,7 +6,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 {
     public sealed partial class ManagementModule
     {
-        private static void Commands(UserMessageCallbackArgs args)
+        private static void ShowCommands(UserMessageCallbackArgs args)
         {
             string[] tokens = [.. ParseHelper.SplitArguments(args.CommandArguments)];
 

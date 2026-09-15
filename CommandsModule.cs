@@ -35,7 +35,7 @@ public partial class GameScript : GameScriptInterfaceExtended
         /// </summary>
         public bool Blocked
         {
-            get => Game.LocalStorage.TryGetItemBool(StorageKey, out bool result) ? result : false;
+            get => Game.LocalStorage.TryGetItemBool(StorageKey, out bool result) && result;
             set => Game.LocalStorage.SetItem(StorageKey, value);
         }
 
@@ -63,10 +63,7 @@ public partial class GameScript : GameScriptInterfaceExtended
         /// <see cref="Blocked"/> value, so construction never fires virtuals
         /// and never ignores stored state.
         /// </summary>
-        protected CommandsModule()
-        {
-            _isBlocked = false;
-        }
+        protected CommandsModule() => _isBlocked = false;
 
         /// <summary>
         /// Commands owned by this module. A plain list on purpose: unlike
@@ -80,7 +77,7 @@ public partial class GameScript : GameScriptInterfaceExtended
         /// Each owned command's permissions before <see cref="Block"/> overrode
         /// them. Captured on first block, restored on <see cref="Unblock"/>.
         /// </summary>
-        private readonly Dictionary<CommandHandler.Command, (bool hostOnly, bool moderatorOnly)> _originalPermissions = new();
+        private readonly Dictionary<CommandHandler.Command, (bool hostOnly, bool moderatorOnly)> _originalPermissions = [];
 
         /// <summary>
         /// Called once per block/unblock transition. React to the restriction

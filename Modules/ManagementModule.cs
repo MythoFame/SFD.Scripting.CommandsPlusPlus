@@ -1,5 +1,3 @@
-using SFDGameScriptInterface;
-
 namespace SFD.Scripting.CommandsPlusPlus;
 
 public partial class GameScript : GameScriptInterfaceExtended
@@ -20,7 +18,7 @@ public partial class GameScript : GameScriptInterfaceExtended
         {
             AddCommand("modules", Modules,
                 "- Display all modules along with whether they are enabled or disabled");
-            AddCommand("commands", Commands,
+            AddCommand("commands", ShowCommands,
                 "[module] - Display all commands along with their help");
             AddCommand("toggle_module", ToggleModule,
                 "<module> - Toggles whether a module is blocked",
