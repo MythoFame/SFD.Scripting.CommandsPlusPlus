@@ -95,6 +95,7 @@ Interact with players. Moderator-only.
 - [x] `/gib <player>`: Gibs a player.
 - [x] `/remove <player>`: Removes a player.
 - [x] `/dmg <player> <amount>`: Deals damage to a player.
+- [x] `/notarget <player>`: Toggles whether bots target a player.
 - [x] `/revive <player>`: Revives a dead player.
 - [x] `/input <player> [bool]`: Toggles whether a player can provide input, effectively freezing or unfreezing them.
 - [x] `/tp <from> <to>`: Teleports a player to another player.
