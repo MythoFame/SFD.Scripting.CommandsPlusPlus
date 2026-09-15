@@ -70,6 +70,7 @@ Custom gameplay rules. Host-only, persisted unless noted otherwise.
   - `/camera dynamic true` sets dynamic camera for all rounds.
   - `/camera individual true` sets individual camera with variable zoom for all rounds.
   - `/camera individual 0.2 true` sets individual camera level with fixed zoom level for all rounds.
+  - Camera type for all rounds is persistent between different games and can be reset with `/camera reset` (this will reset the camera type for current round too).
 - [x] `/rsboard`: Resets the stored win ratio statistics. Moderator-only.
 - [ ] `/refill [bool]`: Toggles whether ammo is constantly refilled for all players.
 - [ ] `/regen <hp>`: Sets health regenerated (or damaged) per second for all players. Set to `0` to disable.
