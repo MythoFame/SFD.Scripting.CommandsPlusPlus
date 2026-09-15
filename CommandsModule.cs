@@ -34,7 +34,7 @@ public partial class GameScript : GameScriptInterfaceExtended
         /// </summary>
         public bool Autostart
         {
-            get => Game.LocalStorage.TryGetItemBool(StorageKey, out bool result) ? result : true;
+            get => !Game.LocalStorage.TryGetItemBool(StorageKey, out bool result) || result;
             set => Game.LocalStorage.SetItem(StorageKey, value);
         }
 
