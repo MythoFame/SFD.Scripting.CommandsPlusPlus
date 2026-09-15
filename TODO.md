@@ -25,18 +25,18 @@ The brackets `<>`, `[]`, `{}` for parameters have different meanings.
 
 ## Modules
 
-Commands are organized into modules, each grouping related commands. Every module can be independently enabled or disabled with `/toggle_module`, and the state persists between sessions.
+Commands are organized into modules, each grouping related commands. Every module can be independently blocked or unblocked with `/toggle_module`, and the state persists between sessions. Blocking a module restricts all of its commands to the host.
 
-Use `/modules` to list all modules with their state and `/commands [module]` to view command help. The Management module is required and cannot be disabled.
+Use `/modules` to list all modules with their state and `/commands [module]` to view command help. The Management module is required and cannot be blocked.
 
 ### Management
 
-Required core module for managing all other modules. Always enabled and cannot be disabled.
+Required core module for managing all other modules. Always active and cannot be blocked.
 
-- [x] `/modules`: Display all modules along with whether they are enabled or disabled.
+- [x] `/modules`: Display all modules along with whether they are blocked or active.
 - [x] `/commands [module]`: Display all commands along with their help. If a module is provided, then display only that module's commands and help.
-- [x] `/toggle_module <module>`: Toggles whether a module is enabled. Host-only, persisted. Argument cannot be the management module.
-- [x] `/reset_modules`: Resets all modules to their default enabled state. Host-only, persisted.
+- [x] `/toggle_module <module>`: Toggles whether a module is blocked. Blocked modules have all their commands restricted to the host. Host-only, persisted. Argument cannot be the management module.
+- [x] `/reset_modules`: Resets all modules to their default unblocked state. Host-only, persisted.
 
 ### Automation
 

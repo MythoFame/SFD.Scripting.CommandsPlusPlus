@@ -7,9 +7,9 @@ public partial class GameScript : GameScriptInterfaceExtended
     /// <summary>
     /// Holds all known modules by case-insensitive name. Owns lookup plus
     /// reset-to-defaults (removing persisted flags so every module reads
-    /// enabled again). Per-module enable/disable lives on
-    /// <see cref="CommandsModule"/>; the guarded <see cref="CommandsModule.IsEnabled"/>
-    /// setter guarantees <c>OnEnable</c>/<c>OnDisable</c> fire exactly once per
+    /// unblocked again). Per-module block/unblock lives on
+    /// <see cref="CommandsModule"/>; the guarded <see cref="CommandsModule.IsBlocked"/>
+    /// setter guarantees <c>OnBlocked</c> fires exactly once per
     /// transition, so this class never needs its own state checks.
     /// </summary>
     public static class ModuleRegistry
@@ -46,10 +46,10 @@ public partial class GameScript : GameScriptInterfaceExtended
         }
 
         /// <summary>
-        /// Resets all modules to their default (enabled) state by removing every
+        /// Resets all modules to their default (unblocked) state by removing every
         /// persisted flag under <see cref="CommandsModule.StorageKeyPrefix"/>
-        /// and enabling every module. Redundant transitions are no-ops thanks to
-        /// the guarded setter, so already-enabled modules are untouched.
+        /// and unblocking every module. Redundant transitions are no-ops thanks to
+        /// the guarded setter, so already-unblocked modules are untouched.
         /// </summary>
         public static void ResetAll()
         {
@@ -60,14 +60,14 @@ public partial class GameScript : GameScriptInterfaceExtended
             }
 
             foreach (CommandsModule module in _cachedModules)
-                module.Enable();
+                module.Unblock();
         }
 
         /// <summary>
-        /// Creates, registers and activates every module from its persisted
-        /// <see cref="CommandsModule.Autostart"/> value. Modules without a
-        /// stored value default to enabled; disabled ones stay dormant without
-        /// any spurious <c>OnDisable</c> call.
+        /// Creates, registers and exposes every module, then applies its persisted
+        /// <see cref="CommandsModule.Blocked"/> value. Modules without a
+        /// stored value default to unblocked; unblocked ones stay active without
+        /// any spurious <c>OnBlocked</c> call.
         /// </summary>
         public static void RegisterAll()
         {
@@ -78,8 +78,10 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             foreach (CommandsModule module in _cachedModules)
             {
-                if (module.Autostart)
-                    module.Enable();
+                module.Register();
+
+                if (module.Blocked)
+                    module.Block();
             }
         }
     }

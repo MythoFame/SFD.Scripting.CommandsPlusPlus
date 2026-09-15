@@ -24,14 +24,14 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             if (string.Equals(module.Name, "Management", StringComparison.OrdinalIgnoreCase))
             {
-                Game.ShowChatMessage("The management module cannot be disabled.", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage("The management module cannot be blocked.", Color.Red, args.User.UserIdentifier);
                 return;
             }
 
-            bool enabled = module.Toggle();
+            bool blocked = module.Toggle();
 
-            Game.ShowChatMessage($"Module {module.Name} {(enabled ? "enabled" : "disabled")}.",
-                enabled ? Color.Green : Color.Yellow, args.User.UserIdentifier);
+            Game.ShowChatMessage($"Module {module.Name} {(blocked ? "blocked" : "unblocked")}.",
+                blocked ? Color.Yellow : Color.Green, args.User.UserIdentifier);
         }
     }
 }

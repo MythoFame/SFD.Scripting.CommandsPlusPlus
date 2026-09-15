@@ -7,11 +7,12 @@ public partial class GameScript : GameScriptInterfaceExtended
     /// <summary>
     /// Base class for a Commands++ module. Each module owns its
     /// <see cref="CommandHandler.Command"/> instances in a plain list and
-    /// exposes them via <see cref="CommandHandler.ActiveCommands"/> only while
-    /// enabled. <see cref="Autostart"/> persists the desired state in
-    /// <see cref="IGame.LocalStorage"/> and defaults to enabled; the runtime
-    /// <see cref="IsEnabled"/> flag guards <see cref="OnEnable"/> and
-    /// <see cref="OnDisable"/> so neither ever fires redundantly.
+    /// exposes them via <see cref="CommandHandler.ActiveCommands"/>.
+    /// <see cref="Blocked"/> persists the blocked state in
+    /// <see cref="IGame.LocalStorage"/> and defaults to unblocked; the runtime
+    /// <see cref="IsBlocked"/> flag guards <see cref="OnBlocked"/> so it never
+    /// fires redundantly. Blocking a module restricts all of its commands to
+    /// the host instead of withdrawing them.
     /// </summary>
     public abstract class CommandsModule
     {
@@ -27,49 +28,44 @@ public partial class GameScript : GameScriptInterfaceExtended
         /// <summary>Storage key prefix for all module flags.</summary>
         public const string StorageKeyPrefix = "CommandsPlusPlus.Module.";
 
-        private string StorageKey => StorageKeyPrefix + Name + ".Enabled";
+        private string StorageKey => StorageKeyPrefix + Name + ".Blocked";
 
         /// <summary>
-        /// Persisted desired state. Reads enabled when no value is stored.
+        /// Persisted blocked state. Reads unblocked when no value is stored.
         /// </summary>
-        public bool Autostart
+        public bool Blocked
         {
-            get => !Game.LocalStorage.TryGetItemBool(StorageKey, out bool result) || result;
+            get => Game.LocalStorage.TryGetItemBool(StorageKey, out bool result) ? result : false;
             set => Game.LocalStorage.SetItem(StorageKey, value);
         }
 
-        private bool _isEnabled;
+        private bool _isBlocked;
 
         /// <summary>
-        /// Runtime state. Setting it fires <see cref="OnEnable"/> or
-        /// <see cref="OnDisable"/> exactly once per transition — assigning the
-        /// current value is a no-op.
+        /// Runtime state. Setting it fires <see cref="OnBlocked"/> exactly once
+        /// per transition — assigning the current value is a no-op.
         /// </summary>
-        public bool IsEnabled
+        public bool IsBlocked
         {
-            get => _isEnabled;
+            get => _isBlocked;
             private set
             {
-                if (_isEnabled == value) return;
+                if (_isBlocked == value) return;
 
-                _isEnabled = value;
-
-                if (value)
-                    OnEnable();
-                else
-                    OnDisable();
+                _isBlocked = value;
+                OnBlocked(value);
             }
         }
 
         /// <summary>
-        /// Starts dormant. Activation (<see cref="Enable"/>) is driven by
+        /// Starts unblocked. Activation (<see cref="Block"/>) is driven by
         /// <see cref="ModuleRegistry.RegisterAll"/> from the persisted
-        /// <see cref="Autostart"/> value, so construction never fires virtuals
+        /// <see cref="Blocked"/> value, so construction never fires virtuals
         /// and never ignores stored state.
         /// </summary>
         protected CommandsModule()
         {
-            _isEnabled = false;
+            _isBlocked = false;
         }
 
         /// <summary>
@@ -81,14 +77,16 @@ public partial class GameScript : GameScriptInterfaceExtended
         public readonly List<CommandHandler.Command> Commands = [];
 
         /// <summary>
-        /// Called once per enable transition. Subscribe to game events here.
+        /// Each owned command's permissions before <see cref="Block"/> overrode
+        /// them. Captured on first block, restored on <see cref="Unblock"/>.
         /// </summary>
-        public abstract void OnEnable();
+        private readonly Dictionary<CommandHandler.Command, (bool hostOnly, bool moderatorOnly)> _originalPermissions = new();
 
         /// <summary>
-        /// Called once per disable transition. Stop game events here.
+        /// Called once per block/unblock transition. React to the restriction
+        /// change here.
         /// </summary>
-        public abstract void OnDisable();
+        public virtual void OnBlocked(bool blocked) { }
 
         /// <summary>
         /// Exposes owned commands to the handler. Skips commands that are
@@ -103,44 +101,54 @@ public partial class GameScript : GameScriptInterfaceExtended
             }
         }
 
-        /// <summary>Withdraws owned commands from the handler.</summary>
-        public void Unregister()
+        /// <summary>
+        /// Persists the blocked state and restricts every owned command to the
+        /// host, remembering original permissions for <see cref="Unblock"/>.
+        /// Fires <see cref="OnBlocked"/> once (guarded by <see cref="IsBlocked"/>).
+        /// </summary>
+        public void Block()
         {
+            Blocked = true;
+
             foreach (CommandHandler.Command command in Commands)
-                CommandHandler.ActiveCommands.Remove(command);
+            {
+                if (!_originalPermissions.ContainsKey(command))
+                    _originalPermissions[command] = (command.HostOnly, command.ModeratorOnly);
+
+                command.HostOnly = true;
+            }
+
+            IsBlocked = true;
         }
 
         /// <summary>
-        /// Persists the enabled state, exposes commands and fires
-        /// <see cref="OnEnable"/> once (guarded by <see cref="IsEnabled"/>).
+        /// Persists the unblocked state and restores every owned command's
+        /// original permissions. Fires <see cref="OnBlocked"/> once (guarded by
+        /// <see cref="IsBlocked"/>).
         /// </summary>
-        public void Enable()
+        public void Unblock()
         {
-            Autostart = true;
-            Register();
-            IsEnabled = true;
+            Blocked = false;
+
+            foreach (var entry in _originalPermissions)
+            {
+                entry.Key.HostOnly = entry.Value.hostOnly;
+                entry.Key.ModeratorOnly = entry.Value.moderatorOnly;
+            }
+
+            _originalPermissions.Clear();
+            IsBlocked = false;
         }
 
-        /// <summary>
-        /// Persists the disabled state, fires <see cref="OnDisable"/> once
-        /// (guarded by <see cref="IsEnabled"/>) and withdraws commands.
-        /// </summary>
-        public void Disable()
-        {
-            Autostart = false;
-            IsEnabled = false;
-            Unregister();
-        }
-
-        /// <summary>Flips the state via <see cref="Enable"/>/<see cref="Disable"/>. Returns the new state.</summary>
+        /// <summary>Flips the state via <see cref="Block"/>/<see cref="Unblock"/>. Returns the new blocked state.</summary>
         public bool Toggle()
         {
-            if (IsEnabled)
-                Disable();
+            if (IsBlocked)
+                Unblock();
             else
-                Enable();
+                Block();
 
-            return IsEnabled;
+            return IsBlocked;
         }
 
         /// <summary>

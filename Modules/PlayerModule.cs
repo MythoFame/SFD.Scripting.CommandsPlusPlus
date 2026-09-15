@@ -69,13 +69,5 @@ public partial class GameScript : GameScriptInterfaceExtended
                 "<player> <action> - Queues an action for a player whose input is disabled",
                 moderatorOnly: true);
         }
-
-        public override void OnEnable()
-        {
-        }
-
-        public override void OnDisable()
-        {
-        }
     }
 }

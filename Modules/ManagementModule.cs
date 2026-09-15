@@ -23,19 +23,11 @@ public partial class GameScript : GameScriptInterfaceExtended
             AddCommand("commands", Commands,
                 "[module] - Display all commands along with their help");
             AddCommand("toggle_module", ToggleModule,
-                "<module> - Toggles whether a module is enabled",
+                "<module> - Toggles whether a module is blocked",
                 hostOnly: true);
             AddCommand("reset_modules", ResetModules,
-                "- Resets all modules to their default enabled state",
+                "- Resets all modules to their default unblocked state",
                 hostOnly: true);
-        }
-
-        public override void OnEnable()
-        {
-        }
-
-        public override void OnDisable()
-        {
         }
     }
 }

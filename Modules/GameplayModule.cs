@@ -21,13 +21,5 @@ public partial class GameScript : GameScriptInterfaceExtended
                 "- Resets the stored win ratio statistics",
                 moderatorOnly: true);
         }
-
-        public override void OnEnable()
-        {
-        }
-
-        public override void OnDisable()
-        {
-        }
     }
 }

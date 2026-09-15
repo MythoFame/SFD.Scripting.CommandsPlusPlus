@@ -11,9 +11,9 @@ public partial class GameScript : GameScriptInterfaceExtended
     /// auto-unsubscribes once the list is emptied — no manual Initialize/Destroy
     /// calls required.
     ///
-    /// Modules own their commands and expose them here via Register/Unregister
-    /// only while enabled, so dispatch stays a flat lookup with no
-    /// module-scanning or per-message overhead.
+    /// Modules own their commands and expose them here via Register; blocking a
+    /// module flips its commands to host-only instead of withdrawing them, so
+    /// dispatch stays a flat lookup with no module-scanning or per-message overhead.
     /// </summary>
     public static class CommandHandler
     {

@@ -36,13 +36,5 @@ public partial class GameScript : GameScriptInterfaceExtended
                 "[team] [ai] [name] - Spawns a robot, optionally on a given team with the given AI and name",
                 moderatorOnly: true);
         }
-
-        public override void OnEnable()
-        {
-        }
-
-        public override void OnDisable()
-        {
-        }
     }
 }
