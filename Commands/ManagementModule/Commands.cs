@@ -16,7 +16,9 @@ public partial class GameScript : GameScriptInterfaceExtended
                 return;
             }
 
-            IEnumerable<CommandsModule> modules = ModuleRegistry.All.OrderBy(module => module.Name);
+            IEnumerable<CommandsModule> modules = ModuleRegistry.All
+                .OrderBy(module => module.Name != "Management")
+                .ThenBy(module => module.Name);
 
             if (tokens.Length == 1)
             {
