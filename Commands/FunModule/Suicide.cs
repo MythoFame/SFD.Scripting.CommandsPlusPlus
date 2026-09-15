@@ -52,6 +52,28 @@ public partial class GameScript : GameScriptInterfaceExtended
             Game.PlaySound(
                 profile.Gender == Gender.Male ? SoundsDatabase.Wilhelm : SoundsDatabase.CartoonScream,
                 Vector2.Zero);
+
+            Events.UpdateCallback updateCallback = null;
+
+            updateCallback = Game.Events.StartUpdateCallback(_ =>
+            {
+                if (self == null || self.IsRemoved)
+                {
+                    updateCallback.Stop();
+
+                    updateCallback = null;
+
+                    return;
+                }
+
+                if (!self.IsLayingOnGround) return;
+
+                self.Gib();
+
+                updateCallback.Stop();
+
+                updateCallback = null;
+            });
         }
     }
 }
