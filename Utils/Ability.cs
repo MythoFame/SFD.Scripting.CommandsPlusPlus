@@ -26,18 +26,21 @@ public partial class GameScript : GameScriptInterfaceExtended
             get => _updateCallback != null;
             set
             {
-                if (value == Enabled) return;
+                if (value != Enabled)
+                {
+                    if (value)
+                    {
+                        _updateCallback = Game.Events.StartUpdateCallback(Update, COOLDOWN);
 
-                if (value)
-                {
-                    _updateCallback = Game.Events.StartUpdateCallback(Update, COOLDOWN);
-                    OnEnabled();
-                }
-                else
-                {
-                    _updateCallback.Stop();
-                    _updateCallback = null;
-                    OnDisabled();
+                        OnEnabled(true);
+                    }
+                    else
+                    {
+                        _updateCallback.Stop();
+                        _updateCallback = null;
+
+                        OnEnabled(false);
+                    }
                 }
             }
         }
@@ -62,6 +65,7 @@ public partial class GameScript : GameScriptInterfaceExtended
             if (Player == null || Player.IsRemoved || Player.IsDead)
             {
                 Enabled = false;
+
                 return;
             }
 
@@ -81,8 +85,6 @@ public partial class GameScript : GameScriptInterfaceExtended
         /// Abstract method called when the power-up is enabled or disabled. Called by
         /// the constructor.
         /// </summary>
-        public abstract void OnEnabled();
-
-        public abstract void OnDisabled();
+        public abstract void OnEnabled(bool enabled);
     }
 }

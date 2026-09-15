@@ -22,13 +22,7 @@ public partial class GameScript : GameScriptInterfaceExtended
         /// <summary>Drops instances bound to gone players so stale references never linger.</summary>
         public static void PurgeStale() => _instances.RemoveAll(fly => fly.Player == null || fly.Player.IsRemoved || fly.Player.IsDead);
 
-        public override void OnDisabled()
-        {
-        }
-
-        public override void OnEnabled()
-        {
-        }
+        public override void OnEnabled(bool enabled) { }
 
         public override void Update(float dlt, float dltSecs)
         {
