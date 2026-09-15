@@ -9,13 +9,14 @@ public partial class GameScript : GameScriptInterfaceExtended
     /// </summary>
     public static class ColorHelper
     {
+        private static byte NextByte() => (byte)Random.Shared.Next(256);
+
         /// <summary>
         /// Returns a random <see cref="Color"/> with a fully random RGB value and default
         /// (opaque) alpha.
         /// </summary>
         /// <param name="random">A Random instance for generating the color.</param>
-        public static Color GetRandomColor(Random random) =>
-            new((byte)random.Next(256), (byte)random.Next(256), (byte)random.Next(256));
+        public static Color GetRandomColor() => new(NextByte(), NextByte(), NextByte());
 
         /// <summary>
         /// Returns the standard <see cref="Color"/> associated with a given team.

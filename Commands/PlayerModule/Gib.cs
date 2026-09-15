@@ -6,7 +6,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 {
     public sealed partial class PlayerModule
     {
-        private static void Kill(UserMessageCallbackArgs args)
+        private static void Gib(UserMessageCallbackArgs args)
         {
             IPlayer[] players = [.. ParseHelper.ParsePlayers(args.CommandArguments, args.User)];
 
@@ -22,11 +22,11 @@ public partial class GameScript : GameScriptInterfaceExtended
             {
                 if (player == null || player.IsRemoved) continue;
 
-                player.Kill();
+                player.Gib();
                 affected++;
             }
 
-            Game.ShowChatMessage($"Killed {affected} player(s).", Color.Green, args.User.UserIdentifier);
+            Game.ShowChatMessage($"Gibbed {affected} player(s).", Color.Green, args.User.UserIdentifier);
         }
     }
 }
