@@ -55,7 +55,7 @@ Custom gameplay rules. Host-only, persisted unless noted otherwise.
 - [ ] `/speech [playSound]`: Toggles custom speech bubbles above players. Second parameter plays a sound when speech appears (default to `true`).
 - [ ] `/grab [enabled]`: Toggles whether players are able grab and throw each other.
 - [ ] `/throw [enabled]`: Toggles whether players can throw objects.
-- [ ] `/dmg [enabled]`: Toggles whether damage is displayed.
+- [ ] `/dmg_numbers [enabled]`: Toggles whether damage is displayed.
 - [ ] `/dropin [enabled]`: Toggles whether joining players spawn instantly instead of waiting for the next round.
 - [ ] `/gmover {players|enabled}`: Toggles whether the game may end, and if only players are left alive.
   - `/gmover off`: game over is disabled.
@@ -94,6 +94,7 @@ Interact with players. Moderator-only.
 - [x] `/kill <player>`: Kills a player.
 - [x] `/gib <player>`: Gibs a player.
 - [x] `/remove <player>`: Removes a player.
+- [x] `/dmg <player> <amount>`: Deals damage to a player.
 - [x] `/revive <player>`: Revives a dead player.
 - [x] `/input <player> [bool]`: Toggles whether a player can provide input, effectively freezing or unfreezing them.
 - [x] `/tp <from> <to>`: Teleports a player to another player.

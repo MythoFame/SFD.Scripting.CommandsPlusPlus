@@ -24,6 +24,9 @@ public partial class GameScript : GameScriptInterfaceExtended
             AddCommand("remove", Remove,
                 "<player> - Removes a player",
                 moderatorOnly: true);
+            AddCommand("dmg", Dmg,
+                "<player> <amount> - Deals damage to a player",
+                moderatorOnly: true);
             AddCommand("tp", Tp,
                 "<from> <to> - Teleports a player to another player, or to you if no target is given",
                 moderatorOnly: true);
