@@ -62,7 +62,7 @@ Custom gameplay rules. Host-only, persisted unless noted otherwise.
   - `/gmover on`: game over is enabled.
   - `/gmover players`: game over works only for players; ignore bots.
 - [ ] `/vctory [bool]`: Toggles or explicitly sets automatic victory condition detection. Used to make a map custom or versus. Moderator-only, not persisted.
-- [ ] `/wpnspawn [bool]`: Toggles or explicitly sets whether weapons spawn on the map. Moderator-only, not persisted.
+- [x] `/wpnspawn [bool]`: Toggles or explicitly sets whether weapons spawn on the map. Moderator-only, not persisted.
 - [ ] `/tags [bool]`: Toggles or explicitly sets nametag and status bar visibility for all players. Moderator-only, not persisted.
 - [ ] `/camera {reset|static|dynamic|individual} [zoom|persistent]`: Sets camera type and optional zoom level.
   - `/camera static`: sets static camera for current round.

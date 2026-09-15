@@ -18,6 +18,9 @@ public partial class GameScript : GameScriptInterfaceExtended
             AddCommand("reset_winratio", ResetWinratio,
                 "- Resets the stored win ratio statistics",
                 moderatorOnly: true);
+            AddCommand("wpnspawn", Wpnspawn,
+                "[bool] - Toggles or explicitly sets whether weapons spawn on the map",
+                moderatorOnly: true);
         }
     }
 }
