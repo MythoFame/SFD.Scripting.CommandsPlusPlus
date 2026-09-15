@@ -74,7 +74,8 @@ Custom gameplay rules. Host-only, persisted unless noted otherwise.
 - [x] `/rsboard`: Resets the stored win ratio statistics. Moderator-only.
 - [ ] `/refill [bool]`: Toggles whether ammo is constantly refilled for all players.
 - [ ] `/regen <hp>`: Sets health regenerated (or damaged) per second for all players. Set to `0` to disable.
-- [ ] `/gravity <multiplier>`: Sets a multiplier applied to gravity. Set to 0 to disable custom gravity.
+- [ ] `/gravity [multiplier]`: Sets a multiplier applied to gravity. Provide no argument to disable.
+- [ ] `/friendly_fire`: Toggles friendly fire.
 
 ## Spectation
 
