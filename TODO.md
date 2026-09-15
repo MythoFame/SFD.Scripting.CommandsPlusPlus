@@ -91,8 +91,8 @@ Interact with players. Moderator-only.
 
 - [x] `/noclip <player>`: Toggles noclip for a player, allowing them to pass through walls.
 - [x] `/fly <player>`: Toggles flying for a player.
-- [x] `/kill <player>`: Kills a player, optionally gibbing them or removing them.
-- [x] `/gib <player>`: Gibs a plauer.
+- [x] `/kill <player>`: Kills a player.
+- [x] `/gib <player>`: Gibs a player.
 - [x] `/remove <player>`: Removes a player.
 - [x] `/revive <player>`: Revives a dead player.
 - [x] `/input <player> [bool]`: Toggles whether a player can provide input, effectively freezing or unfreezing them.
