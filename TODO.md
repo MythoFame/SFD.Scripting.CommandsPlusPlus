@@ -14,10 +14,10 @@ The brackets `<>`, `[]`, `{}` for parameters have different meanings.
 
 ### Types
 
-- `bool`: can be `{true|false}` or `{yes|no}`.
+- `bool`: can be `{true|false}`, `{yes|no}` or `{1|0}`.
 - `string`: any text.
 - `int`: integer value like `1`, `-20`, `0`, `520`.
-- `float`: floating value like `1`, `-20`, `0`, `520`.
+- `float`: floating value like `1.0`, `-20.25`, `0`, `520.3`.
 - `player`: a player name or index.
 - `user`: a user name, index or account name.
 
@@ -25,7 +25,7 @@ The brackets `<>`, `[]`, `{}` for parameters have different meanings.
 
 ## Modules
 
-Commands are organized into modules, each grouping related commands. Every module can be independently enabled or disabled with `/toggle_module`, and the state persists between sessions. 
+Commands are organized into modules, each grouping related commands. Every module can be independently enabled or disabled with `/toggle_module`, and the state persists between sessions.
 
 Use `/modules` to list all modules with their state and `/commands [module]` to view command help. The Management module is required and cannot be disabled.
 
@@ -52,17 +52,27 @@ Run commands automatically on events. Host-only, persisted.
 Custom gameplay rules. Host-only, persisted unless noted otherwise.
 
 - [ ] `/respawn <delay>`: Toggles custom respawn and sets the respawn delay in seconds.
-- [ ] `/speech`: Toggles custom speech bubbles above players.
-- [ ] `/grab`: Toggles whether players are able to grab and throw each other.
-- [ ] `/dmg_numbers`: Toggles whether damage is displayed with floating numbers.
-- [ ] `/drop_in`: Toggles whether joining players spawn instantly instead of waiting for the next round.
-- [ ] `/no_bot_gameover`: Toggles whether the game ends when only bots are left alive.
-- [ ] `/auto_victory [bool]`: Toggles or explicitly sets automatic victory condition detection. Used to make a map custom or versus. Moderator-only, not persisted.
-- [ ] `/weapon_spawn [bool]`: Toggles or explicitly sets whether weapons spawn on the map. Moderator-only, not persisted.
+- [ ] `/speech [playSound]`: Toggles custom speech bubbles above players. Second parameter plays a sound when speech appears (default to `true`).
+- [ ] `/grab [enabled]`: Toggles whether players are able grab and throw each other.
+- [ ] `/throw [enabled]`: Toggles whether players can throw objects.
+- [ ] `/dmg [enabled]`: Toggles whether damage is displayed.
+- [ ] `/dropin [enabled]`: Toggles whether joining players spawn instantly instead of waiting for the next round.
+- [ ] `/gmover {players|enabled}`: Toggles whether the game may end, and if only players are left alive.
+  - `/gmover off`: game over is disabled.
+  - `/gmover on`: game over is enabled.
+  - `/gmover players`: game over works only for players; ignore bots.
+- [ ] `/vctory [bool]`: Toggles or explicitly sets automatic victory condition detection. Used to make a map custom or versus. Moderator-only, not persisted.
+- [ ] `/wpnspawn [bool]`: Toggles or explicitly sets whether weapons spawn on the map. Moderator-only, not persisted.
 - [ ] `/tags [bool]`: Toggles or explicitly sets nametag and status bar visibility for all players. Moderator-only, not persisted.
-- [x] `/reset_winratio`: Resets the stored win ratio statistics. Moderator-only.
-- [ ] `/refill_ammo`: Toggles whether ammo is constantly refilled for all players.
-- [ ] `/regen <hp>`: Sets health regenerated per second for all players. Set to 0 to disable.
+- [ ] `/camera {reset|static|dynamic|individual} [zoom|persistent]`: Sets camera type and optional zoom level.
+  - `/camera static`: sets static camera for current round.
+  - `/camera individual 0.5`: sets individual camera with fixed zoom level.
+  - `/camera dynamic true` sets dynamic camera for all rounds.
+  - `/camera individual true` sets individual camera with variable zoom for all rounds.
+  - `/camera individual 0.2 true` sets individual camera level with fixed zoom level for all rounds.
+- [x] `/rsboard`: Resets the stored win ratio statistics. Moderator-only.
+- [ ] `/refill [bool]`: Toggles whether ammo is constantly refilled for all players.
+- [ ] `/regen <hp>`: Sets health regenerated (or damaged) per second for all players. Set to `0` to disable.
 - [ ] `/gravity <multiplier>`: Sets a multiplier applied to gravity. Set to 0 to disable custom gravity.
 
 ## Spectation
@@ -80,17 +90,19 @@ Interact with players. Moderator-only.
 
 - [x] `/noclip <player>`: Toggles noclip for a player, allowing them to pass through walls.
 - [x] `/fly <player>`: Toggles flying for a player.
-- [x] `/kill <player> [gib|rm]`: Kills a player, optionally gibbing them or removing them.
+- [x] `/kill <player>`: Kills a player, optionally gibbing them or removing them.
+- [x] `/gib <player>`: Gibs a plauer.
+- [x] `/remove <player>`: Removes a player.
 - [x] `/revive <player>`: Revives a dead player.
-- [x] `/input <player>`: Toggles whether a player can provide input, effectively freezing or unfreezing them.
-- [x] `/tp <from> [to]`: Teleports a player to another player. If no target is provided, teleports them to your position.
+- [x] `/input <player> [bool]`: Toggles whether a player can provide input, effectively freezing or unfreezing them.
+- [x] `/tp <from> <to>`: Teleports a player to another player.
 - [x] `/team <player> <team>`: Sets the team of a player.
 - [x] `/trip <player>`: Trips a player, knocking them down.
-- [ ] `/setmodifier <player> <modifier> <value>`: Sets a player modifier to the given value.
+- [ ] `/modifier <player> <modifier> <value>`: Sets a player modifier to the given value.
 - [x] `/spawn <id>`: Spawns an object with the given ID at your position.
 - [x] `/burn <player>`: Toggles whether a player is burning.
-- [x] `/copy_skin <from> <to>`: Copies one player's profile onto another player.
-- [x] `/swap_skin <from> <to>`: Swap one player's profile onto another player.
+- [x] `/copy <from> <to>`: Copies one player's profile onto another player.
+- [x] `/swap <from> <to>`: Swap one player's profile onto another player.
 - [x] `/user <from> <to>`: Swaps the users of two players.
 - [ ] `/wear <name> <type> [primary_color] [secondary_color]`: Gives your profile a cosmetic item of the given type and colors.
 - [x] `/action <player> <action>`: Queues an action for a player whose input is disabled.
