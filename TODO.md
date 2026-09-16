@@ -25,18 +25,18 @@ The brackets `<>`, `[]`, `{}` for parameters have different meanings.
 
 ## Modules
 
-Commands are organized into modules, each grouping related commands. Every module can be independently blocked or unblocked with `/toggle_module`, and the state persists between sessions. Blocking a module restricts all of its commands to the host.
+Commands are organized into modules, each grouping related commands. Every module can be independently allowed or restricted with `/toggle_module`, and the state persists between sessions. Restricting a module limits all of its commands to the host.
 
-Use `/modules` to list all modules with their state and `/commands [module]` to view command help. The Management module is required and cannot be blocked.
+Use `/modules` to list all modules with their state and `/commands [module]` to view command help. The Management module is required and cannot be restricted.
 
 ### Management
 
-Required core module for managing all other modules. Always active and cannot be blocked.
+Required core module for managing all other modules. Always allowed and cannot be restricted.
 
-- [x] `/modules`: Display all modules along with whether they are blocked or active.
+- [x] `/modules`: Display all modules along with whether they are allowed or restricted.
 - [x] `/commands [module]`: Display all commands along with their help. If a module is provided, then display only that module's commands and help.
-- [x] `/toggle_module <module>`: Toggles whether a module is blocked. Blocked modules have all their commands restricted to the host. Host-only, persisted. Argument cannot be the management module.
-- [x] `/reset_modules`: Resets all modules to their default unblocked state. Host-only, persisted.
+- [x] `/toggle_module <module>`: Toggles whether a module is restricted. Restricted modules have all their commands limited to the host. Host-only, persisted. Argument cannot be the management module.
+- [x] `/reset_modules`: Resets all modules to their default allowed state. Host-only, persisted.
 
 ### Automation
 

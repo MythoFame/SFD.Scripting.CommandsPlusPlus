@@ -8,11 +8,11 @@ public partial class GameScript : GameScriptInterfaceExtended
     /// Base class for a Commands++ module. Each module owns its
     /// <see cref="CommandHandler.Command"/> instances in a plain list and
     /// exposes them via <see cref="CommandHandler.ActiveCommands"/>.
-    /// <see cref="Blocked"/> persists the blocked state in
-    /// <see cref="IGame.LocalStorage"/> and defaults to unblocked; the runtime
-    /// <see cref="IsBlocked"/> flag guards <see cref="OnBlocked"/> so it never
-    /// fires redundantly. Blocking a module restricts all of its commands to
-    /// the host instead of withdrawing them.
+    /// <see cref="Restricted"/> persists the restricted state in
+    /// <see cref="IGame.LocalStorage"/> and defaults to allowed; the runtime
+    /// <see cref="IsRestricted"/> flag guards <see cref="OnRestricted"/> so it
+    /// never fires redundantly. Restricting a module limits all of its commands
+    /// to the host instead of withdrawing them.
     /// </summary>
     public abstract class CommandsModule
     {
@@ -28,42 +28,42 @@ public partial class GameScript : GameScriptInterfaceExtended
         /// <summary>Storage key prefix for all module flags.</summary>
         public const string StorageKeyPrefix = "CommandsPlusPlus.Module.";
 
-        private string StorageKey => StorageKeyPrefix + Name + ".Blocked";
+        private string StorageKey => StorageKeyPrefix + Name + ".Restricted";
 
         /// <summary>
-        /// Persisted blocked state. Reads unblocked when no value is stored.
+        /// Persisted restricted state. Reads allowed when no value is stored.
         /// </summary>
-        public bool Blocked
+        public bool Restricted
         {
             get => Game.LocalStorage.TryGetItemBool(StorageKey, out bool result) && result;
             set => Game.LocalStorage.SetItem(StorageKey, value);
         }
 
-        private bool _isBlocked;
+        private bool _isRestricted;
 
         /// <summary>
-        /// Runtime state. Setting it fires <see cref="OnBlocked"/> exactly once
-        /// per transition — assigning the current value is a no-op.
+        /// Runtime state. Setting it fires <see cref="OnRestricted"/> exactly
+        /// once per transition — assigning the current value is a no-op.
         /// </summary>
-        public bool IsBlocked
+        public bool IsRestricted
         {
-            get => _isBlocked;
+            get => _isRestricted;
             private set
             {
-                if (_isBlocked == value) return;
+                if (_isRestricted == value) return;
 
-                _isBlocked = value;
-                OnBlocked(value);
+                _isRestricted = value;
+                OnRestricted(value);
             }
         }
 
         /// <summary>
-        /// Starts unblocked. Activation (<see cref="Block"/>) is driven by
+        /// Starts allowed. Restriction (<see cref="Restrict"/>) is driven by
         /// <see cref="ModuleRegistry.RegisterAll"/> from the persisted
-        /// <see cref="Blocked"/> value, so construction never fires virtuals
+        /// <see cref="Restricted"/> value, so construction never fires virtuals
         /// and never ignores stored state.
         /// </summary>
-        protected CommandsModule() => _isBlocked = false;
+        protected CommandsModule() => _isRestricted = false;
 
         /// <summary>
         /// Commands owned by this module. A plain list on purpose: unlike
@@ -74,16 +74,17 @@ public partial class GameScript : GameScriptInterfaceExtended
         public readonly List<CommandHandler.Command> Commands = [];
 
         /// <summary>
-        /// Each owned command's permissions before <see cref="Block"/> overrode
-        /// them. Captured on first block, restored on <see cref="Unblock"/>.
+        /// Each owned command's permissions before <see cref="Restrict"/>
+        /// overrode them. Captured on first restriction, restored on
+        /// <see cref="Allow"/>.
         /// </summary>
         private readonly Dictionary<CommandHandler.Command, (bool hostOnly, bool moderatorOnly)> _originalPermissions = [];
 
         /// <summary>
-        /// Called once per block/unblock transition. React to the restriction
+        /// Called once per allow/restrict transition. React to the restriction
         /// change here.
         /// </summary>
-        public virtual void OnBlocked(bool blocked) { }
+        public virtual void OnRestricted(bool restricted) { }
 
         /// <summary>
         /// Exposes owned commands to the handler. Skips commands that are
@@ -99,13 +100,13 @@ public partial class GameScript : GameScriptInterfaceExtended
         }
 
         /// <summary>
-        /// Persists the blocked state and restricts every owned command to the
-        /// host, remembering original permissions for <see cref="Unblock"/>.
-        /// Fires <see cref="OnBlocked"/> once (guarded by <see cref="IsBlocked"/>).
+        /// Persists the restricted state and limits every owned command to the
+        /// host, remembering original permissions for <see cref="Allow"/>.
+        /// Fires <see cref="OnRestricted"/> once (guarded by <see cref="IsRestricted"/>).
         /// </summary>
-        public void Block()
+        public void Restrict()
         {
-            Blocked = true;
+            Restricted = true;
 
             foreach (CommandHandler.Command command in Commands)
             {
@@ -115,17 +116,17 @@ public partial class GameScript : GameScriptInterfaceExtended
                 command.HostOnly = true;
             }
 
-            IsBlocked = true;
+            IsRestricted = true;
         }
 
         /// <summary>
-        /// Persists the unblocked state and restores every owned command's
-        /// original permissions. Fires <see cref="OnBlocked"/> once (guarded by
-        /// <see cref="IsBlocked"/>).
+        /// Persists the allowed state and restores every owned command's
+        /// original permissions. Fires <see cref="OnRestricted"/> once (guarded
+        /// by <see cref="IsRestricted"/>).
         /// </summary>
-        public void Unblock()
+        public void Allow()
         {
-            Blocked = false;
+            Restricted = false;
 
             foreach (var entry in _originalPermissions)
             {
@@ -134,18 +135,18 @@ public partial class GameScript : GameScriptInterfaceExtended
             }
 
             _originalPermissions.Clear();
-            IsBlocked = false;
+            IsRestricted = false;
         }
 
-        /// <summary>Flips the state via <see cref="Block"/>/<see cref="Unblock"/>. Returns the new blocked state.</summary>
+        /// <summary>Flips the state via <see cref="Restrict"/>/<see cref="Allow"/>. Returns the new restricted state.</summary>
         public bool Toggle()
         {
-            if (IsBlocked)
-                Unblock();
+            if (IsRestricted)
+                Allow();
             else
-                Block();
+                Restrict();
 
-            return IsBlocked;
+            return IsRestricted;
         }
 
         /// <summary>

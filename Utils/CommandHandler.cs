@@ -11,7 +11,7 @@ public partial class GameScript : GameScriptInterfaceExtended
     /// auto-unsubscribes once the list is emptied — no manual Initialize/Destroy
     /// calls required.
     ///
-    /// Modules own their commands and expose them here via Register; blocking a
+    /// Modules own their commands and expose them here via Register; restricting a
     /// module flips its commands to host-only instead of withdrawing them, so
     /// dispatch stays a flat lookup with no module-scanning or per-message overhead.
     /// </summary>
@@ -63,7 +63,7 @@ public partial class GameScript : GameScriptInterfaceExtended
         /// matching <see cref="Command"/> in <see cref="ActiveCommands"/>, enforces its
         /// <see cref="Command.ModeratorOnly"/> and <see cref="Command.HostOnly"/>
         /// permissions, and fires its callback. Modules register their commands
-        /// here while enabled, so no module awareness is needed at dispatch time.
+        /// here while registered, so no module awareness is needed at dispatch time.
         /// </summary>
         private static void OnUserMessage(UserMessageCallbackArgs args)
         {

@@ -12,8 +12,8 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             foreach (CommandsModule module in ModuleRegistry.All.OrderBy(module => module.Name))
             {
-                string state = module.IsBlocked ? "blocked" : "active";
-                Color color = module.IsBlocked ? Color.Red : Color.Green;
+                string state = module.IsRestricted ? "restricted" : "allowed";
+                Color color = module.IsRestricted ? Color.Red : Color.Green;
 
                 Game.ShowChatMessage($"{module.Name}: {state} - {module.Description}", color, args.User.UserIdentifier);
             }
