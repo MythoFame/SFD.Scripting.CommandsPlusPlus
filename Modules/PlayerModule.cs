@@ -36,6 +36,9 @@ public partial class GameScript : GameScriptInterfaceExtended
             AddCommand("trip", Trip,
                 "<player> - Trips a player, knocking them down",
                 moderatorOnly: true);
+            AddCommand("pos", Pos,
+                "<player> - Displays the world position of a player",
+                moderatorOnly: true);
             AddCommand("input", Input,
                 "<player> - Toggles whether a player can provide input",
                 moderatorOnly: true);

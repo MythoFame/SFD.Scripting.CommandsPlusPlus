@@ -102,6 +102,7 @@ Interact with players. Moderator-only.
 - [x] `/tp <from> <to>`: Teleports a player to another player.
 - [x] `/team <player> <team>`: Sets the team of a player.
 - [x] `/trip <player>`: Trips a player, knocking them down.
+- [x] `/pos <player>`: Displays the world position of a player. Moderator-only.
 - [ ] `/modifier <player> <modifier> <value>`: Sets a player modifier to the given value.
 - [x] `/spawn <id>`: Spawns an object with the given ID at your position.
 - [x] `/burn <player>`: Toggles whether a player is burning.
