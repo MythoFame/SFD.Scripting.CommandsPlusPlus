@@ -72,7 +72,7 @@ public partial class GameScript : GameScriptInterfaceExtended
             AddCommand("copy", Copy,
                 "<from> <to> - Copies one player's profile onto another player",
                 moderatorOnly: true);
-            AddCommand("swap_skin", SwapSkin,
+            AddCommand("swap", Swap,
                 "<from> <to> - Swaps the profiles of two players",
                 moderatorOnly: true);
             AddCommand("user", User,
