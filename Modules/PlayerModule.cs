@@ -31,7 +31,13 @@ public partial class GameScript : GameScriptInterfaceExtended
                 "<player> - Toggles whether bots target a player",
                 moderatorOnly: true);
             AddCommand("tp", Tp,
-                "<from> <to> - Teleports a player to another player, or to you if no target is given",
+                "<to> - Teleports you to a player",
+                moderatorOnly: true);
+            AddCommand("tphere", Tphere,
+                "<player> - Teleports a player to you",
+                moderatorOnly: true);
+            AddCommand("tppos", Tppos,
+                "<player> <x> <y> - Teleports a player to a world position",
                 moderatorOnly: true);
             AddCommand("trip", Trip,
                 "<player> - Trips a player, knocking them down",

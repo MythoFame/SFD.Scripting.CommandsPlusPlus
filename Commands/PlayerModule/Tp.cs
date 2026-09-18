@@ -10,59 +10,47 @@ public partial class GameScript : GameScriptInterfaceExtended
         {
             string[] tokens = [.. ParseHelper.SplitArguments(args.CommandArguments)];
 
-            if (tokens.Length == 0 || tokens.Length > 2)
+            if (tokens.Length != 1)
             {
-                Game.ShowChatMessage("Usage: /tp <from> [to]", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage("Usage: /tp <to>", Color.Red, args.User.UserIdentifier);
                 return;
             }
 
-            IPlayer[] sources = [.. ParseHelper.ParsePlayers(tokens[0], args.User)];
+            IPlayer self = args.User.GetPlayer();
 
-            if (sources.Length == 0)
+            if (self == null || self.IsRemoved)
+            {
+                Game.ShowChatMessage("You have no live player to teleport.", Color.Red, args.User.UserIdentifier);
+                return;
+            }
+
+            IPlayer target = null;
+
+            foreach (IPlayer candidate in ParseHelper.ParsePlayers(tokens[0], args.User))
+            {
+                if (candidate != null && !candidate.IsRemoved)
+                {
+                    target = candidate;
+                    break;
+                }
+            }
+
+            if (target == null)
             {
                 Game.ShowChatMessage($"Player '{tokens[0]}' not found.", Color.Red, args.User.UserIdentifier);
                 return;
             }
 
-            Vector2 targetPos;
-            string targetLabel;
+            TeleportPlayers(args, [self], target.GetWorldPosition(), target.Name);
+        }
 
-            if (tokens.Length == 2)
-            {
-                IPlayer target = null;
-
-                foreach (IPlayer candidate in ParseHelper.ParsePlayers(tokens[1], args.User))
-                {
-                    if (candidate != null && !candidate.IsRemoved)
-                    {
-                        target = candidate;
-                        break;
-                    }
-                }
-
-                if (target == null)
-                {
-                    Game.ShowChatMessage($"Player '{tokens[1]}' not found.", Color.Red, args.User.UserIdentifier);
-                    return;
-                }
-
-                targetPos = target.GetWorldPosition();
-                targetLabel = target.Name;
-            }
-            else
-            {
-                IPlayer self = args.User.GetPlayer();
-
-                if (self == null || self.IsRemoved)
-                {
-                    Game.ShowChatMessage("You have no live player to teleport to.", Color.Red, args.User.UserIdentifier);
-                    return;
-                }
-
-                targetPos = self.GetWorldPosition();
-                targetLabel = "you";
-            }
-
+        /// <summary>
+        /// Shared teleport core for <c>/tp</c>, <c>/tphere</c> and <c>/tppos</c>:
+        /// moves every live source player to the destination with a gleam trail
+        /// and reports the count to the caller.
+        /// </summary>
+        private static void TeleportPlayers(UserMessageCallbackArgs args, IPlayer[] sources, Vector2 targetPos, string targetLabel)
+        {
             int affected = 0;
 
             foreach (IPlayer player in sources)

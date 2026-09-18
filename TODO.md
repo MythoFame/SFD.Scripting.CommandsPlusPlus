@@ -99,7 +99,9 @@ Interact with players. Moderator-only.
 - [x] `/notarget <player>`: Toggles whether bots target a player.
 - [x] `/revive <player>`: Revives a dead player.
 - [x] `/input <player> [bool]`: Toggles whether a player can provide input, effectively freezing or unfreezing them.
-- [x] `/tp <from> <to>`: Teleports a player to another player.
+- [x] `/tp <to>`: Teleports you to a player.
+- [x] `/tphere <player>`: Teleports a player to you.
+- [x] `/tppos <player> <x> <y>`: Teleports a player to a world position.
 - [x] `/team <player> <team>`: Sets the team of a player.
 - [x] `/trip <player>`: Trips a player, knocking them down.
 - [x] `/pos <player>`: Displays the world position of a player. Moderator-only.
