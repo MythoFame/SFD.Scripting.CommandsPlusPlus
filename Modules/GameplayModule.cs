@@ -15,7 +15,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
         public GameplayModule()
         {
-            AddCommand("reset_winratio", ResetWinratio,
+            AddCommand("rsboard", Rsboard,
                 "- Resets the stored win ratio statistics",
                 moderatorOnly: true);
             AddCommand("wpnspawn", Wpnspawn,

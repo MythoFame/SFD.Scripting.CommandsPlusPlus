@@ -6,7 +6,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 {
     public sealed partial class GameplayModule
     {
-        private static void ResetWinratio(UserMessageCallbackArgs args)
+        private static void Rsboard(UserMessageCallbackArgs args)
         {
             Game.ResetScore();
 
