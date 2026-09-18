@@ -64,13 +64,12 @@ Custom gameplay rules. Host-only, persisted unless noted otherwise.
 - [ ] `/vctory [bool]`: Toggles or explicitly sets automatic victory condition detection. Used to make a map custom or versus. Moderator-only, not persisted.
 - [x] `/wpnspawn [bool]`: Toggles or explicitly sets whether weapons spawn on the map. Moderator-only, not persisted.
 - [ ] `/tags [bool]`: Toggles or explicitly sets nametag and status bar visibility for all players. Moderator-only, not persisted.
-- [ ] `/camera {reset|static|dynamic|individual} [zoom|persistent]`: Sets camera type and optional zoom level.
-  - `/camera static`: sets static camera for current round.
+- [ ] `/camera {reset|static|dynamic|individual} [zoom]`: Sets camera type and optional zoom level for the current round. Not persisted.
+  - `/camera static`: sets static camera.
+  - `/camera dynamic`: sets dynamic camera.
+  - `/camera individual`: sets individual camera with variable zoom.
   - `/camera individual 0.5`: sets individual camera with fixed zoom level.
-  - `/camera dynamic true` sets dynamic camera for all rounds.
-  - `/camera individual true` sets individual camera with variable zoom for all rounds.
-  - `/camera individual 0.2 true` sets individual camera level with fixed zoom level for all rounds.
-  - Camera type for all rounds is persistent between different games and can be reset with `/camera reset` (this will reset the camera type for current round too).
+  - `/camera reset`: resets the camera type.
 - [x] `/rsboard`: Resets the stored win ratio statistics. Moderator-only.
 - [ ] `/refill [bool]`: Toggles whether ammo is constantly refilled for all players.
 - [ ] `/regen <hp>`: Sets health regenerated (or damaged) per second for all players. Set to `0` to disable.
