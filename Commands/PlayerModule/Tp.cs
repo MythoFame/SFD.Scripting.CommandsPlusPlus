@@ -41,6 +41,12 @@ public partial class GameScript : GameScriptInterfaceExtended
                 return;
             }
 
+            if (target.UniqueID == self.UniqueID)
+            {
+                Game.ShowChatMessage("You cannot teleport to yourself.", Color.Red, args.User.UserIdentifier);
+                return;
+            }
+
             TeleportPlayers(args, [self], target.GetWorldPosition(), target.Name);
         }
 
