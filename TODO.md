@@ -57,11 +57,9 @@ Custom gameplay rules. Host-only, persisted unless noted otherwise.
 - [ ] `/throw [enabled]`: Toggles whether players can throw objects.
 - [ ] `/dmg_numbers [enabled]`: Toggles whether damage is displayed.
 - [ ] `/dropin [enabled]`: Toggles whether joining players spawn instantly instead of waiting for the next round.
-- [ ] `/gmover {players|enabled}`: Toggles whether the game may end, and if only players are left alive.
-  - `/gmover off`: game over is disabled.
-  - `/gmover on`: game over is enabled.
-  - `/gmover players`: game over works only for players; ignore bots.
-- [ ] `/vctory [bool]`: Toggles or explicitly sets automatic victory condition detection. Used to make a map custom or versus. Moderator-only, not persisted.
+- [ ] `/gmover {true|false|players}`: Controls automatic victory detection, i.e. whether the round may end. Host-only.
+  - `/gmover true|false`: enables or disables game over for the current round. Not persisted.
+  - `/gmover players`: game over triggers on players only; bots are ignored. Persisted.
 - [x] `/wpnspawn [bool]`: Toggles or explicitly sets whether weapons spawn on the map. Moderator-only, not persisted.
 - [ ] `/tags [bool]`: Toggles or explicitly sets nametag and status bar visibility for all players. Moderator-only, not persisted.
 - [ ] `/camera {reset|static|dynamic|individual} [zoom]`: Sets camera type and optional zoom level for the current round. Not persisted.
