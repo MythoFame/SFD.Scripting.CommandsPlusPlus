@@ -6,13 +6,13 @@ public partial class GameScript : GameScriptInterfaceExtended
 {
     public sealed partial class PlayerModule
     {
-        private static void CopySkin(UserMessageCallbackArgs args)
+        private static void Copy(UserMessageCallbackArgs args)
         {
             string[] tokens = [.. ParseHelper.SplitArguments(args.CommandArguments)];
 
             if (tokens.Length != 2)
             {
-                Game.ShowChatMessage("Usage: /copy_skin <from> <to>", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage("Usage: /copy <from> <to>", Color.Red, args.User.UserIdentifier);
                 return;
             }
 
