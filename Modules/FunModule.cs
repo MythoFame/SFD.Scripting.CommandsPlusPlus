@@ -33,6 +33,9 @@ public partial class GameScript : GameScriptInterfaceExtended
             AddCommand("bot", Bot,
                 "[team] [ai] [name] - Spawns a robot, optionally on a given team with the given AI and name",
                 moderatorOnly: true);
+            AddCommand("color", ColorCommand,
+                "<player> <color> - Recolors all of a player's clothing",
+                moderatorOnly: true);
         }
     }
 }
