@@ -29,10 +29,10 @@ public partial class GameScript : GameScriptInterfaceExtended
                 return;
             }
 
-            string color1 = tokens.Length > 3 ? ToColorPackage(tokens[3]) : "";
-            string color2 = tokens.Length > 4 ? ToColorPackage(tokens[4]) : "";
+            string color1 = tokens.Length > 3 ? ColorHelper.ToColorPackage(tokens[3]) : "";
+            string color2 = tokens.Length > 4 ? ColorHelper.ToColorPackage(tokens[4]) : "";
 
-            IProfileClothingItem item = new(Capitalize(tokens[2]), color1, color2);
+            IProfileClothingItem item = new(ColorHelper.Capitalize(tokens[2]), color1, color2);
 
             IPlayer[] players = [.. ParseHelper.ParsePlayers(tokens[0], args.User)];
 
@@ -57,29 +57,6 @@ public partial class GameScript : GameScriptInterfaceExtended
             if (affected == 0) return;
 
             Game.ShowChatMessage($"Set {slot.Name} to '{tokens[2]}' for {affected} player(s).", Color.Green, args.User.UserIdentifier);
-        }
-
-        /// <summary>
-        /// Forces the first letter to upper case, e.g. balaclava to Balaclava.
-        /// </summary>
-        private static string Capitalize(string value) =>
-            string.IsNullOrEmpty(value) ? value : char.ToUpper(value[0]) + value[1..];
-
-        /// <summary>
-        /// Maps a color name to its package name, e.g. red to ClothingRed
-        /// and lightgrey to ClothingLightGrey. Empty stays empty.
-        /// </summary>
-        private static string ToColorPackage(string value)
-        {
-            if (string.IsNullOrEmpty(value)) return "";
-
-            if (value.StartsWith("light", StringComparison.OrdinalIgnoreCase) && value.Length > 5)
-                return "ClothingLight" + Capitalize(value[5..]);
-
-            if (value.StartsWith("dark", StringComparison.OrdinalIgnoreCase) && value.Length > 4)
-                return "ClothingDark" + Capitalize(value[4..]);
-
-            return "Clothing" + Capitalize(value);
         }
 
         /// <summary>
