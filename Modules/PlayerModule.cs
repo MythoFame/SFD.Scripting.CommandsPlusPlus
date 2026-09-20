@@ -84,6 +84,9 @@ public partial class GameScript : GameScriptInterfaceExtended
             AddCommand("user", User,
                 "<from> <to> - Swaps the users of two players",
                 moderatorOnly: true);
+            AddCommand("wear", Wear,
+                "<player> <slot> <name> [color1] [color2] - Gives a player a cosmetic item in the given slot",
+                moderatorOnly: true);
             AddCommand("action", ActionCommand,
                 "<player> <action> - Queues an action for a player whose input is disabled",
                 moderatorOnly: true);
