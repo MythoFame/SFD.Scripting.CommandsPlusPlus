@@ -61,7 +61,6 @@ Custom gameplay rules. Host-only, persisted unless noted otherwise.
   - `/gmover true|false`: enables or disables game over for the current round. Not persisted.
   - `/gmover players`: game over triggers on players only; bots are ignored. Persisted.
 - [x] `/wpnspawn [bool]`: Toggles or explicitly sets whether weapons spawn on the map. Moderator-only, not persisted.
-- [ ] `/tags [bool]`: Toggles or explicitly sets nametag and status bar visibility for all players. Moderator-only, not persisted.
 - [ ] `/camera {reset|static|dynamic|individual} [zoom]`: Sets camera type and optional zoom level for the current round. Not persisted.
   - `/camera static`: sets static camera.
   - `/camera dynamic`: sets dynamic camera.
@@ -102,6 +101,7 @@ Interact with players. Moderator-only.
 - [x] `/team <player> <team>`: Sets the team of a player.
 - [x] `/trip <player>`: Trips a player, knocking them down.
 - [x] `/pos <player>`: Displays the world position of a player. Moderator-only.
+- [x] `/tag <player> [name|status]`: Toggles nametag and status bar visibility for a player.
 - [ ] `/modifier <player> <modifier> <value>`: Sets a player modifier to the given value.
 - [x] `/spawn <id>`: Spawns an object with the given ID at your position.
 - [x] `/burn <player>`: Toggles whether a player is burning.

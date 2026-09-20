@@ -45,6 +45,9 @@ public partial class GameScript : GameScriptInterfaceExtended
             AddCommand("pos", Pos,
                 "<player> - Displays the world position of a player",
                 moderatorOnly: true);
+            AddCommand("tag", Tag,
+                "<player> [name|status] - Toggles nametag and status bar visibility for a player",
+                moderatorOnly: true);
             AddCommand("input", Input,
                 "<player> - Toggles whether a player can provide input",
                 moderatorOnly: true);
