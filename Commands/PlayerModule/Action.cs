@@ -12,13 +12,14 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             if (tokens.Length != 2)
             {
-                Game.ShowChatMessage("Usage: /action <player> <action>", Color.Red, args.User.UserIdentifier);
+                ShowActionUsage(args);
                 return;
             }
 
             if (!Enum.TryParse(tokens[1], true, out PlayerCommandType action) || !Enum.IsDefined(action))
             {
-                Game.ShowChatMessage("Invalid action.", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage($"Invalid action '{tokens[1]}'.", Color.Red, args.User.UserIdentifier);
+                ShowActionUsage(args);
                 return;
             }
 
@@ -56,6 +57,31 @@ public partial class GameScript : GameScriptInterfaceExtended
             {
                 Game.ShowChatMessage($"{skipped} player(s) must have their input disabled.", Color.Yellow, args.User.UserIdentifier);
             }
+        }
+
+        /// <summary>
+        /// Shows usage plus every <see cref="PlayerCommandType"/> value, five
+        /// per message so no single chat message hits the length limit.
+        /// </summary>
+        private static void ShowActionUsage(UserMessageCallbackArgs args)
+        {
+            Game.ShowChatMessage("Usage: /action <player> <action>. Actions:", Color.Red, args.User.UserIdentifier);
+
+            List<string> chunk = [];
+
+            foreach (string name in Enum.GetNames<PlayerCommandType>())
+            {
+                chunk.Add(name);
+
+                if (chunk.Count == 15)
+                {
+                    Game.ShowChatMessage(string.Join(", ", chunk), Color.Red, args.User.UserIdentifier);
+                    chunk.Clear();
+                }
+            }
+
+            if (chunk.Count > 0)
+                Game.ShowChatMessage(string.Join(", ", chunk), Color.Red, args.User.UserIdentifier);
         }
     }
 }
