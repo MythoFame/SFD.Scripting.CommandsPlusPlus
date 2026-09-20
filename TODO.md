@@ -102,7 +102,7 @@ Interact with players. Moderator-only.
 - [x] `/trip <player>`: Trips a player, knocking them down.
 - [x] `/pos <player>`: Displays the world position of a player. Moderator-only.
 - [x] `/tag <player> [name|status]`: Toggles nametag and status bar visibility for a player.
-- [ ] `/modifier <player> <modifier> <value>`: Sets a player modifier to the given value.
+- [x] `/modifier <player> <modifier> <value>`: Sets a player modifier to the given value.
 - [x] `/spawn <id>`: Spawns an object with the given ID at your position.
 - [x] `/burn <player>`: Toggles whether a player is burning.
 - [x] `/copy <from> <to>`: Copies one player's profile onto another player.
