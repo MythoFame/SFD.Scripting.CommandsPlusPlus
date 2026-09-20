@@ -56,6 +56,7 @@ public partial class GameScript : GameScriptInterfaceExtended
             if (hasToken)
                 yield return token.ToString();
         }
+
         /// <summary>
         /// Bitmask of the parsing operations a parser should attempt. Flags are
         /// evaluated in a fixed, secure order regardless of their bit values — index,
