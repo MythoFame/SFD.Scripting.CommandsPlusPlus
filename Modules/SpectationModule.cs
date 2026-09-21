@@ -17,6 +17,8 @@ public partial class GameScript : GameScriptInterfaceExtended
 
         public SpectationModule()
         {
+            AddCommand("spectate", Spectate,
+                "[player] - Toggles your own spectation for the next round");
         }
     }
 }

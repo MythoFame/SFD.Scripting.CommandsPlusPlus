@@ -26,5 +26,6 @@ public partial class GameScript : GameScriptInterfaceExtended
         RespawnRule.Initialize();
         FriendlyFireRule.Initialize();
         GravityRule.Initialize();
+        SpectationRule.Initialize();
     }
 }
