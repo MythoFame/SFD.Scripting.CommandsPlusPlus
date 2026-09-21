@@ -90,6 +90,12 @@ public partial class GameScript : GameScriptInterfaceExtended
             AddCommand("action", ActionCommand,
                 "<player> <action> - Queues an action for a player whose input is disabled",
                 moderatorOnly: true);
+            AddCommand("magnet", MagnetCommand,
+                "<player> [area_size] [players|objects] - Toggles attraction of nearby players and/or objects toward a player",
+                moderatorOnly: true);
+            AddCommand("repulse", RepulseCommand,
+                "<player> [area_size] [players|objects] - Toggles repulsion of nearby players and/or objects away from a player",
+                moderatorOnly: true);
         }
     }
 }

@@ -111,8 +111,8 @@ Interact with players. Moderator-only.
 - [x] `/wear <player> <slot> <name> [color1] [color2]`: Gives a player a cosmetic item in the given slot with the given colors.
 - [x] `/action <player> <action>`: Queues an action for a player whose input is disabled.
 - [x] `/refill <player>`: Refills a player's ammo as if they used an ammo stash.
-- [ ] `/magnet <player> [area_size] [players|objects]`: Toggles attraction of nearby players and/or objects toward a player.
-- [ ] `/repulse <player> [area_size] [players|objects]`: Toggles repulsion of nearby players and/or objects away from a player.
+- [x] `/magnet <player> [area_size] [players|objects]`: Toggles attraction of nearby players and/or objects toward a player.
+- [x] `/repulse <player> [area_size] [players|objects]`: Toggles repulsion of nearby players and/or objects away from a player.
 
 ## Fun
 
