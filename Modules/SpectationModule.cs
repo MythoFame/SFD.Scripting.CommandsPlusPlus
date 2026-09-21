@@ -18,7 +18,16 @@ public partial class GameScript : GameScriptInterfaceExtended
         public SpectationModule()
         {
             AddCommand("spectate", Spectate,
-                "[player] - Toggles your own spectation for the next round");
+                "[user] - Toggles your own spectation for the next round");
+            AddCommand("spectate_whitelist", SpectateWhitelist,
+                "- Toggles whether only whitelisted players are allowed to play",
+                moderatorOnly: true);
+            AddCommand("spectate_add_whitelist", SpectateAddWhitelist,
+                "<user> - Adds a user to the spectate whitelist",
+                moderatorOnly: true);
+            AddCommand("spectate_rm_whitelist", SpectateRmWhitelist,
+                "<account> - Removes an account from the spectate whitelist, * clears all",
+                moderatorOnly: true);
         }
     }
 }

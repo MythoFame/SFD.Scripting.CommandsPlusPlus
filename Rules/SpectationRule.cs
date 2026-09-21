@@ -38,16 +38,31 @@ public partial class GameScript : GameScriptInterfaceExtended
             {
                 if (user.IsBot || !Spectating.Contains(user.AccountName)) continue;
 
-                IPlayer player = user.GetPlayer();
-
-                if (player == null || player.IsRemoved) continue;
-
-                player.SetUser(null);
-
-                player.Remove();
-
-                Game.ShowChatMessage("You're currently spectating. Type /spectate to stop spectating.", Color.Yellow, user.UserIdentifier);
+                ForceSpectate(user, "You're currently spectating. Type /spectate to stop spectating.");
             }
+
+            if (WhitelistOnly)
+            {
+                foreach(IUser user in Game.GetActiveUsers())
+                {
+                    if (user.IsBot || Whitelist.Contains(user.AccountName)) continue;
+
+                    ForceSpectate(user, "Only whitelisted players may play.");
+                }
+            }
+        }
+
+        private static void ForceSpectate(IUser user, string message)
+        {
+            IPlayer player = user.GetPlayer();
+
+            if (player == null || player.IsRemoved) return;
+
+            player.SetUser(null);
+
+            player.Remove();
+
+            Game.ShowChatMessage(message, Color.Yellow, user.UserIdentifier);
         }
 
         /// <summary>

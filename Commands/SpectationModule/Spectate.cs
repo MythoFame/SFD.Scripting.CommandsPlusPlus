@@ -12,7 +12,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             if (tokens.Length > 1)
             {
-                Game.ShowChatMessage("Usage: /spectate [player]", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage("Usage: /spectate [user]", Color.Red, args.User.UserIdentifier);
                 return;
             }
 
@@ -43,9 +43,9 @@ public partial class GameScript : GameScriptInterfaceExtended
                 return;
             }
 
-            IPlayer target = null;
+            IUser target = null;
 
-            foreach (IPlayer candidate in ParseHelper.ParsePlayers(tokens[0], args.User))
+            foreach (IUser candidate in ParseHelper.ParseUsers(tokens[0], args.User))
             {
                 if (candidate != null && !candidate.IsRemoved)
                 {
@@ -56,23 +56,18 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             if (target == null)
             {
-                Game.ShowChatMessage($"Player '{tokens[0]}' not found.", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage($"User '{tokens[0]}' not found.", Color.Red, args.User.UserIdentifier);
                 return;
             }
 
-            IUser targetUser = target.GetUser();
-
-            if (targetUser == null)
-            {
-                Game.ShowChatMessage($"{target.Name} has no user.", Color.Red, args.User.UserIdentifier);
-                return;
-            }
-
-            string targetAccount = targetUser.AccountName;
+            string targetAccount = target.AccountName;
 
             if (SpectationRule.Spectating.Contains(targetAccount, StringComparer.OrdinalIgnoreCase))
             {
-                Game.ShowChatMessage($"{target.Name} is already spectating next round.", Color.Yellow, args.User.UserIdentifier);
+                SpectationRule.Spectating = [.. SpectationRule.Spectating
+                    .Where(n => !string.Equals(n, targetAccount, StringComparison.OrdinalIgnoreCase))];
+
+                Game.ShowChatMessage($"{target.Name} will play next round.", Color.Green, args.User.UserIdentifier);
                 return;
             }
 
