@@ -6,14 +6,14 @@ public partial class GameScript : GameScriptInterfaceExtended
 {
     public sealed partial class GameplayModule
     {
-        private static void Clear(UserMessageCallbackArgs args)
+        private static void ClearObj(UserMessageCallbackArgs args)
         {
             string[] tokens = [.. ParseHelper.SplitArguments(args.CommandArguments)];
             int uid = args.User?.UserIdentifier ?? -1;
 
             if (tokens.Length != 1)
             {
-                Game.ShowChatMessage("Usage: /clear <id>", Color.Red, uid);
+                Game.ShowChatMessage("Usage: /clear_obj <id>", Color.Red, uid);
                 return;
             }
 

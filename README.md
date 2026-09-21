@@ -81,7 +81,7 @@ Change how the match itself behaves. Persistent rules like respawns and physics 
 | `/dropin <delay>` | Sets the drop-in spawn delay. Set to `0` or below to disable. |
 | `/gmover {true\|false\|players}` | Controls automatic victory detection, i.e. whether the round may end. Host-only. `true`/`false` enables or disables game over for the current round (not persisted), `players` enables players-only mode — the round ends automatically when only bots are left (persisted). |
 | `/weather <none\|snow\|rain>` | Sets the weather. Moderator-only, not persisted. |
-| `/clear <id>` | Removes all objects with the given ID. Moderator-only. |
+| `/clear_obj <id>` | Removes all objects with the given ID. Moderator-only. |
 | `/wpnspawn [true\|false]` | Toggles or sets whether weapons spawn on the map. Moderator-only, not persisted. |
 | `/camera {static\|dynamic\|individual} [zoom]` | Sets camera type and optional zoom level for the current round. Not persisted. |
 | `/rsboard` | Resets the stored win ratio statistics. Moderator-only. |
