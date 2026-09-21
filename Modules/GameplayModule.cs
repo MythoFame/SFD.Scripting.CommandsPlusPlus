@@ -45,6 +45,9 @@ public partial class GameScript : GameScriptInterfaceExtended
             AddCommand("respawn", Respawn,
                 "<delay> - Sets the custom respawn delay, 0 or below disables it",
                 hostOnly: true);
+            AddCommand("friendly_fire", FriendlyFire,
+                "- Toggles friendly fire",
+                hostOnly: true);
         }
     }
 }
