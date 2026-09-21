@@ -36,6 +36,9 @@ public partial class GameScript : GameScriptInterfaceExtended
             AddCommand("dmg_numbers", DmgNumbers,
                 "[bool] [players|objects|all] - Toggles or sets whether damage is displayed",
                 hostOnly: true);
+            AddCommand("speech", Speech,
+                "[bool] - Toggles custom speech bubbles above players",
+                hostOnly: true);
         }
     }
 }
