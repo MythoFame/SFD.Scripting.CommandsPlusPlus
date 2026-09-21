@@ -42,6 +42,9 @@ public partial class GameScript : GameScriptInterfaceExtended
             AddCommand("dropin", Dropin,
                 "<delay> - Sets the drop-in spawn delay, 0 or below disables it",
                 hostOnly: true);
+            AddCommand("respawn", Respawn,
+                "<delay> - Sets the custom respawn delay, 0 or below disables it",
+                hostOnly: true);
         }
     }
 }
