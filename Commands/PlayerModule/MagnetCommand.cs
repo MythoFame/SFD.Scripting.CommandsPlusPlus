@@ -64,6 +64,8 @@ public partial class GameScript : GameScriptInterfaceExtended
             int affected = 0;
             string lastName = string.Empty;
             bool lastState = false;
+            float lastArea = 0f;
+            Magnet.Target lastTarget = Magnet.Target.All;
 
             foreach (IPlayer player in players)
             {
@@ -88,21 +90,24 @@ public partial class GameScript : GameScriptInterfaceExtended
 
                 lastName = player.Name;
                 lastState = existing.Enabled;
+                lastArea = existing.AreaSize;
+                lastTarget = existing.Targets;
                 affected++;
             }
 
             if (affected == 0) return;
 
-            string scope = target == Magnet.Target.All ? "all targets" : $"{target.ToString().ToLowerInvariant()} only";
+            string scope = lastTarget == Magnet.Target.All ? "all" : lastTarget.ToString().ToLowerInvariant();
+            string details = $"area {lastArea}, {scope}";
 
             if (affected == 1)
             {
-                Game.ShowChatMessage($"{label} {(lastState ? "enabled" : "disabled")} for {lastName} ({scope}).",
+                Game.ShowChatMessage($"{label} {(lastState ? "enabled" : "disabled")} for {lastName} ({details}).",
                     Color.Green, uid);
             }
             else
             {
-                Game.ShowChatMessage($"{label} updated for {affected} player(s) ({scope}).",
+                Game.ShowChatMessage($"{label} updated for {affected} player(s) ({details}).",
                     Color.Green, uid);
             }
         }
