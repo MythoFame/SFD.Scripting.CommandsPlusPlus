@@ -14,10 +14,6 @@ The brackets `<>`, `[]`, `{}` for parameters have different meanings.
 
 ### Types
 
-- `bool`: can be `{true|false}` or `{1|0}`.
-- `string`: any text.
-- `int`: integer value like `1`, `-20`, `0`, `520`.
-- `float`: floating value like `1.0`, `-20.25`, `0`, `520.3`.
 - `player`: a player name or index.
 - `user`: a user name, index or account name.
 
