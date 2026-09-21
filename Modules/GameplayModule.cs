@@ -19,8 +19,11 @@ public partial class GameScript : GameScriptInterfaceExtended
                 "- Resets the stored win ratio statistics",
                 moderatorOnly: true);
             AddCommand("wpnspawn", Wpnspawn,
-                "[bool] - Toggles or explicitly sets whether weapons spawn on the map",
+                "[bool] - Toggles or sets whether weapons spawn on the map",
                 moderatorOnly: true);
+            AddCommand("refill_all", RefillAll,
+                "[bool] - Toggles or sets whether ammo is constantly refilled for all players",
+                hostOnly: true);
         }
     }
 }

@@ -11,8 +11,10 @@ public partial class GameScript : GameScriptInterfaceExtended
 {
     private static readonly Random _random = Random.Shared;
 
-    public static void OnStartup()
+    public static void OnStartup() => ModuleRegistry.RegisterAll();
+
+    public static void AfterStartup()
     {
-        ModuleRegistry.RegisterAll();
+        RefillAllRule.Initialize();
     }
 }
