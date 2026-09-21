@@ -181,7 +181,11 @@ public partial class GameScript : GameScriptInterfaceExtended
             CommandHandler.Command command = CommandHandler.ActiveCommands
                 .FirstOrDefault(c => c.Name == args.Command);
 
-            if (command == null) return;
+            if (command == null)
+            {
+                Game.RunCommand(message);
+                return;
+            }
 
             command.OnCommand.Invoke(args);
         }
