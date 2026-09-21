@@ -85,7 +85,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             if (PlaySound)
             {
-                Game.PlaySound(SoundsDatabase.C4Arm, Vector2.Zero, 0.1f);
+                Game.PlaySound(SoundsDatabase.C4Arm, Vector2.Zero, 0.25f);
             }
         }
     }
