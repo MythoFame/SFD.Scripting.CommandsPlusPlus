@@ -8,9 +8,10 @@ public partial class GameScript : GameScriptInterfaceExtended
     {
         private static void ResetModules(UserMessageCallbackArgs args)
         {
+            int uid = args.User?.UserIdentifier ?? -1;
             ModuleRegistry.ResetAll();
 
-            Game.ShowChatMessage("All modules reset to their default state.", Color.Green, args.User.UserIdentifier);
+            Game.ShowChatMessage("All modules reset to their default state.", Color.Green, uid);
         }
     }
 }

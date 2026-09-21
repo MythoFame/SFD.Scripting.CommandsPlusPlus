@@ -8,14 +8,15 @@ public partial class GameScript : GameScriptInterfaceExtended
     {
         private static void Modules(UserMessageCallbackArgs args)
         {
-            Game.ShowChatMessage("Modules:", Color.Green, args.User.UserIdentifier);
+            int uid = args.User?.UserIdentifier ?? -1;
+            Game.ShowChatMessage("Modules:", Color.Green, uid);
 
             foreach (CommandsModule module in ModuleRegistry.All.OrderBy(module => module.Name))
             {
                 string state = module.IsRestricted ? "restricted" : "allowed";
                 Color color = module.IsRestricted ? Color.Red : Color.Green;
 
-                Game.ShowChatMessage($"{module.Name}: {state} - {module.Description}", color, args.User.UserIdentifier);
+                Game.ShowChatMessage($"{module.Name}: {state} - {module.Description}", color, uid);
             }
         }
     }

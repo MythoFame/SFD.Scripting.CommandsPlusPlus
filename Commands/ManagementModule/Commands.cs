@@ -9,10 +9,11 @@ public partial class GameScript : GameScriptInterfaceExtended
         private static void ShowCommands(UserMessageCallbackArgs args)
         {
             string[] tokens = [.. ParseHelper.SplitArguments(args.CommandArguments)];
+            int uid = args.User?.UserIdentifier ?? -1;
 
             if (tokens.Length > 1)
             {
-                Game.ShowChatMessage("Usage: /commands [module]", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage("Usage: /commands [module]", Color.Red, uid);
                 return;
             }
 
@@ -24,7 +25,7 @@ public partial class GameScript : GameScriptInterfaceExtended
             {
                 if (!ModuleRegistry.TryGet(tokens[0], out CommandsModule module))
                 {
-                    Game.ShowChatMessage($"Module '{tokens[0]}' not found.", Color.Red, args.User.UserIdentifier);
+                    Game.ShowChatMessage($"Module '{tokens[0]}' not found.", Color.Red, uid);
                     return;
                 }
 
@@ -40,7 +41,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
                 if (visible.Length == 0) continue;
 
-                Game.ShowChatMessage($"{module.Name}: {module.Description}", Color.Green, args.User.UserIdentifier);
+                Game.ShowChatMessage($"{module.Name}: {module.Description}", Color.Green, uid);
 
                 foreach (CommandHandler.Command command in visible)
                 {
@@ -54,7 +55,7 @@ public partial class GameScript : GameScriptInterfaceExtended
                         : command.ModeratorOnly ? Color.Yellow
                         : Color.Green;
 
-                    Game.ShowChatMessage(displayText, color, args.User.UserIdentifier);
+                    Game.ShowChatMessage(displayText, color, uid);
                 }
             }
         }
