@@ -53,7 +53,7 @@ Custom gameplay rules. Host-only, persisted unless noted otherwise.
 
 - [ ] `/respawn <delay>`: Toggles custom respawn and sets the respawn delay in seconds.
 - [ ] `/speech [playSound]`: Toggles custom speech bubbles above players. Second parameter plays a sound when speech appears (default to `true`).
-- [ ] `/grab [bool]`: Toggles or sets whether players are able to grab and throw each other.
+- [x] `/grab [bool]`: Toggles or sets whether players are able to grab and throw each other.
 - [ ] `/throw [bool]`: Toggles or sets whether players can throw objects.
 - [ ] `/dmg_numbers [bool]`: Toggles or sets whether damage is displayed.
 - [ ] `/dropin [bool]`: Toggles or sets whether joining players spawn instantly instead of waiting for the next round.

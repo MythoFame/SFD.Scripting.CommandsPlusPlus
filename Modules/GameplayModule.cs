@@ -24,6 +24,9 @@ public partial class GameScript : GameScriptInterfaceExtended
             AddCommand("refill_all", RefillAll,
                 "[bool] - Toggles or sets whether ammo is constantly refilled for all players",
                 hostOnly: true);
+            AddCommand("grab", Grab,
+                "[bool] - Toggles or sets whether players are able to grab and throw each other",
+                hostOnly: true);
         }
     }
 }

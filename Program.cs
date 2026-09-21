@@ -16,5 +16,6 @@ public partial class GameScript : GameScriptInterfaceExtended
     public static void AfterStartup()
     {
         RefillAllRule.Initialize();
+        GrabRule.Initialize();
     }
 }
