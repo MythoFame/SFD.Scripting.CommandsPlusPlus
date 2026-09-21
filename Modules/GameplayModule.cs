@@ -61,6 +61,9 @@ public partial class GameScript : GameScriptInterfaceExtended
             AddCommand("weather", Weather,
                 "<none|snow|rain> - Sets the weather. Moderator-only, not persisted.",
                 moderatorOnly: true);
+            AddCommand("clear", Clear,
+                "<id> - Removes all objects with the given ID. Moderator-only.",
+                moderatorOnly: true);
         }
     }
 }
