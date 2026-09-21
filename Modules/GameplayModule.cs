@@ -48,6 +48,9 @@ public partial class GameScript : GameScriptInterfaceExtended
             AddCommand("friendly_fire", FriendlyFire,
                 "- Toggles friendly fire",
                 hostOnly: true);
+            AddCommand("gravity", Gravity,
+                "<constant> - Sets a constant applied to gravity",
+                hostOnly: true);
         }
     }
 }
