@@ -54,6 +54,9 @@ public partial class GameScript : GameScriptInterfaceExtended
             AddCommand("camera", Camera,
                 "{reset|static|dynamic|individual} [zoom] - Sets camera type and optional zoom level for the current round",
                 hostOnly: true);
+            AddCommand("gmover", Gmover,
+                "{true|false|players} - Controls automatic victory detection",
+                hostOnly: true);
         }
     }
 }
