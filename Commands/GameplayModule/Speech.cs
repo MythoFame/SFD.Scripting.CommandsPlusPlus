@@ -9,10 +9,11 @@ public partial class GameScript : GameScriptInterfaceExtended
         private static void Speech(UserMessageCallbackArgs args)
         {
             string[] tokens = [.. ParseHelper.SplitArguments(args.CommandArguments)];
+            int uid = args.User?.UserIdentifier ?? -1;
 
             if (tokens.Length > 1)
             {
-                Game.ShowChatMessage("Usage: /speech [bool]", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage("Usage: /speech [bool]", Color.Red, uid);
                 return;
             }
 
@@ -24,7 +25,7 @@ public partial class GameScript : GameScriptInterfaceExtended
             }
             else if (!bool.TryParse(tokens[0], out enable))
             {
-                Game.ShowChatMessage("Usage: /speech [bool]", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage("Usage: /speech [bool]", Color.Red, uid);
                 return;
             }
             else
@@ -36,7 +37,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             string silent = enable && !SpeechRule.PlaySound ? " (silent)" : string.Empty;
 
-            Game.ShowChatMessage($"Speech bubbles {(enable ? "enabled" : "disabled")}{silent}.", Color.Green, args.User.UserIdentifier);
+            Game.ShowChatMessage($"Speech bubbles {(enable ? "enabled" : "disabled")}{silent}.", Color.Green, uid);
         }
     }
 }

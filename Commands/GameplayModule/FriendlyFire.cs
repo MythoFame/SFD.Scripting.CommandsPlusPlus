@@ -9,16 +9,17 @@ public partial class GameScript : GameScriptInterfaceExtended
         private static void FriendlyFire(UserMessageCallbackArgs args)
         {
             string[] tokens = [.. ParseHelper.SplitArguments(args.CommandArguments)];
+            int uid = args.User?.UserIdentifier ?? -1;
 
             if (tokens.Length != 0)
             {
-                Game.ShowChatMessage("Usage: /friendly_fire", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage("Usage: /friendly_fire", Color.Red, uid);
                 return;
             }
 
             FriendlyFireRule.IsEnabled = !FriendlyFireRule.IsEnabled;
 
-            Game.ShowChatMessage($"Friendly fire {(FriendlyFireRule.IsEnabled ? "disabled" : "enabled")}.", Color.Green, args.User.UserIdentifier);
+            Game.ShowChatMessage($"Friendly fire {(FriendlyFireRule.IsEnabled ? "disabled" : "enabled")}.", Color.Green, uid);
         }
     }
 }

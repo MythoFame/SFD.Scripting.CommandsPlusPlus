@@ -9,10 +9,11 @@ public partial class GameScript : GameScriptInterfaceExtended
         private static void DmgNumbers(UserMessageCallbackArgs args)
         {
             string[] tokens = [.. ParseHelper.SplitArguments(args.CommandArguments)];
+            int uid = args.User?.UserIdentifier ?? -1;
 
             if (tokens.Length > 2)
             {
-                Game.ShowChatMessage("Usage: /dmg_numbers [bool] [players|objects|all]", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage("Usage: /dmg_numbers [bool] [players|objects|all]", Color.Red, uid);
                 return;
             }
 
@@ -24,7 +25,7 @@ public partial class GameScript : GameScriptInterfaceExtended
             }
             else if (!bool.TryParse(tokens[0], out enable))
             {
-                Game.ShowChatMessage("Usage: /dmg_numbers [bool] [players|objects|all]", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage("Usage: /dmg_numbers [bool] [players|objects|all]", Color.Red, uid);
                 return;
             }
 
@@ -38,7 +39,7 @@ public partial class GameScript : GameScriptInterfaceExtended
                     target = DmgNumbersRule.DamageTarget.Objects;
                 else if (!string.Equals(tokens[1], "all", StringComparison.OrdinalIgnoreCase))
                 {
-                    Game.ShowChatMessage("Filter must be 'players', 'objects' or 'all'.", Color.Red, args.User.UserIdentifier);
+                    Game.ShowChatMessage("Filter must be 'players', 'objects' or 'all'.", Color.Red, uid);
                     return;
                 }
             }
@@ -47,7 +48,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             if (tokens.Length < 2 && enable == DmgNumbersRule.IsEnabled)
             {
-                Game.ShowChatMessage($"Damage numbers are already {(enable ? "displayed" : "hidden")}.", Color.Yellow, args.User.UserIdentifier);
+                Game.ShowChatMessage($"Damage numbers are already {(enable ? "displayed" : "hidden")}.", Color.Yellow, uid);
                 return;
             }
 
@@ -57,7 +58,7 @@ public partial class GameScript : GameScriptInterfaceExtended
                 ? $" for {target.ToString().ToLowerInvariant()} only"
                 : string.Empty;
 
-            Game.ShowChatMessage($"Damage numbers {(enable ? "displayed" : "hidden")}{scope}.", Color.Green, args.User.UserIdentifier);
+            Game.ShowChatMessage($"Damage numbers {(enable ? "displayed" : "hidden")}{scope}.", Color.Green, uid);
         }
     }
 }

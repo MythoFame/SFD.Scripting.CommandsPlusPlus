@@ -15,10 +15,11 @@ public partial class GameScript : GameScriptInterfaceExtended
         private static void Wpnspawn(UserMessageCallbackArgs args)
         {
             string[] tokens = [.. ParseHelper.SplitArguments(args.CommandArguments)];
+            int uid = args.User?.UserIdentifier ?? -1;
 
             if (tokens.Length > 1)
             {
-                Game.ShowChatMessage("Usage: /wpnspawn [bool]", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage("Usage: /wpnspawn [bool]", Color.Red, uid);
                 return;
             }
 
@@ -30,7 +31,7 @@ public partial class GameScript : GameScriptInterfaceExtended
             }
             else if (!bool.TryParse(tokens[0], out enable))
             {
-                Game.ShowChatMessage("Usage: /wpnspawn [bool]", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage("Usage: /wpnspawn [bool]", Color.Red, uid);
                 return;
             }
 
@@ -38,27 +39,27 @@ public partial class GameScript : GameScriptInterfaceExtended
             {
                 if (_savedSpawnChances == null)
                 {
-                    Game.ShowChatMessage("Weapon spawning is already enabled.", Color.Yellow, args.User.UserIdentifier);
+                    Game.ShowChatMessage("Weapon spawning is already enabled.", Color.Yellow, uid);
                     return;
                 }
 
                 Game.UpdateWeaponSpawnChances(_savedSpawnChances);
                 _savedSpawnChances = null;
 
-                Game.ShowChatMessage("Weapon spawning enabled.", Color.Green, args.User.UserIdentifier);
+                Game.ShowChatMessage("Weapon spawning enabled.", Color.Green, uid);
             }
             else
             {
                 if (_savedSpawnChances != null)
                 {
-                    Game.ShowChatMessage("Weapon spawning is already disabled.", Color.Yellow, args.User.UserIdentifier);
+                    Game.ShowChatMessage("Weapon spawning is already disabled.", Color.Yellow, uid);
                     return;
                 }
 
                 _savedSpawnChances = Game.GetWeaponSpawnChances();
                 Game.ClearWeaponSpawnChances();
 
-                Game.ShowChatMessage("Weapon spawning disabled.", Color.Green, args.User.UserIdentifier);
+                Game.ShowChatMessage("Weapon spawning disabled.", Color.Green, uid);
             }
         }
     }

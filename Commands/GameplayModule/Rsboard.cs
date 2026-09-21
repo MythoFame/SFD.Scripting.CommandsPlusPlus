@@ -8,9 +8,10 @@ public partial class GameScript : GameScriptInterfaceExtended
     {
         private static void Rsboard(UserMessageCallbackArgs args)
         {
+            int uid = args.User?.UserIdentifier ?? -1;
             Game.ResetScore();
 
-            Game.ShowChatMessage("Win ratio statistics reset.", Color.Green, args.User.UserIdentifier);
+            Game.ShowChatMessage("Win ratio statistics reset.", Color.Green, uid);
         }
     }
 }
