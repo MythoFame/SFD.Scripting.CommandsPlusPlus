@@ -57,15 +57,6 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             string commandName = commandTokens[0].TrimStart('/');
 
-            CommandHandler.Command command = CommandHandler.ActiveCommands
-                .FirstOrDefault(c => c.Name.Equals(commandName, StringComparison.InvariantCultureIgnoreCase));
-
-            if (command == null)
-            {
-                Game.ShowChatMessage($"Unknown command '{commandTokens[0]}'.", Color.Red, uid);
-                return;
-            }
-
             JobsRule.Add(new JobsRule.Job
             {
                 Trigger = trigger,
