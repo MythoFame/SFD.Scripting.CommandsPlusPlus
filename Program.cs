@@ -13,6 +13,11 @@ public partial class GameScript : GameScriptInterfaceExtended
 
     public static void OnStartup() => ModuleRegistry.RegisterAll();
 
+    public static void OnShutdown()
+    {
+        JobsRule.Shutdown();
+    }
+
     public static void AfterStartup()
     {
         RefillAllRule.Initialize();
@@ -27,5 +32,6 @@ public partial class GameScript : GameScriptInterfaceExtended
         FriendlyFireRule.Initialize();
         GravityRule.Initialize();
         SpectationRule.Initialize();
+        JobsRule.Initialize();
     }
 }

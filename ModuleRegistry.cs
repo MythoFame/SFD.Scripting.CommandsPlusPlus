@@ -77,6 +77,7 @@ public partial class GameScript : GameScriptInterfaceExtended
         public static void RegisterAll()
         {
             Register(new ManagementModule());
+            Register(new AutomationModule());
             Register(new PlayerModule());
             Register(new GameplayModule());
             Register(new FunModule());
