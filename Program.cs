@@ -19,5 +19,6 @@ public partial class GameScript : GameScriptInterfaceExtended
         GrabRule.Initialize();
         RegenRule.Initialize();
         ThrowRule.Initialize();
+        DmgNumbersRule.Initialize();
     }
 }

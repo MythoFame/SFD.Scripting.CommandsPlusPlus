@@ -33,6 +33,9 @@ public partial class GameScript : GameScriptInterfaceExtended
             AddCommand("regen", Regen,
                 "<hp> - Sets health regenerated per second for all players",
                 hostOnly: true);
+            AddCommand("dmg_numbers", DmgNumbers,
+                "[bool] [players|objects|all] - Toggles or sets whether damage is displayed",
+                hostOnly: true);
         }
     }
 }

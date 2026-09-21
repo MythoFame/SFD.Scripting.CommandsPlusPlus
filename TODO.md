@@ -54,8 +54,8 @@ Custom gameplay rules. Host-only, persisted unless noted otherwise.
 - [ ] `/respawn <delay>`: Toggles custom respawn and sets the respawn delay in seconds.
 - [ ] `/speech [playSound]`: Toggles custom speech bubbles above players. Second parameter plays a sound when speech appears (default to `true`).
 - [x] `/grab [bool]`: Toggles or sets whether players are able to grab and throw each other.
-- [ ] `/dmg_numbers [bool]`: Toggles or sets whether damage is displayed.
 - [x] `/throw [bool]`: Toggles or sets whether players can throw objects.
+- [x] `/dmg_numbers [bool] [players|objects|all]`: Toggles or sets whether damage is displayed.
 - [ ] `/dropin [bool]`: Toggles or sets whether joining players spawn instantly instead of waiting for the next round.
 - [ ] `/gmover {true|false|players}`: Controls automatic victory detection, i.e. whether the round may end. Host-only.
   - `/gmover true|false`: enables or disables game over for the current round. Not persisted.
