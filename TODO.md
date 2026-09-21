@@ -122,7 +122,7 @@ Lightweight fun commands for everyone unless noted otherwise.
 - [x] `/lightning <player>`: Summons a lightning strike upon a player. Moderator-only.
 - [x] `/bot [team] [ai] [name]`: Spawns a robot, optionally on a given team with the given AI and name. Moderator-only.
 - [x] `/color <player> <color>`: Recolors all of a player's clothing. Moderator-only.
-- [ ] `/bullet <player> <id>`: Sets custom bullets for a player. Moderator-only.
+- [x] `/bullet <player> [id]`: Sets custom bullets for a player, or disables them if no ID is given. Moderator-only.
 - [x] `/anvil <player>`: Drops a heavy object onto a player. Moderator-only.
 - [x] `/clone <player> [team] [ai]`: Spawns a clone of a player, optionally on a given team with the given AI. Moderator-only.
 - [x] `/fart`: Makes you fart.

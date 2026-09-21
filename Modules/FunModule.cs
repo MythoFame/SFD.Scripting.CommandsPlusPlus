@@ -36,6 +36,9 @@ public partial class GameScript : GameScriptInterfaceExtended
             AddCommand("color", ColorCommand,
                 "<player> <color> - Recolors all of a player's clothing",
                 moderatorOnly: true);
+            AddCommand("bullet", Bullet,
+                "<player> [id] - Sets custom bullets for a player, or disables them if no ID is given",
+                moderatorOnly: true);
         }
     }
 }
