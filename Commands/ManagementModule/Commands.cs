@@ -33,12 +33,17 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             foreach (CommandsModule module in modules)
             {
+                CommandHandler.Command[] visible = [.. module.Commands
+                    .OrderBy(command => command.Name)
+                    .Where(command => (!command.ModeratorOnly || args.User.IsModerator)
+                        && (!command.HostOnly || args.User.IsHost))];
+
+                if (visible.Length == 0) continue;
+
                 Game.ShowChatMessage($"{module.Name}: {module.Description}", Color.Green, args.User.UserIdentifier);
 
-                foreach (CommandHandler.Command command in module.Commands.OrderBy(command => command.Name))
+                foreach (CommandHandler.Command command in visible)
                 {
-                    if (command.ModeratorOnly && !args.User.IsModerator) continue;
-                    if (command.HostOnly && !args.User.IsHost) continue;
 
                     string displayText = $"/{command.Name} ";
 
