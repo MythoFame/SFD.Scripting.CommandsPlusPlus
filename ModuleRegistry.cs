@@ -5,7 +5,7 @@ public partial class GameScript : GameScriptInterfaceExtended
     /// <summary>
     /// Holds all known modules by case-insensitive name. Owns lookup plus
     /// reset-to-defaults (removing persisted flags so every module reads
-    /// allowed again). Per-module allow/restrict lives on
+    /// its default again). Per-module allow/restrict lives on
     /// <see cref="CommandsModule"/>; the guarded <see cref="CommandsModule.IsRestricted"/>
     /// setter guarantees <c>OnRestricted</c> fires exactly once per
     /// transition, so this class never needs its own state checks.
@@ -44,10 +44,11 @@ public partial class GameScript : GameScriptInterfaceExtended
         }
 
         /// <summary>
-        /// Resets all modules to their default (allowed) state by removing every
+        /// Resets all modules to their default state by removing every
         /// persisted flag under <see cref="CommandsModule.StorageKeyPrefix"/>
-        /// and allowing every module. Redundant transitions are no-ops thanks to
-        /// the guarded setter, so already-allowed modules are untouched.
+        /// and restoring every module's default. Redundant transitions are
+        /// no-ops thanks to the guarded setter, so already-default modules
+        /// are untouched.
         /// </summary>
         public static void ResetAll()
         {
@@ -58,14 +59,20 @@ public partial class GameScript : GameScriptInterfaceExtended
             }
 
             foreach (CommandsModule module in _cachedModules)
-                module.Allow();
+            {
+                if (module.DefaultRestricted)
+                    module.Restrict();
+                else
+                    module.Allow();
+            }
         }
 
         /// <summary>
         /// Creates, registers and exposes every module, then applies its persisted
         /// <see cref="CommandsModule.Restricted"/> value. Modules without a
-        /// stored value default to allowed; allowed ones stay active without
-        /// any spurious <c>OnRestricted</c> call.
+        /// stored value fall back to <see cref="CommandsModule.DefaultRestricted"/>;
+        /// ones already at their target state stay active without any
+        /// spurious <c>OnRestricted</c> call.
         /// </summary>
         public static void RegisterAll()
         {
@@ -73,12 +80,15 @@ public partial class GameScript : GameScriptInterfaceExtended
             Register(new PlayerModule());
             Register(new GameplayModule());
             Register(new FunModule());
+            Register(new SpectationModule());
 
             foreach (CommandsModule module in _cachedModules)
             {
                 module.Register();
 
-                if (module.Restricted)
+                bool restricted = module.HasPersistedState ? module.Restricted : module.DefaultRestricted;
+
+                if (restricted)
                     module.Restrict();
             }
         }

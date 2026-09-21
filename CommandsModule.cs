@@ -9,7 +9,8 @@ public partial class GameScript : GameScriptInterfaceExtended
     /// <see cref="CommandHandler.Command"/> instances in a plain list and
     /// exposes them via <see cref="CommandHandler.ActiveCommands"/>.
     /// <see cref="Restricted"/> persists the restricted state in
-    /// <see cref="IGame.LocalStorage"/> and defaults to allowed; the runtime
+    /// <see cref="IGame.LocalStorage"/> and defaults to
+    /// <see cref="DefaultRestricted"/>; the runtime
     /// <see cref="IsRestricted"/> flag guards <see cref="OnRestricted"/> so it
     /// never fires redundantly. Restricting a module limits all of its commands
     /// to the host instead of withdrawing them.
@@ -31,11 +32,23 @@ public partial class GameScript : GameScriptInterfaceExtended
         private string StorageKey => StorageKeyPrefix + Name + ".Restricted";
 
         /// <summary>
-        /// Persisted restricted state. Reads allowed when no value is stored.
+        /// Restricted state for fresh installs with no stored value.
+        /// Override to restrict a module by default.
+        /// </summary>
+        public virtual bool DefaultRestricted => false;
+
+        /// <summary>
+        /// Whether a restricted state was ever persisted for this module.
+        /// </summary>
+        public bool HasPersistedState => Game.LocalStorage.ContainsKey(StorageKey);
+
+        /// <summary>
+        /// Persisted restricted state. Reads <see cref="DefaultRestricted"/>
+        /// when no value is stored.
         /// </summary>
         public bool Restricted
         {
-            get => Game.LocalStorage.TryGetItemBool(StorageKey, out bool result) && result;
+            get => HasPersistedState && Game.LocalStorage.TryGetItemBool(StorageKey, out bool result) && result;
             set => Game.LocalStorage.SetItem(StorageKey, value);
         }
 

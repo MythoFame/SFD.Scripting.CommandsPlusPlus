@@ -10,7 +10,7 @@ public partial class GameScript : GameScriptInterfaceExtended
         {
             ModuleRegistry.ResetAll();
 
-            Game.ShowChatMessage("All modules reset to their default allowed state.", Color.Green, args.User.UserIdentifier);
+            Game.ShowChatMessage("All modules reset to their default state.", Color.Green, args.User.UserIdentifier);
         }
     }
 }
