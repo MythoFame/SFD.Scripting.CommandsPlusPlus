@@ -109,6 +109,7 @@ Interact with players. Moderator-only.
 - [x] `/refill <player>`: Refills a player's ammo as if they used an ammo stash.
 - [x] `/magnet <player> [area_size] [players|objects|all]`: Toggles attraction of nearby players and/or objects toward a player.
 - [x] `/repulse <player> [area_size] [players|objects|all]`: Toggles repulsion of nearby players and/or objects away from a player.
+- [x] `/boost <player> <left|down|up|right> [speed]`: Boosts a player in a direction.
 
 ## Fun
 

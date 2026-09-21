@@ -96,6 +96,9 @@ public partial class GameScript : GameScriptInterfaceExtended
             AddCommand("repulse", RepulseCommand,
                 "<player> [area_size] [players|objects|all] - Toggles repulsion of nearby players and/or objects away from a player.",
                 moderatorOnly: true);
+            AddCommand("boost", Boost,
+                "<player> <left|down|up|right> [speed] - Boosts a player in a direction.",
+                moderatorOnly: true);
         }
     }
 }
