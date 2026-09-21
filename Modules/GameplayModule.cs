@@ -52,7 +52,7 @@ public partial class GameScript : GameScriptInterfaceExtended
                 "<constant> - Sets a constant applied to gravity",
                 hostOnly: true);
             AddCommand("camera", Camera,
-                "{reset|static|dynamic|individual} [zoom] - Sets camera type and optional zoom level for the current round",
+                "{static|dynamic|individual} [zoom] - Sets camera type and optional zoom level for the current round",
                 hostOnly: true);
             AddCommand("gmover", Gmover,
                 "{true|false|players} - Controls automatic victory detection",

@@ -12,26 +12,13 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             if (tokens.Length == 0 || tokens.Length > 2)
             {
-                Game.ShowChatMessage("Usage: /camera {reset|static|dynamic|individual} [zoom]", Color.Red, args.User.UserIdentifier);
-                return;
-            }
-
-            if (string.Equals(tokens[0], "reset", StringComparison.OrdinalIgnoreCase))
-            {
-                if (tokens.Length > 1)
-                {
-                    Game.ShowChatMessage("Usage: /camera {reset|static|dynamic|individual} [zoom]", Color.Red, args.User.UserIdentifier);
-                    return;
-                }
-
-                Game.SetCurrentCameraMode(CameraMode.NONE);
-                Game.ShowChatMessage("Camera reset.", Color.Green, args.User.UserIdentifier);
+                Game.ShowChatMessage("Usage: /camera {static|dynamic|individual} [zoom]", Color.Red, args.User.UserIdentifier);
                 return;
             }
 
             if (!Enum.TryParse(tokens[0], true, out CameraMode mode) || !Enum.IsDefined(mode))
             {
-                Game.ShowChatMessage("Usage: /camera {reset|static|dynamic|individual} [zoom]", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage("Usage: /camera {static|dynamic|individual} [zoom]", Color.Red, args.User.UserIdentifier);
                 return;
             }
 

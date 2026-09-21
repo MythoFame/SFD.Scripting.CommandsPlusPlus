@@ -61,12 +61,11 @@ Custom gameplay rules. Host-only, persisted unless noted otherwise.
   - `/gmover true|false`: enables or disables game over for the current round. Not persisted.
   - `/gmover players`: game over triggers on players only; bots are ignored. Persisted.
 - [x] `/wpnspawn [bool]`: Toggles or sets whether weapons spawn on the map. Moderator-only, not persisted.
-- [x] `/camera {reset|static|dynamic|individual} [zoom]`: Sets camera type and optional zoom level for the current round. Not persisted.
+- [x] `/camera {static|dynamic|individual} [zoom]`: Sets camera type and optional zoom level for the current round. Not persisted.
   - `/camera static`: sets static camera.
   - `/camera dynamic`: sets dynamic camera.
   - `/camera individual`: sets individual camera with variable zoom.
   - `/camera individual 0.5`: sets individual camera with fixed zoom level.
-  - `/camera reset`: resets the camera type.
 - [x] `/rsboard`: Resets the stored win ratio statistics. Moderator-only.
 - [x] `/refill_all [bool]`: Toggles or sets whether ammo is constantly refilled for all players.
 - [x] `/regen <hp>`: Sets health regenerated per second for all players. Set to `0` or below to disable.
