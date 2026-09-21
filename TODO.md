@@ -76,10 +76,10 @@ Custom gameplay rules. Host-only, persisted unless noted otherwise.
 
 Control who spectates and who plays.
 
-- [x] `/spectate [user]`: Toggles your own spectation for the next round. Moderators can specify a user to force-spectate them.
-- [x] `/spectate_whitelist`: Toggles whether only whitelisted players are allowed to play while everyone else spectates. Moderator-only.
-- [x] `/spectate_add_whitelist <user>`: Adds a user to the spectate whitelist, allowing them to play. Moderator-only.
-- [x] `/spectate_rm_whitelist <account>`: Removes an account from the spectate whitelist. Moderator-only. Use `*` to clear all.
+- [x] `/spec [user]`: Toggles spectation for next round. Moderators can force-spectate a user.
+- [x] `/spec_wl`: Toggles whitelist-only mode. Moderator-only.
+- [x] `/spec_add <user>`: Adds user to whitelist. Moderator-only.
+- [x] `/spec_rm <account>`: Removes account from whitelist (`*` clears all). Moderator-only.
 
 ## Player
 
