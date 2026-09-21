@@ -27,6 +27,9 @@ public partial class GameScript : GameScriptInterfaceExtended
             AddCommand("grab", Grab,
                 "[bool] - Toggles or sets whether players are able to grab and throw each other",
                 hostOnly: true);
+            AddCommand("regen", Regen,
+                "<hp> - Sets health regenerated per second for all players",
+                hostOnly: true);
         }
     }
 }

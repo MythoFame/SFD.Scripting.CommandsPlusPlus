@@ -69,7 +69,7 @@ Custom gameplay rules. Host-only, persisted unless noted otherwise.
   - `/camera reset`: resets the camera type.
 - [x] `/rsboard`: Resets the stored win ratio statistics. Moderator-only.
 - [x] `/refill_all [bool]`: Toggles or sets whether ammo is constantly refilled for all players.
-- [ ] `/regen <hp>`: Sets health regenerated (or damaged) per second for all players. Set to `0` to disable.
+- [x] `/regen <hp>`: Sets health regenerated per second for all players. Set to `0` or below to disable.
 - [ ] `/gravity [multiplier]`: Sets a multiplier applied to gravity. Provide no argument to disable.
 - [ ] `/friendly_fire`: Toggles friendly fire.
 
