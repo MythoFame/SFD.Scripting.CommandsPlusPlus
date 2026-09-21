@@ -56,7 +56,7 @@ Custom gameplay rules. Host-only, persisted unless noted otherwise.
 - [x] `/grab [bool]`: Toggles or sets whether players are able to grab and throw each other.
 - [x] `/throw [bool]`: Toggles or sets whether players can throw objects.
 - [x] `/dmg_numbers [bool] [players|objects|all]`: Toggles or sets whether damage is displayed.
-- [ ] `/dropin [bool]`: Toggles or sets whether joining players spawn instantly instead of waiting for the next round.
+- [x] `/dropin <delay>`: Sets the drop-in spawn delay. Set to `0` or below to disable.
 - [ ] `/gmover {true|false|players}`: Controls automatic victory detection, i.e. whether the round may end. Host-only.
   - `/gmover true|false`: enables or disables game over for the current round. Not persisted.
   - `/gmover players`: game over triggers on players only; bots are ignored. Persisted.

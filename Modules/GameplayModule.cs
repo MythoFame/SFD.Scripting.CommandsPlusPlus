@@ -39,6 +39,9 @@ public partial class GameScript : GameScriptInterfaceExtended
             AddCommand("speech", Speech,
                 "[bool] - Toggles custom speech bubbles above players",
                 hostOnly: true);
+            AddCommand("dropin", Dropin,
+                "<delay> - Sets the drop-in spawn delay, 0 or below disables it",
+                hostOnly: true);
         }
     }
 }

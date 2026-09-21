@@ -21,5 +21,6 @@ public partial class GameScript : GameScriptInterfaceExtended
         ThrowRule.Initialize();
         DmgNumbersRule.Initialize();
         SpeechRule.Initialize();
+        DropinRule.Initialize();
     }
 }
