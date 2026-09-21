@@ -9,10 +9,11 @@ public partial class GameScript : GameScriptInterfaceExtended
         private static void Tp(UserMessageCallbackArgs args)
         {
             string[] tokens = [.. ParseHelper.SplitArguments(args.CommandArguments)];
+            int uid = args.User?.UserIdentifier ?? -1;
 
             if (tokens.Length != 1)
             {
-                Game.ShowChatMessage("Usage: /tp <to>", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage("Usage: /tp <to>", Color.Red, uid);
                 return;
             }
 
@@ -20,7 +21,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             if (self == null || self.IsRemoved)
             {
-                Game.ShowChatMessage("You have no live player to teleport.", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage("You have no live player to teleport.", Color.Red, uid);
                 return;
             }
 
@@ -37,13 +38,13 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             if (target == null)
             {
-                Game.ShowChatMessage($"Player '{tokens[0]}' not found.", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage($"Player '{tokens[0]}' not found.", Color.Red, uid);
                 return;
             }
 
             if (target.UniqueID == self.UniqueID)
             {
-                Game.ShowChatMessage("You cannot teleport to yourself.", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage("You cannot teleport to yourself.", Color.Red, uid);
                 return;
             }
 
@@ -57,6 +58,7 @@ public partial class GameScript : GameScriptInterfaceExtended
         /// </summary>
         private static void TeleportPlayers(UserMessageCallbackArgs args, IPlayer[] sources, Vector2 targetPos, string targetLabel)
         {
+            int uid = args.User?.UserIdentifier ?? -1;
             int affected = 0;
 
             foreach (IPlayer player in sources)
@@ -70,7 +72,7 @@ public partial class GameScript : GameScriptInterfaceExtended
                 PointShape.Trail(pos => Game.PlayEffect(EffectName.ItemGleam, pos), from, targetPos, 15f);
             }
 
-            Game.ShowChatMessage($"Teleported {affected} player(s) to {targetLabel}.", Color.Green, args.User.UserIdentifier);
+            Game.ShowChatMessage($"Teleported {affected} player(s) to {targetLabel}.", Color.Green, uid);
         }
     }
 }

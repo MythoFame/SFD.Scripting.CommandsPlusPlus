@@ -9,10 +9,11 @@ public partial class GameScript : GameScriptInterfaceExtended
         private static void Burn(UserMessageCallbackArgs args)
         {
             string[] tokens = [.. ParseHelper.SplitArguments(args.CommandArguments)];
+            int uid = args.User?.UserIdentifier ?? -1;
 
             if (tokens.Length != 1)
             {
-                Game.ShowChatMessage("Usage: /burn <player>", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage("Usage: /burn <player>", Color.Red, uid);
                 return;
             }
 
@@ -20,7 +21,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             if (players.Length == 0)
             {
-                Game.ShowChatMessage($"Player '{tokens[0]}' not found.", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage($"Player '{tokens[0]}' not found.", Color.Red, uid);
                 return;
             }
 
@@ -47,12 +48,12 @@ public partial class GameScript : GameScriptInterfaceExtended
             if (affected == 1)
             {
                 Game.ShowChatMessage($"{lastName} is {(lastState ? "now" : "no longer")} burning.",
-                    Color.Green, args.User.UserIdentifier);
+                    Color.Green, uid);
             }
             else
             {
                 Game.ShowChatMessage($"Toggled burning for {affected} player(s).",
-                    Color.Green, args.User.UserIdentifier);
+                    Color.Green, uid);
             }
         }
     }

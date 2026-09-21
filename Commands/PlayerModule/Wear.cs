@@ -9,6 +9,7 @@ public partial class GameScript : GameScriptInterfaceExtended
         private static void Wear(UserMessageCallbackArgs args)
         {
             string[] tokens = [.. ParseHelper.SplitArguments(args.CommandArguments)];
+            int uid = args.User?.UserIdentifier ?? -1;
 
             if (tokens.Length < 3 || tokens.Length > 5)
             {
@@ -24,7 +25,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             if (slot == null)
             {
-                Game.ShowChatMessage($"Unknown slot '{tokens[1]}'.", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage($"Unknown slot '{tokens[1]}'.", Color.Red, uid);
                 ShowWearUsage(args);
                 return;
             }
@@ -38,7 +39,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             if (players.Length == 0)
             {
-                Game.ShowChatMessage($"Player '{tokens[0]}' not found.", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage($"Player '{tokens[0]}' not found.", Color.Red, uid);
                 return;
             }
 
@@ -56,7 +57,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             if (affected == 0) return;
 
-            Game.ShowChatMessage($"Set {slot.Name} to '{tokens[2]}' for {affected} player(s).", Color.Green, args.User.UserIdentifier);
+            Game.ShowChatMessage($"Set {slot.Name} to '{tokens[2]}' for {affected} player(s).", Color.Green, uid);
         }
 
         /// <summary>
@@ -64,13 +65,14 @@ public partial class GameScript : GameScriptInterfaceExtended
         /// </summary>
         private static void ShowWearUsage(UserMessageCallbackArgs args)
         {
-            Game.ShowChatMessage("Usage: /wear <player> <slot> <name> [color1] [color2].", Color.Red, args.User.UserIdentifier);
+            int uid = args.User?.UserIdentifier ?? -1;
+            Game.ShowChatMessage("Usage: /wear <player> <slot> <name> [color1] [color2].", Color.Red, uid);
 
             var slots = typeof(IProfile).GetFields(
                 System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance)
                 .Where(f => f.FieldType == typeof(IProfileClothingItem));
 
-            Game.ShowChatMessage($"Slots: {string.Join(", ", slots.Select(f => f.Name))}.", Color.Red, args.User.UserIdentifier);
+            Game.ShowChatMessage($"Slots: {string.Join(", ", slots.Select(f => f.Name))}.", Color.Red, uid);
         }
     }
 }

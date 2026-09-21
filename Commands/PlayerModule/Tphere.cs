@@ -9,10 +9,11 @@ public partial class GameScript : GameScriptInterfaceExtended
         private static void Tphere(UserMessageCallbackArgs args)
         {
             string[] tokens = [.. ParseHelper.SplitArguments(args.CommandArguments)];
+            int uid = args.User?.UserIdentifier ?? -1;
 
             if (tokens.Length != 1)
             {
-                Game.ShowChatMessage("Usage: /tphere <player>", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage("Usage: /tphere <player>", Color.Red, uid);
                 return;
             }
 
@@ -20,7 +21,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             if (self == null || self.IsRemoved)
             {
-                Game.ShowChatMessage("You have no live player to teleport to.", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage("You have no live player to teleport to.", Color.Red, uid);
                 return;
             }
 
@@ -28,7 +29,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             if (matched.Length == 0)
             {
-                Game.ShowChatMessage($"Player '{tokens[0]}' not found.", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage($"Player '{tokens[0]}' not found.", Color.Red, uid);
                 return;
             }
 
@@ -36,7 +37,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             if (sources.Length == 0)
             {
-                Game.ShowChatMessage("You cannot teleport yourself to yourself.", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage("You cannot teleport yourself to yourself.", Color.Red, uid);
                 return;
             }
 

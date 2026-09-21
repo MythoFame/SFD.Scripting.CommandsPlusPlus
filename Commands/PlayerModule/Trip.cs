@@ -9,10 +9,11 @@ public partial class GameScript : GameScriptInterfaceExtended
         private static void Trip(UserMessageCallbackArgs args)
         {
             string[] tokens = [.. ParseHelper.SplitArguments(args.CommandArguments)];
+            int uid = args.User?.UserIdentifier ?? -1;
 
             if (tokens.Length != 1)
             {
-                Game.ShowChatMessage("Usage: /trip <player>", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage("Usage: /trip <player>", Color.Red, uid);
                 return;
             }
 
@@ -20,7 +21,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             if (players.Length == 0)
             {
-                Game.ShowChatMessage($"Player '{tokens[0]}' not found.", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage($"Player '{tokens[0]}' not found.", Color.Red, uid);
                 return;
             }
 
@@ -34,7 +35,7 @@ public partial class GameScript : GameScriptInterfaceExtended
                 affected++;
             }
 
-            Game.ShowChatMessage($"Tripped {affected} player(s).", Color.Green, args.User.UserIdentifier);
+            Game.ShowChatMessage($"Tripped {affected} player(s).", Color.Green, uid);
         }
     }
 }

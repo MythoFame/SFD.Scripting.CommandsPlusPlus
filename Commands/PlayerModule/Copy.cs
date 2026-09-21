@@ -9,10 +9,11 @@ public partial class GameScript : GameScriptInterfaceExtended
         private static void Copy(UserMessageCallbackArgs args)
         {
             string[] tokens = [.. ParseHelper.SplitArguments(args.CommandArguments)];
+            int uid = args.User?.UserIdentifier ?? -1;
 
             if (tokens.Length != 2)
             {
-                Game.ShowChatMessage("Usage: /copy <from> <to>", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage("Usage: /copy <from> <to>", Color.Red, uid);
                 return;
             }
 
@@ -29,7 +30,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             if (source == null)
             {
-                Game.ShowChatMessage($"Player '{tokens[0]}' not found.", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage($"Player '{tokens[0]}' not found.", Color.Red, uid);
                 return;
             }
 
@@ -37,7 +38,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             if (targets.Length == 0)
             {
-                Game.ShowChatMessage($"Player '{tokens[1]}' not found.", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage($"Player '{tokens[1]}' not found.", Color.Red, uid);
                 return;
             }
 
@@ -52,7 +53,7 @@ public partial class GameScript : GameScriptInterfaceExtended
                 affected++;
             }
 
-            Game.ShowChatMessage($"Copied {source.Name}'s profile onto {affected} player(s).", Color.Green, args.User.UserIdentifier);
+            Game.ShowChatMessage($"Copied {source.Name}'s profile onto {affected} player(s).", Color.Green, uid);
         }
     }
 }

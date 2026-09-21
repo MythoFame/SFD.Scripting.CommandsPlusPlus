@@ -9,10 +9,11 @@ public partial class GameScript : GameScriptInterfaceExtended
         private static void Tag(UserMessageCallbackArgs args)
         {
             string[] tokens = [.. ParseHelper.SplitArguments(args.CommandArguments)];
+            int uid = args.User?.UserIdentifier ?? -1;
 
             if (tokens.Length == 0 || tokens.Length > 2)
             {
-                Game.ShowChatMessage("Usage: /tag <player> [name|status]", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage("Usage: /tag <player> [name|status]", Color.Red, uid);
                 return;
             }
 
@@ -27,7 +28,7 @@ public partial class GameScript : GameScriptInterfaceExtended
                     toggleName = false;
                 else
                 {
-                    Game.ShowChatMessage("Mode must be 'name' or 'status'.", Color.Red, args.User.UserIdentifier);
+                    Game.ShowChatMessage("Mode must be 'name' or 'status'.", Color.Red, uid);
                     return;
                 }
             }
@@ -36,7 +37,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             if (players.Length == 0)
             {
-                Game.ShowChatMessage($"Player '{tokens[0]}' not found.", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage($"Player '{tokens[0]}' not found.", Color.Red, uid);
                 return;
             }
 
@@ -72,11 +73,11 @@ public partial class GameScript : GameScriptInterfaceExtended
                 if (toggleStatus)
                     parts.Add($"status bars {(lastStatusVisible ? "visible" : "hidden")}");
 
-                Game.ShowChatMessage($"{lastName}: {string.Join(" and ", parts)}.", Color.Green, args.User.UserIdentifier);
+                Game.ShowChatMessage($"{lastName}: {string.Join(" and ", parts)}.", Color.Green, uid);
             }
             else
             {
-                Game.ShowChatMessage($"Toggled tags for {affected} player(s).", Color.Green, args.User.UserIdentifier);
+                Game.ShowChatMessage($"Toggled tags for {affected} player(s).", Color.Green, uid);
             }
         }
     }

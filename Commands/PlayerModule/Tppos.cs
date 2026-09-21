@@ -9,22 +9,23 @@ public partial class GameScript : GameScriptInterfaceExtended
         private static void Tppos(UserMessageCallbackArgs args)
         {
             string[] tokens = [.. ParseHelper.SplitArguments(args.CommandArguments)];
+            int uid = args.User?.UserIdentifier ?? -1;
 
             if (tokens.Length != 3)
             {
-                Game.ShowChatMessage("Usage: /tppos <player> <x> <y>", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage("Usage: /tppos <player> <x> <y>", Color.Red, uid);
                 return;
             }
 
             if (!float.TryParse(tokens[1], out float x))
             {
-                Game.ShowChatMessage($"Invalid x coordinate '{tokens[1]}'.", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage($"Invalid x coordinate '{tokens[1]}'.", Color.Red, uid);
                 return;
             }
 
             if (!float.TryParse(tokens[2], out float y))
             {
-                Game.ShowChatMessage($"Invalid y coordinate '{tokens[2]}'.", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage($"Invalid y coordinate '{tokens[2]}'.", Color.Red, uid);
                 return;
             }
 
@@ -32,7 +33,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             if (sources.Length == 0)
             {
-                Game.ShowChatMessage($"Player '{tokens[0]}' not found.", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage($"Player '{tokens[0]}' not found.", Color.Red, uid);
                 return;
             }
 

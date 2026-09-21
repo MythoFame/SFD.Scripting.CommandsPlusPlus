@@ -9,10 +9,11 @@ public partial class GameScript : GameScriptInterfaceExtended
         private static void Swap(UserMessageCallbackArgs args)
         {
             string[] tokens = [.. ParseHelper.SplitArguments(args.CommandArguments)];
+            int uid = args.User?.UserIdentifier ?? -1;
 
             if (tokens.Length != 2)
             {
-                Game.ShowChatMessage("Usage: /swap <from> <to>", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage("Usage: /swap <from> <to>", Color.Red, uid);
                 return;
             }
 
@@ -22,7 +23,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             if (sources.Length != 1 || targets.Length != 1)
             {
-                Game.ShowChatMessage("Target a single player on each side.", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage("Target a single player on each side.", Color.Red, uid);
                 return;
             }
 
@@ -31,7 +32,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             if (source == null || source.IsRemoved || target == null || target.IsRemoved)
             {
-                Game.ShowChatMessage("Target a single live player on each side.", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage("Target a single live player on each side.", Color.Red, uid);
                 return;
             }
 
@@ -41,7 +42,7 @@ public partial class GameScript : GameScriptInterfaceExtended
             source.SetProfile(targetProfile);
             target.SetProfile(sourceProfile);
 
-            Game.ShowChatMessage($"Swapped profiles of {source.Name} and {target.Name}.", Color.Green, args.User.UserIdentifier);
+            Game.ShowChatMessage($"Swapped profiles of {source.Name} and {target.Name}.", Color.Green, uid);
         }
     }
 }

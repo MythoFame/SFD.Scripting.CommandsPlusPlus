@@ -19,10 +19,11 @@ public partial class GameScript : GameScriptInterfaceExtended
             string command = attract ? "magnet" : "repulse";
             string label = attract ? "Magnet" : "Repulse";
             string[] tokens = [.. ParseHelper.SplitArguments(args.CommandArguments)];
+            int uid = args.User?.UserIdentifier ?? -1;
 
             if (tokens.Length == 0 || tokens.Length > 3)
             {
-                Game.ShowChatMessage($"Usage: /{command} <player> [area_size] [players|objects|all]", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage($"Usage: /{command} <player> [area_size] [players|objects|all]", Color.Red, uid);
                 return;
             }
 
@@ -30,7 +31,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             if (tokens.Length > 1 && (!float.TryParse(tokens[1], out areaSize) || areaSize <= 0))
             {
-                Game.ShowChatMessage("Area size must be a positive number.", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage("Area size must be a positive number.", Color.Red, uid);
                 return;
             }
 
@@ -44,7 +45,7 @@ public partial class GameScript : GameScriptInterfaceExtended
                     target = Magnet.Target.Objects;
                 else if (!string.Equals(tokens[2], "all", StringComparison.OrdinalIgnoreCase))
                 {
-                    Game.ShowChatMessage("Filter must be 'players', 'objects' or 'all'.", Color.Red, args.User.UserIdentifier);
+                    Game.ShowChatMessage("Filter must be 'players', 'objects' or 'all'.", Color.Red, uid);
                     return;
                 }
             }
@@ -53,7 +54,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             if (players.Length == 0)
             {
-                Game.ShowChatMessage($"Player '{tokens[0]}' not found.", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage($"Player '{tokens[0]}' not found.", Color.Red, uid);
                 return;
             }
 
@@ -97,12 +98,12 @@ public partial class GameScript : GameScriptInterfaceExtended
             if (affected == 1)
             {
                 Game.ShowChatMessage($"{label} {(lastState ? "enabled" : "disabled")} for {lastName} ({scope}).",
-                    Color.Green, args.User.UserIdentifier);
+                    Color.Green, uid);
             }
             else
             {
                 Game.ShowChatMessage($"{label} updated for {affected} player(s) ({scope}).",
-                    Color.Green, args.User.UserIdentifier);
+                    Color.Green, uid);
             }
         }
     }

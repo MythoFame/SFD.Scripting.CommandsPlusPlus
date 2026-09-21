@@ -9,10 +9,11 @@ public partial class GameScript : GameScriptInterfaceExtended
         private static void Remove(UserMessageCallbackArgs args)
         {
             string[] tokens = [.. ParseHelper.SplitArguments(args.CommandArguments)];
+            int uid = args.User?.UserIdentifier ?? -1;
 
             if (tokens.Length != 1)
             {
-                Game.ShowChatMessage("Usage: /remove <player>", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage("Usage: /remove <player>", Color.Red, uid);
                 return;
             }
 
@@ -20,7 +21,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             if (players.Length == 0)
             {
-                Game.ShowChatMessage($"Player '{tokens[0]}' not found.", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage($"Player '{tokens[0]}' not found.", Color.Red, uid);
                 return;
             }
 
@@ -36,7 +37,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             if (affected == 0) return;
 
-            Game.ShowChatMessage($"Removed {affected} player(s).", Color.Green, args.User.UserIdentifier);
+            Game.ShowChatMessage($"Removed {affected} player(s).", Color.Green, uid);
         }
     }
 }

@@ -9,16 +9,17 @@ public partial class GameScript : GameScriptInterfaceExtended
         private static void Team(UserMessageCallbackArgs args)
         {
             string[] tokens = [.. ParseHelper.SplitArguments(args.CommandArguments)];
+            int uid = args.User?.UserIdentifier ?? -1;
 
             if (tokens.Length != 2)
             {
-                Game.ShowChatMessage("Usage: /team <player> <team>", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage("Usage: /team <player> <team>", Color.Red, uid);
                 return;
             }
 
             if (!Enum.TryParse(tokens[1], true, out PlayerTeam team) || !Enum.IsDefined(team))
             {
-                Game.ShowChatMessage("Invalid team. Use independent (or 0) or team 1-8.", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage("Invalid team. Use independent (or 0) or team 1-8.", Color.Red, uid);
                 return;
             }
 
@@ -26,7 +27,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             if (players.Length == 0)
             {
-                Game.ShowChatMessage($"Player '{tokens[0]}' not found.", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage($"Player '{tokens[0]}' not found.", Color.Red, uid);
                 return;
             }
 
@@ -40,7 +41,7 @@ public partial class GameScript : GameScriptInterfaceExtended
                 affected++;
             }
 
-            Game.ShowChatMessage($"Set {affected} player(s) to {team}.", Color.Green, args.User.UserIdentifier);
+            Game.ShowChatMessage($"Set {affected} player(s) to {team}.", Color.Green, uid);
         }
     }
 }

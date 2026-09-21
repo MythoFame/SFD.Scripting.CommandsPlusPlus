@@ -9,22 +9,23 @@ public partial class GameScript : GameScriptInterfaceExtended
         private static void Dmg(UserMessageCallbackArgs args)
         {
             string[] tokens = [.. ParseHelper.SplitArguments(args.CommandArguments)];
+            int uid = args.User?.UserIdentifier ?? -1;
 
             if (tokens.Length != 2)
             {
-                Game.ShowChatMessage("Usage: /dmg <player> <amount>", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage("Usage: /dmg <player> <amount>", Color.Red, uid);
                 return;
             }
 
             if (!float.TryParse(tokens[1], out float amount))
             {
-                Game.ShowChatMessage($"Invalid amount '{tokens[1]}'.", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage($"Invalid amount '{tokens[1]}'.", Color.Red, uid);
                 return;
             }
 
             if (amount <= 0)
             {
-                Game.ShowChatMessage("Amount must be positive.", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage("Amount must be positive.", Color.Red, uid);
                 return;
             }
 
@@ -32,7 +33,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             if (players.Length == 0)
             {
-                Game.ShowChatMessage($"Player '{tokens[0]}' not found.", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage($"Player '{tokens[0]}' not found.", Color.Red, uid);
                 return;
             }
 
@@ -48,7 +49,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             if (affected == 0) return;
 
-            Game.ShowChatMessage($"Dealt {amount} damage to {affected} player(s).", Color.Green, args.User.UserIdentifier);
+            Game.ShowChatMessage($"Dealt {amount} damage to {affected} player(s).", Color.Green, uid);
         }
     }
 }

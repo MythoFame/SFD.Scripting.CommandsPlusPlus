@@ -9,6 +9,7 @@ public partial class GameScript : GameScriptInterfaceExtended
         private static void Modifier(UserMessageCallbackArgs args)
         {
             string[] tokens = [.. ParseHelper.SplitArguments(args.CommandArguments)];
+            int uid = args.User?.UserIdentifier ?? -1;
 
             if (tokens.Length != 3)
             {
@@ -40,7 +41,7 @@ public partial class GameScript : GameScriptInterfaceExtended
                             ? string.Join(", ", matches.Select(f => f.Name))
                             : string.Join(", ", matches.Take(5).Select(f => f.Name)) + $" and {matches.Length - 5} more";
 
-                        Game.ShowChatMessage($"Ambiguous modifier '{tokens[1]}'. Candidates: {candidates}.", Color.Red, args.User.UserIdentifier);
+                        Game.ShowChatMessage($"Ambiguous modifier '{tokens[1]}'. Candidates: {candidates}.", Color.Red, uid);
                         return;
                     }
                 }
@@ -48,7 +49,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             if (field == null)
             {
-                Game.ShowChatMessage($"Unknown modifier '{tokens[1]}'.", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage($"Unknown modifier '{tokens[1]}'.", Color.Red, uid);
                 ShowModifierUsage(args);
                 return;
             }
@@ -59,7 +60,7 @@ public partial class GameScript : GameScriptInterfaceExtended
             {
                 if (!int.TryParse(tokens[2], out int intValue))
                 {
-                    Game.ShowChatMessage($"Invalid value '{tokens[2]}'.", Color.Red, args.User.UserIdentifier);
+                    Game.ShowChatMessage($"Invalid value '{tokens[2]}'.", Color.Red, uid);
                     return;
                 }
 
@@ -69,7 +70,7 @@ public partial class GameScript : GameScriptInterfaceExtended
             {
                 if (!float.TryParse(tokens[2], out float floatValue))
                 {
-                    Game.ShowChatMessage($"Invalid value '{tokens[2]}'.", Color.Red, args.User.UserIdentifier);
+                    Game.ShowChatMessage($"Invalid value '{tokens[2]}'.", Color.Red, uid);
                     return;
                 }
 
@@ -77,7 +78,7 @@ public partial class GameScript : GameScriptInterfaceExtended
             }
             else
             {
-                Game.ShowChatMessage($"Modifier '{field.Name}' has unsupported type '{field.FieldType.Name}'.", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage($"Modifier '{field.Name}' has unsupported type '{field.FieldType.Name}'.", Color.Red, uid);
                 return;
             }
 
@@ -85,7 +86,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             if (players.Length == 0)
             {
-                Game.ShowChatMessage($"Player '{tokens[0]}' not found.", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage($"Player '{tokens[0]}' not found.", Color.Red, uid);
                 return;
             }
 
@@ -103,7 +104,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             if (affected == 0) return;
 
-            Game.ShowChatMessage($"Set {field.Name} to {tokens[2]} for {affected} player(s).", Color.Green, args.User.UserIdentifier);
+            Game.ShowChatMessage($"Set {field.Name} to {tokens[2]} for {affected} player(s).", Color.Green, uid);
         }
 
         /// <summary>
@@ -112,7 +113,8 @@ public partial class GameScript : GameScriptInterfaceExtended
         /// </summary>
         private static void ShowModifierUsage(UserMessageCallbackArgs args)
         {
-            Game.ShowChatMessage("Usage: /modifier <player> <modifier> <value>. Modifiers:", Color.Red, args.User.UserIdentifier);
+            int uid = args.User?.UserIdentifier ?? -1;
+            Game.ShowChatMessage("Usage: /modifier <player> <modifier> <value>. Modifiers:", Color.Red, uid);
 
             List<string> chunk = [];
 
@@ -123,13 +125,13 @@ public partial class GameScript : GameScriptInterfaceExtended
 
                 if (chunk.Count == 15)
                 {
-                    Game.ShowChatMessage(string.Join(", ", chunk), Color.Red, args.User.UserIdentifier);
+                    Game.ShowChatMessage(string.Join(", ", chunk), Color.Red, uid);
                     chunk.Clear();
                 }
             }
 
             if (chunk.Count > 0)
-                Game.ShowChatMessage(string.Join(", ", chunk), Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage(string.Join(", ", chunk), Color.Red, uid);
         }
     }
 }
