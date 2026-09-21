@@ -80,7 +80,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
                 if (proj.PowerupBounceActive)
                 {
-                    EffectsWrapper.PlayTraceSpawner(obj, EffectName.Electric, 2);
+                    EffectsWrapper.PlayTraceSpawner(obj, EffectName.Electric, 1);
 
                     obj.SetMass(obj.GetMass() / 2);
                 }
