@@ -3,7 +3,7 @@ namespace SFD.Scripting.CommandsPlusPlus;
 public partial class GameScript : GameScriptInterfaceExtended
 {
     /// <summary>
-    /// Player interaction commands (kill, revive, teleport, ...).
+    /// Moderator tools to directly control players, their gear and movement.
     /// Command implementations live in <c>Commands/PlayerModule/</c> as
     /// partial declarations of this class.
     /// </summary>
@@ -11,90 +11,90 @@ public partial class GameScript : GameScriptInterfaceExtended
     {
         public override string Name => "Player";
 
-        public override string Description => "Player module";
+        public override string Description => "Moderator tools to directly control players.";
 
         public PlayerModule()
         {
             AddCommand("kill", Kill,
-                "<player> - Kills a player",
+                "<player> - Kills a player.",
                 moderatorOnly: true);
             AddCommand("gib", Gib,
-                "<player> - Gibs a player",
+                "<player> - Gibs a player.",
                 moderatorOnly: true);
             AddCommand("remove", Remove,
-                "<player> - Removes a player",
+                "<player> - Removes a player.",
                 moderatorOnly: true);
             AddCommand("dmg", Dmg,
-                "<player> <amount> - Deals damage to a player",
+                "<player> <amount> - Deals damage to a player.",
                 moderatorOnly: true);
             AddCommand("notarget", NoTarget,
-                "<player> - Toggles whether bots target a player",
+                "<player> - Toggles whether bots target a player.",
                 moderatorOnly: true);
             AddCommand("tp", Tp,
-                "<to> - Teleports you to a player",
+                "<to> - Teleports you to a player.",
                 moderatorOnly: true);
             AddCommand("tphere", Tphere,
-                "<player> - Teleports a player to you",
+                "<player> - Teleports a player to you.",
                 moderatorOnly: true);
             AddCommand("tppos", Tppos,
-                "<player> <x> <y> - Teleports a player to a world position",
+                "<player> <x> <y> - Teleports a player to a world position.",
                 moderatorOnly: true);
             AddCommand("trip", Trip,
-                "<player> - Trips a player, knocking them down",
+                "<player> - Trips a player, knocking them down.",
                 moderatorOnly: true);
             AddCommand("pos", Pos,
-                "<player> - Displays the world position of a player",
+                "<player> - Displays the world position of a player. Moderator-only.",
                 moderatorOnly: true);
             AddCommand("modifier", Modifier,
-                "<player> <modifier> <value> - Sets a player modifier to the given value",
+                "<player> <modifier> <value> - Sets a player modifier to the given value.",
                 moderatorOnly: true);
             AddCommand("tag", Tag,
-                "<player> [name|status] - Toggles nametag and status bar visibility for a player",
+                "<player> [name|status] - Toggles nametag and status bar visibility for a player.",
                 moderatorOnly: true);
             AddCommand("input", Input,
-                "<player> - Toggles whether a player can provide input",
+                "<player> - Toggles whether a player can provide input, effectively freezing or unfreezing them.",
                 moderatorOnly: true);
             AddCommand("team", Team,
-                "<player> <team> - Sets the team of a player",
+                "<player> <team> - Sets the team of a player.",
                 moderatorOnly: true);
             AddCommand("burn", Burn,
-                "<player> - Toggles whether a player is burning",
+                "<player> - Toggles whether a player is burning.",
                 moderatorOnly: true);
             AddCommand("spawn", Spawn,
-                "<id> - Spawns an object with the given ID at your position",
+                "<id> - Spawns an object with the given ID at your position.",
                 moderatorOnly: true);
             AddCommand("revive", Revive,
-                "<player> - Revives a dead player",
+                "<player> - Revives a dead player.",
                 moderatorOnly: true);
             AddCommand("refill", Refill,
-                "<player> - Refills a player's ammo as if they used an ammo stash",
+                "<player> - Refills a player's ammo as if they used an ammo stash.",
                 moderatorOnly: true);
             AddCommand("fly", FlyCommand,
-                "<player> - Toggles flying for a player",
+                "<player> - Toggles flying for a player.",
                 moderatorOnly: true);
             AddCommand("noclip", Noclip,
-                "<player> - Toggles noclip for a player, allowing them to pass through walls",
+                "<player> - Toggles noclip for a player, allowing them to pass through walls.",
                 moderatorOnly: true);
             AddCommand("copy", Copy,
-                "<from> <to> - Copies one player's profile onto another player",
+                "<from> <to> - Copies one player's profile onto another player.",
                 moderatorOnly: true);
             AddCommand("swap", Swap,
-                "<from> <to> - Swaps the profiles of two players",
+                "<from> <to> - Swaps the profiles of two players.",
                 moderatorOnly: true);
             AddCommand("user", User,
-                "<from> <to> - Swaps the users of two players",
+                "<from> <to> - Swaps the users of two players.",
                 moderatorOnly: true);
             AddCommand("wear", Wear,
-                "<player> <slot> <name> [color1] [color2] - Gives a player a cosmetic item in the given slot",
+                "<player> <slot> <name> [color1] [color2] - Gives a player a cosmetic item in the given slot with the given colors.",
                 moderatorOnly: true);
             AddCommand("action", ActionCommand,
-                "<player> <action> - Queues an action for a player whose input is disabled",
+                "<player> <action> - Queues an action for a player whose input is disabled.",
                 moderatorOnly: true);
             AddCommand("magnet", MagnetCommand,
-                "<player> [area_size] [players|objects|all] - Toggles attraction of nearby players and/or objects toward a player",
+                "<player> [area_size] [players|objects|all] - Toggles attraction of nearby players and/or objects toward a player.",
                 moderatorOnly: true);
             AddCommand("repulse", RepulseCommand,
-                "<player> [area_size] [players|objects|all] - Toggles repulsion of nearby players and/or objects away from a player",
+                "<player> [area_size] [players|objects|all] - Toggles repulsion of nearby players and/or objects away from a player.",
                 moderatorOnly: true);
         }
     }

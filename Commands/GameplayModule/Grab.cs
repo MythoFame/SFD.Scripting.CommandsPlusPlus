@@ -13,7 +13,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             if (tokens.Length > 1)
             {
-                Game.ShowChatMessage("Usage: /grab [bool]", Color.Red, uid);
+                Game.ShowChatMessage("Usage: /grab [true|false]", Color.Red, uid);
                 return;
             }
 
@@ -25,7 +25,7 @@ public partial class GameScript : GameScriptInterfaceExtended
             }
             else if (!bool.TryParse(tokens[0], out enable))
             {
-                Game.ShowChatMessage("Usage: /grab [bool]", Color.Red, uid);
+                Game.ShowChatMessage("Usage: /grab [true|false]", Color.Red, uid);
                 return;
             }
 

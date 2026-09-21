@@ -44,30 +44,29 @@ Run commands automatically on events. Host-only, persisted.
 
 - [x] `/jobs`: Lists all jobs along with their index, trigger, arguments and command.
 - [x] `/add_job {startup|shutdown|gameover|spawn|time} <args> <command...>`: Adds a job that runs a command on a certain trigger. Arguments depend on the trigger.
-- [x] `/remove_job <index>`: Removes the job with the given index.
-- [x] `/clear_jobs`: Removes all jobs.
+- [x] `/remove_job <index>`: Removes the job with the given index. Use `*` to remove all.
 
 ## Gameplay
 
 Custom gameplay rules. Host-only, persisted unless noted otherwise.
 
 - [x] `/respawn <delay>`: Sets the custom respawn delay. Set to `0` or below to disable.
-- [x] `/speech [bool]`: Toggles custom speech bubbles above players. Second parameter plays a sound when speech appears (default to `false`).
-- [x] `/grab [bool]`: Toggles or sets whether players are able to grab and throw each other.
-- [x] `/throw [bool]`: Toggles or sets whether players can throw objects.
-- [x] `/dmg_numbers [bool] [players|objects|all]`: Toggles or sets whether damage is displayed.
+- [x] `/speech [true|false]`: Toggles custom speech bubbles above players. Second parameter plays a sound when speech appears (default to `false`).
+- [x] `/grab [true|false]`: Toggles or sets whether players are able to grab and throw each other.
+- [x] `/throw [true|false]`: Toggles or sets whether players can throw objects.
+- [x] `/dmg_numbers [true|false] [players|objects|all]`: Toggles or sets whether damage is displayed.
 - [x] `/dropin <delay>`: Sets the drop-in spawn delay. Set to `0` or below to disable.
 - [x] `/gmover {true|false|players}`: Controls automatic victory detection, i.e. whether the round may end. Host-only.
   - `/gmover true|false`: enables or disables game over for the current round. Not persisted.
-  - `/gmover players`: game over triggers on players only; bots are ignored. Persisted.
-- [x] `/wpnspawn [bool]`: Toggles or sets whether weapons spawn on the map. Moderator-only, not persisted.
+  - `/gmover players`: enables players-only mode — the round ends automatically when only bots are left. Persisted.
+- [x] `/wpnspawn [true|false]`: Toggles or sets whether weapons spawn on the map. Moderator-only, not persisted.
 - [x] `/camera {static|dynamic|individual} [zoom]`: Sets camera type and optional zoom level for the current round. Not persisted.
   - `/camera static`: sets static camera.
   - `/camera dynamic`: sets dynamic camera.
   - `/camera individual`: sets individual camera with variable zoom.
   - `/camera individual 0.5`: sets individual camera with fixed zoom level.
 - [x] `/rsboard`: Resets the stored win ratio statistics. Moderator-only.
-- [x] `/refill_all [bool]`: Toggles or sets whether ammo is constantly refilled for all players.
+- [x] `/refill_all [true|false]`: Toggles or sets whether ammo is constantly refilled for all players.
 - [x] `/regen <hp>`: Sets health regenerated per second for all players. Set to `0` or below to disable.
 - [x] `/gravity <constant>`: Sets a constant applied to gravity. Set to `0` to disable.
 - [x] `/friendly_fire`: Toggles friendly fire.

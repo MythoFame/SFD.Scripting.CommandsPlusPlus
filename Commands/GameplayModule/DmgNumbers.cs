@@ -13,7 +13,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             if (tokens.Length > 2)
             {
-                Game.ShowChatMessage("Usage: /dmg_numbers [bool] [players|objects|all]", Color.Red, uid);
+                Game.ShowChatMessage("Usage: /dmg_numbers [true|false] [players|objects|all]", Color.Red, uid);
                 return;
             }
 
@@ -25,7 +25,7 @@ public partial class GameScript : GameScriptInterfaceExtended
             }
             else if (!bool.TryParse(tokens[0], out enable))
             {
-                Game.ShowChatMessage("Usage: /dmg_numbers [bool] [players|objects|all]", Color.Red, uid);
+                Game.ShowChatMessage("Usage: /dmg_numbers [true|false] [players|objects|all]", Color.Red, uid);
                 return;
             }
 
