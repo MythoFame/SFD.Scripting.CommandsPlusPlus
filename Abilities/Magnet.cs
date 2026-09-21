@@ -11,6 +11,14 @@ public partial class GameScript : GameScriptInterfaceExtended
     /// </summary>
     public class Magnet : Ability
     {
+        [Flags]
+        public enum Target
+        {
+            Players = 1,
+            Objects = 2,
+            All = Players | Objects
+        }
+
         private const float EFFECT_INTERVAL = 250;
         private const float MIN_DISTANCE = 20;
         private const float DEF_FORCE = 2;
@@ -22,11 +30,8 @@ public partial class GameScript : GameScriptInterfaceExtended
         /// <summary>Side length of the square effect area.</summary>
         public float AreaSize = DEF_AREA_SIZE;
 
-        /// <summary>Whether other players are affected.</summary>
-        public bool AffectPlayers = true;
-
-        /// <summary>Whether non-player objects are affected.</summary>
-        public bool AffectObjects = true;
+        /// <summary>Which targets are affected.</summary>
+        public Target Targets = Target.All;
 
 
         private float _effectTimer;
@@ -59,8 +64,7 @@ public partial class GameScript : GameScriptInterfaceExtended
         {
             Force = DEF_FORCE;
             AreaSize = DEF_AREA_SIZE;
-            AffectPlayers = true;
-            AffectObjects = true;
+            Targets = Target.All;
             _effectTimer = 0;
         }
 
@@ -92,11 +96,11 @@ public partial class GameScript : GameScriptInterfaceExtended
 
                 if (target is IPlayer player)
                 {
-                    if (!AffectPlayers || player.IsDead || player.UniqueID == Player.UniqueID) continue;
+                    if (!Targets.HasFlag(Target.Players) || player.IsDead || player.UniqueID == Player.UniqueID) continue;
 
                     PlayerHelper.Unstick(player);
                 }
-                else if (!AffectObjects ||
+                else if (!Targets.HasFlag(Target.Objects) ||
                     target.GetBodyType() != BodyType.Dynamic) continue;
 
                 target.SetLinearVelocity(Vector2Helper.DirectionTo(pos, center) * Force);

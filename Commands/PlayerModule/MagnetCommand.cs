@@ -22,7 +22,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             if (tokens.Length == 0 || tokens.Length > 3)
             {
-                Game.ShowChatMessage($"Usage: /{command} <player> [area_size] [players|objects]", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage($"Usage: /{command} <player> [area_size] [players|objects|all]", Color.Red, args.User.UserIdentifier);
                 return;
             }
 
@@ -34,18 +34,17 @@ public partial class GameScript : GameScriptInterfaceExtended
                 return;
             }
 
-            bool playersOnly = false;
-            bool objectsOnly = false;
+            Magnet.Target target = Magnet.Target.All;
 
             if (tokens.Length > 2)
             {
                 if (string.Equals(tokens[2], "players", StringComparison.OrdinalIgnoreCase))
-                    playersOnly = true;
+                    target = Magnet.Target.Players;
                 else if (string.Equals(tokens[2], "objects", StringComparison.OrdinalIgnoreCase))
-                    objectsOnly = true;
-                else
+                    target = Magnet.Target.Objects;
+                else if (!string.Equals(tokens[2], "all", StringComparison.OrdinalIgnoreCase))
                 {
-                    Game.ShowChatMessage("Filter must be 'players' or 'objects'.", Color.Red, args.User.UserIdentifier);
+                    Game.ShowChatMessage("Filter must be 'players', 'objects' or 'all'.", Color.Red, args.User.UserIdentifier);
                     return;
                 }
             }
@@ -76,11 +75,7 @@ public partial class GameScript : GameScriptInterfaceExtended
                 if (tokens.Length > 1)
                     existing.AreaSize = areaSize;
 
-                if (playersOnly || objectsOnly)
-                {
-                    existing.AffectPlayers = playersOnly;
-                    existing.AffectObjects = objectsOnly;
-                }
+                existing.Targets = target;
 
                 if (existing.Enabled && Math.Sign(existing.Force) == (attract ? 1 : -1))
                     existing.Enabled = false;
@@ -97,14 +92,16 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             if (affected == 0) return;
 
+            string scope = target == Magnet.Target.All ? "all targets" : $"{target.ToString().ToLowerInvariant()} only";
+
             if (affected == 1)
             {
-                Game.ShowChatMessage($"{label} {(lastState ? "enabled" : "disabled")} for {lastName}.",
+                Game.ShowChatMessage($"{label} {(lastState ? "enabled" : "disabled")} for {lastName} ({scope}).",
                     Color.Green, args.User.UserIdentifier);
             }
             else
             {
-                Game.ShowChatMessage($"{label} updated for {affected} player(s).",
+                Game.ShowChatMessage($"{label} updated for {affected} player(s) ({scope}).",
                     Color.Green, args.User.UserIdentifier);
             }
         }
