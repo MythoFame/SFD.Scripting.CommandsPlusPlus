@@ -58,6 +58,9 @@ public partial class GameScript : GameScriptInterfaceExtended
             AddCommand("gmover", Gmover,
                 "{true|false|players} - Controls automatic victory detection, i.e. whether the round may end. Host-only.",
                 hostOnly: true);
+            AddCommand("weather", Weather,
+                "<none|snow|rain> - Sets the weather. Moderator-only, not persisted.",
+                moderatorOnly: true);
         }
     }
 }
