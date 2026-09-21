@@ -9,10 +9,11 @@ public partial class GameScript : GameScriptInterfaceExtended
         private static void Spectate(UserMessageCallbackArgs args)
         {
             string[] tokens = [.. ParseHelper.SplitArguments(args.CommandArguments)];
+            int uid = args.User?.UserIdentifier ?? -1;
 
             if (tokens.Length > 1)
             {
-                Game.ShowChatMessage("Usage: /spectate [user]", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage("Usage: /spectate [user]", Color.Red, uid);
                 return;
             }
 
@@ -25,13 +26,13 @@ public partial class GameScript : GameScriptInterfaceExtended
                     SpectationRule.Spectating = [.. SpectationRule.Spectating
                         .Where(n => !string.Equals(n, account, StringComparison.OrdinalIgnoreCase))];
 
-                    Game.ShowChatMessage("You will play next round.", Color.Green, args.User.UserIdentifier);
+                    Game.ShowChatMessage("You will play next round.", Color.Green, uid);
                 }
                 else
                 {
                     SpectationRule.Spectating = [.. SpectationRule.Spectating, account];
 
-                    Game.ShowChatMessage("You will spectate next round.", Color.Green, args.User.UserIdentifier);
+                    Game.ShowChatMessage("You will spectate next round.", Color.Green, uid);
                 }
 
                 return;
@@ -39,7 +40,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             if (!args.User.IsModerator)
             {
-                Game.ShowChatMessage("You don't have permission to use this command.", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage("You don't have permission to use this command.", Color.Red, uid);
                 return;
             }
 
@@ -56,7 +57,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             if (target == null)
             {
-                Game.ShowChatMessage($"User '{tokens[0]}' not found.", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage($"User '{tokens[0]}' not found.", Color.Red, uid);
                 return;
             }
 
@@ -67,13 +68,13 @@ public partial class GameScript : GameScriptInterfaceExtended
                 SpectationRule.Spectating = [.. SpectationRule.Spectating
                     .Where(n => !string.Equals(n, targetAccount, StringComparison.OrdinalIgnoreCase))];
 
-                Game.ShowChatMessage($"{target.Name} will play next round.", Color.Green, args.User.UserIdentifier);
+                Game.ShowChatMessage($"{target.Name} will play next round.", Color.Green, uid);
                 return;
             }
 
             SpectationRule.Spectating = [.. SpectationRule.Spectating, targetAccount];
 
-            Game.ShowChatMessage($"{target.Name} will spectate next round.", Color.Green, args.User.UserIdentifier);
+            Game.ShowChatMessage($"{target.Name} will spectate next round.", Color.Green, uid);
         }
     }
 }

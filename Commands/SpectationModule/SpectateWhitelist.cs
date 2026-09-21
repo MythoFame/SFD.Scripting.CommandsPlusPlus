@@ -9,21 +9,22 @@ public partial class GameScript : GameScriptInterfaceExtended
         private static void SpectateWhitelist(UserMessageCallbackArgs args)
         {
             string[] tokens = [.. ParseHelper.SplitArguments(args.CommandArguments)];
+            int uid = args.User?.UserIdentifier ?? -1;
 
             if (tokens.Length != 0)
             {
-                Game.ShowChatMessage("Usage: /spectate_whitelist", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage("Usage: /spectate_whitelist", Color.Red, uid);
                 return;
             }
 
             SpectationRule.WhitelistOnly = !SpectationRule.WhitelistOnly;
 
-            Game.ShowChatMessage($"Whitelist {(SpectationRule.WhitelistOnly ? "enabled" : "disabled")}.", Color.Green, args.User.UserIdentifier);
+            Game.ShowChatMessage($"Whitelist {(SpectationRule.WhitelistOnly ? "enabled" : "disabled")}.", Color.Green, uid);
 
             string[] whitelist = SpectationRule.Whitelist;
 
             if (SpectationRule.WhitelistOnly && whitelist.Length > 0)
-                Game.ShowChatMessage($"Whitelisted: {string.Join(", ", whitelist)}.", Color.Green, args.User.UserIdentifier);
+                Game.ShowChatMessage($"Whitelisted: {string.Join(", ", whitelist)}.", Color.Green, uid);
         }
     }
 }

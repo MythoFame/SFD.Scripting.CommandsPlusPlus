@@ -9,10 +9,11 @@ public partial class GameScript : GameScriptInterfaceExtended
         private static void SpectateAddWhitelist(UserMessageCallbackArgs args)
         {
             string[] tokens = [.. ParseHelper.SplitArguments(args.CommandArguments)];
+            int uid = args.User?.UserIdentifier ?? -1;
 
             if (tokens.Length != 1)
             {
-                Game.ShowChatMessage("Usage: /spectate_add_whitelist <user>", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage("Usage: /spectate_add_whitelist <user>", Color.Red, uid);
                 return;
             }
 
@@ -43,16 +44,16 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             if (SpectationRule.Whitelist.Contains(account))
             {
-                Game.ShowChatMessage($"{label} is already whitelisted.", Color.Yellow, args.User.UserIdentifier);
+                Game.ShowChatMessage($"{label} is already whitelisted.", Color.Yellow, uid);
                 return;
             }
 
             SpectationRule.Whitelist = [.. SpectationRule.Whitelist, account];
 
             if (target == null)
-                Game.ShowChatMessage($"Player '{tokens[0]}' not found. Added it to the whitelist as an account name.", Color.Green, args.User.UserIdentifier);
+                Game.ShowChatMessage($"Player '{tokens[0]}' not found. Added it to the whitelist as an account name.", Color.Green, uid);
             else
-                Game.ShowChatMessage($"Added {target.Name} to the whitelist.", Color.Green, args.User.UserIdentifier);
+                Game.ShowChatMessage($"Added {target.Name} to the whitelist.", Color.Green, uid);
         }
     }
 }
