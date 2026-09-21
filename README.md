@@ -80,6 +80,8 @@ Change how the match itself behaves. Persistent rules like respawns and physics 
 | `/dmg_numbers [true\|false] [players\|objects\|all]` | Toggles or sets whether damage is displayed. |
 | `/dropin <delay>` | Sets the drop-in spawn delay. Set to `0` or below to disable. |
 | `/gmover {true\|false\|players}` | Controls automatic victory detection, i.e. whether the round may end. Host-only. `true`/`false` enables or disables game over for the current round (not persisted), `players` enables players-only mode — the round ends automatically when only bots are left (persisted). |
+| `/weather <none\|snow\|rain>` | Sets the weather. Moderator-only, not persisted. |
+| `/clear <id>` | Removes all objects with the given ID. Moderator-only. |
 | `/wpnspawn [true\|false]` | Toggles or sets whether weapons spawn on the map. Moderator-only, not persisted. |
 | `/camera {static\|dynamic\|individual} [zoom]` | Sets camera type and optional zoom level for the current round. Not persisted. |
 | `/rsboard` | Resets the stored win ratio statistics. Moderator-only. |
@@ -132,6 +134,7 @@ Moderator tools to directly control players, their gear and movement.
 | `/refill <player>` | Refills a player's ammo as if they used an ammo stash. |
 | `/magnet <player> [area_size] [players\|objects\|all]` | Toggles attraction of nearby players and/or objects toward a player. |
 | `/repulse <player> [area_size] [players\|objects\|all]` | Toggles repulsion of nearby players and/or objects away from a player. |
+| `/boost <player> <left\|down\|up\|right> [speed]` | Boosts a player in a direction. |
 
 ### Fun
 
