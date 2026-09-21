@@ -9,10 +9,11 @@ public partial class GameScript : GameScriptInterfaceExtended
         private static void Bullet(UserMessageCallbackArgs args)
         {
             string[] tokens = [.. ParseHelper.SplitArguments(args.CommandArguments)];
+            int uid = args.User?.UserIdentifier ?? -1;
 
             if (tokens.Length == 0 || tokens.Length > 2)
             {
-                Game.ShowChatMessage("Usage: /bullet <player> [id]", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage("Usage: /bullet <player> [id]", Color.Red, uid);
                 return;
             }
 
@@ -20,7 +21,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             if (players.Length == 0)
             {
-                Game.ShowChatMessage($"Player '{tokens[0]}' not found.", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage($"Player '{tokens[0]}' not found.", Color.Red, uid);
                 return;
             }
 
@@ -64,9 +65,9 @@ public partial class GameScript : GameScriptInterfaceExtended
                 if (!enable)
                 {
                     if (players.Length == 1 && !string.IsNullOrEmpty(lastName))
-                        Game.ShowChatMessage($"{lastName} has no custom bullets.", Color.Yellow, args.User.UserIdentifier);
+                        Game.ShowChatMessage($"{lastName} has no custom bullets.", Color.Yellow, uid);
                     else
-                        Game.ShowChatMessage("No players had custom bullets.", Color.Yellow, args.User.UserIdentifier);
+                        Game.ShowChatMessage("No players had custom bullets.", Color.Yellow, uid);
                 }
 
                 return;
@@ -77,12 +78,12 @@ public partial class GameScript : GameScriptInterfaceExtended
                 if (affected == 1)
                 {
                     Game.ShowChatMessage($"Custom bullets set to '{tokens[1]}' for {lastName}.",
-                        Color.Green, args.User.UserIdentifier);
+                        Color.Green, uid);
                 }
                 else
                 {
                     Game.ShowChatMessage($"Custom bullets set to '{tokens[1]}' for {affected} player(s).",
-                        Color.Green, args.User.UserIdentifier);
+                        Color.Green, uid);
                 }
             }
             else
@@ -90,12 +91,12 @@ public partial class GameScript : GameScriptInterfaceExtended
                 if (affected == 1)
                 {
                     Game.ShowChatMessage($"Custom bullets disabled for {lastName}.",
-                        Color.Green, args.User.UserIdentifier);
+                        Color.Green, uid);
                 }
                 else
                 {
                     Game.ShowChatMessage($"Disabled custom bullets for {affected} player(s).",
-                        Color.Green, args.User.UserIdentifier);
+                        Color.Green, uid);
                 }
             }
         }

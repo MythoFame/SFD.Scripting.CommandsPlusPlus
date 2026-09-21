@@ -18,17 +18,18 @@ public partial class GameScript : GameScriptInterfaceExtended
 
         private static void Graffiti(UserMessageCallbackArgs args)
         {
+            int uid = args.User?.UserIdentifier ?? -1;
             string text = args.CommandArguments.Trim();
 
             if (text.Length == 0)
             {
-                Game.ShowChatMessage("Usage: /graffiti <text>", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage("Usage: /graffiti <text>", Color.Red, uid);
                 return;
             }
 
             if (text.Length > GRAFFITI_TEXT_LIMIT)
             {
-                Game.ShowChatMessage($"Text cannot have more than {GRAFFITI_TEXT_LIMIT} characters!", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage($"Text cannot have more than {GRAFFITI_TEXT_LIMIT} characters!", Color.Red, uid);
                 return;
             }
 
@@ -36,7 +37,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             if (self == null || self.IsRemoved)
             {
-                Game.ShowChatMessage("Your character must be active!", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage("Your character must be active!", Color.Red, uid);
                 return;
             }
 
@@ -58,7 +59,7 @@ public partial class GameScript : GameScriptInterfaceExtended
             EffectsWrapper.PlaySteam(graffitiPos, color, GRAFFITI_STEAM_SCALE);
             EffectsWrapper.PlaySteam(graffitiPos, color, GRAFFITI_STEAM_SCALE);
 
-            Game.ShowChatMessage($"Created graffiti '{text}'.", Color.Green, args.User.UserIdentifier);
+            Game.ShowChatMessage($"Created graffiti '{text}'.", Color.Green, uid);
 
             IObject[] graffitis = Game.GetObjectsByCustomID<IObjectText>(GRAFFITI_ID);
 

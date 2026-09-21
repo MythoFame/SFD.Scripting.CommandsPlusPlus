@@ -9,10 +9,11 @@ public partial class GameScript : GameScriptInterfaceExtended
         private static void Clone(UserMessageCallbackArgs args)
         {
             string[] tokens = [.. ParseHelper.SplitArguments(args.CommandArguments)];
+            int uid = args.User?.UserIdentifier ?? -1;
 
             if (tokens.Length < 1 || tokens.Length > 3)
             {
-                Game.ShowChatMessage("Usage: /clone <player> [team] [ai]", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage("Usage: /clone <player> [team] [ai]", Color.Red, uid);
                 return;
             }
 
@@ -20,7 +21,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             if (sources.Length != 1)
             {
-                Game.ShowChatMessage("Target a single player.", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage("Target a single player.", Color.Red, uid);
                 return;
             }
 
@@ -28,7 +29,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             if (source == null || source.IsRemoved)
             {
-                Game.ShowChatMessage("Target a single live player.", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage("Target a single live player.", Color.Red, uid);
                 return;
             }
 
@@ -38,7 +39,7 @@ public partial class GameScript : GameScriptInterfaceExtended
             {
                 if (!Enum.TryParse(tokens[1], true, out team) || !Enum.IsDefined(team))
                 {
-                    Game.ShowChatMessage("Invalid team. Use independent (or 0) or team 1-8.", Color.Red, args.User.UserIdentifier);
+                    Game.ShowChatMessage("Invalid team. Use independent (or 0) or team 1-8.", Color.Red, uid);
                     return;
                 }
             }
@@ -52,7 +53,7 @@ public partial class GameScript : GameScriptInterfaceExtended
             {
                 if (!Enum.TryParse(tokens[2], true, out ai) || !Enum.IsDefined(ai))
                 {
-                    Game.ShowChatMessage("Invalid AI type.", Color.Red, args.User.UserIdentifier);
+                    Game.ShowChatMessage("Invalid AI type.", Color.Red, uid);
                     return;
                 }
             }
@@ -86,7 +87,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             PlayerHelper.Unstick(clone);
 
-            Game.ShowChatMessage($"Cloned {source.Name} (team {team}, AI {ai}).", Color.Green, args.User.UserIdentifier);
+            Game.ShowChatMessage($"Cloned {source.Name} (team {team}, AI {ai}).", Color.Green, uid);
         }
     }
 }

@@ -13,10 +13,11 @@ public partial class GameScript : GameScriptInterfaceExtended
         private static void Suicide(UserMessageCallbackArgs args)
         {
             string[] tokens = [.. ParseHelper.SplitArguments(args.CommandArguments)];
+            int uid = args.User?.UserIdentifier ?? -1;
 
             if (tokens.Length != 0)
             {
-                Game.ShowChatMessage("Usage: /suicide", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage("Usage: /suicide", Color.Red, uid);
                 return;
             }
 
@@ -24,13 +25,13 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             if (self == null || self.IsRemoved)
             {
-                Game.ShowChatMessage("Your character must be active!", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage("Your character must be active!", Color.Red, uid);
                 return;
             }
 
             if (!self.IsInputEnabled)
             {
-                Game.ShowChatMessage("Your input must be enabled!", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage("Your input must be enabled!", Color.Red, uid);
                 return;
             }
 
