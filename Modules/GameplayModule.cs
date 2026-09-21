@@ -51,6 +51,9 @@ public partial class GameScript : GameScriptInterfaceExtended
             AddCommand("gravity", Gravity,
                 "<constant> - Sets a constant applied to gravity",
                 hostOnly: true);
+            AddCommand("camera", Camera,
+                "{reset|static|dynamic|individual} [zoom] - Sets camera type and optional zoom level for the current round",
+                hostOnly: true);
         }
     }
 }

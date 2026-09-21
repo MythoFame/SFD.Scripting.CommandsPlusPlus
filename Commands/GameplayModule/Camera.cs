@@ -1,0 +1,68 @@
+using SFDGameScriptInterface;
+
+namespace SFD.Scripting.CommandsPlusPlus;
+
+public partial class GameScript : GameScriptInterfaceExtended
+{
+    public sealed partial class GameplayModule
+    {
+        private static void Camera(UserMessageCallbackArgs args)
+        {
+            string[] tokens = [.. ParseHelper.SplitArguments(args.CommandArguments)];
+
+            if (tokens.Length == 0 || tokens.Length > 2)
+            {
+                Game.ShowChatMessage("Usage: /camera {reset|static|dynamic|individual} [zoom]", Color.Red, args.User.UserIdentifier);
+                return;
+            }
+
+            if (string.Equals(tokens[0], "reset", StringComparison.OrdinalIgnoreCase))
+            {
+                if (tokens.Length > 1)
+                {
+                    Game.ShowChatMessage("Usage: /camera {reset|static|dynamic|individual} [zoom]", Color.Red, args.User.UserIdentifier);
+                    return;
+                }
+
+                Game.SetCurrentCameraMode(CameraMode.NONE);
+                Game.ShowChatMessage("Camera reset.", Color.Green, args.User.UserIdentifier);
+                return;
+            }
+
+            if (!Enum.TryParse(tokens[0], true, out CameraMode mode) || !Enum.IsDefined(mode))
+            {
+                Game.ShowChatMessage("Usage: /camera {reset|static|dynamic|individual} [zoom]", Color.Red, args.User.UserIdentifier);
+                return;
+            }
+
+            float zoom = 0f;
+
+            if (tokens.Length > 1)
+            {
+                if (mode != CameraMode.Individual)
+                {
+                    Game.ShowChatMessage("Zoom only applies to the individual camera.", Color.Red, args.User.UserIdentifier);
+                    return;
+                }
+
+                if (!float.TryParse(tokens[1], out zoom) || zoom <= 0)
+                {
+                    Game.ShowChatMessage($"Invalid zoom '{tokens[1]}'.", Color.Red, args.User.UserIdentifier);
+                    return;
+                }
+            }
+
+            Game.SetCurrentCameraMode(mode);
+
+            if (tokens.Length > 1)
+            {
+                Game.SetCameraFixedIndividualZoom(zoom);
+                Game.ShowChatMessage($"Camera set to individual with zoom {zoom}.", Color.Green, args.User.UserIdentifier);
+            }
+            else
+            {
+                Game.ShowChatMessage($"Camera set to {mode.ToString().ToLowerInvariant()}.", Color.Green, args.User.UserIdentifier);
+            }
+        }
+    }
+}
