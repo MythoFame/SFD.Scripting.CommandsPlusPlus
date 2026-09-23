@@ -52,7 +52,7 @@ Schedule commands to run automatically when events happen. Great for announcemen
 /add_job time 30000 0 /msg 30 seconds have passed!
 # Repeats every 30 seconds forever (0 = unlimited).
 
-/add_job time 60000 3 /refill_all true
+/add_job time 60000 3 /revive *
 # Revives everyone every 60 seconds, three times.
 
 /add_job spawn /msg A new fighter has spawned!
