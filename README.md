@@ -88,7 +88,7 @@ Change how the match itself behaves. Persistent rules like respawns and physics 
 | `/refill_all [true\|false]` | Toggles or sets whether ammo is constantly refilled for all players. |
 | `/regen <hp>` | Sets health regenerated per second for all players. Set to `0` or below to disable. |
 | `/gravity <constant>` | Sets a constant applied to gravity. Set to `0` to disable. |
-| `/friendly_fire` | Toggles friendly fire. |
+| `/friendly_fire [true\|false]` | Toggles friendly fire. |
 
 ### Spectation
 
