@@ -26,9 +26,10 @@ Any command works, including built-in game commands.
 [b]Examples:[/b]
 [code]/add_job startup /msg Welcome to the arena!
 /add_job time 30000 0 /msg 30 seconds have passed!
-/add_job spawn /msg A new fighter has spawned!
+/add_job spawn /msg Welcome, @@PLAYER@@!
 /add_job shutdown /msg Good game!
 /add_job gameover /msg The round is over![/code]
+Spawn jobs replace @@PLAYER@@ with each spawned player's name.
 
 [h3]Gameplay: Change how the match itself behaves. Host only.[/h3]
 [table]

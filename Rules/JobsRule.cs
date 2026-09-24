@@ -35,6 +35,9 @@ public partial class GameScript : GameScriptInterfaceExtended
         private const string COMMANDS_KEY = "CommandsPlusPlus.Jobs.Commands";
         private const string COMMAND_ARGS_KEY = "CommandsPlusPlus.Jobs.CommandArgs";
 
+        /// <summary>Placeholder replaced with the spawned player's name in spawn jobs.</summary>
+        private const string PlayerToken = "@@PLAYER@@";
+
         /// <summary>Whether trigger hooks are live. Timers only start when initialized.</summary>
         private static bool _initialized;
 
@@ -58,7 +61,7 @@ public partial class GameScript : GameScriptInterfaceExtended
                     Run(job);
             }
 
-            Game.Events.StartPlayerCreatedCallback(_ => Fire(JobTrigger.Spawn));
+            Game.Events.StartPlayerCreatedCallback(OnPlayerCreated);
             GameOverCallback.Start(() => Fire(JobTrigger.GameOver));
 
             foreach (Job job in Jobs)
@@ -160,6 +163,19 @@ public partial class GameScript : GameScriptInterfaceExtended
             job.Timer = Game.Events.StartUpdateCallback(_ => Run(job), interval, count);
         }
 
+        private static void OnPlayerCreated(IPlayer[] players)
+        {
+            foreach (IPlayer player in players)
+            {
+                foreach (Job job in Jobs)
+                {
+                    if (job.Trigger != JobTrigger.Spawn) continue;
+
+                    Run(job, player.Name ?? string.Empty);
+                }
+            }
+        }
+
         private static void Fire(JobTrigger trigger)
         {
             foreach (Job job in Jobs)
@@ -170,11 +186,16 @@ public partial class GameScript : GameScriptInterfaceExtended
             }
         }
 
-        private static void Run(Job job)
+        private static void Run(Job job, string playerName = null)
         {
-            string message = string.IsNullOrEmpty(job.CommandArgs)
+            string commandArgs = job.CommandArgs;
+
+            if (!string.IsNullOrEmpty(playerName))
+                commandArgs = commandArgs.Replace(PlayerToken, playerName, StringComparison.Ordinal);
+
+            string message = string.IsNullOrEmpty(commandArgs)
                 ? "/" + job.Command
-                : "/" + job.Command + " " + job.CommandArgs;
+                : "/" + job.Command + " " + commandArgs;
 
             UserMessageCallbackArgs args = new(null, message);
 

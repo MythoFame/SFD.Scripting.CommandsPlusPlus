@@ -55,8 +55,8 @@ Schedule commands to run automatically when events happen. Great for announcemen
 /add_job time 60000 3 /revive *
 # Revives everyone every 60 seconds, three times.
 
-/add_job spawn /msg A new fighter has spawned!
-# Runs whenever a player spawns.
+/add_job spawn /msg Welcome, @@PLAYER@@!
+# @@PLAYER@@ is replaced with each spawned player's name.
 
 /add_job shutdown /msg Good game!
 # Runs when the map unloads.
@@ -65,7 +65,7 @@ Schedule commands to run automatically when events happen. Great for announcemen
 # Runs when the round ends.
 ```
 
-Each job is stored as a trigger type plus trigger arguments, command name and command arguments. Removing a job rebuilds the lists, so indexes shift after `/remove_job`.
+Each job is stored as a trigger type plus trigger arguments, command name and command arguments. Removing a job rebuilds the lists, so indexes shift after `/remove_job`. Spawn jobs replace `@@PLAYER@@` in command arguments with each spawned player's name.
 
 ### Gameplay
 
