@@ -43,7 +43,7 @@ public partial class GameScript : GameScriptInterfaceExtended
             {
                 if (player == null || player.IsRemoved) continue;
 
-                string objectID = _anvilObjectIDs[_random.Next(_anvilObjectIDs.Length)];
+                string objectID = _anvilObjectIDs[Random.Shared.Next(_anvilObjectIDs.Length)];
 
                 IObject obj = Game.CreateObject(objectID, Vector2.Zero);
 

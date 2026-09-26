@@ -68,7 +68,7 @@ public partial class GameScript : GameScriptInterfaceExtended
             {
                 if (user == null) continue;
 
-                PlayerHelper.Respawn(user, PathGridHelper.GetRandomSpawnPosition(_random), Delay);
+                PlayerHelper.Respawn(user, PathGridHelper.GetRandomSpawnPosition(Random.Shared), Delay);
             }
         }
     }

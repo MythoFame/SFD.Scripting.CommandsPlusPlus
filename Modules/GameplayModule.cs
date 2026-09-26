@@ -3,67 +3,111 @@ namespace SFD.Scripting.CommandsPlusPlus;
 public partial class GameScript : GameScriptInterfaceExtended
 {
     /// <summary>
-    /// Change how the match itself behaves. Persistent rules like respawns
-    /// and physics that stay on until you turn them off. Host-only, persisted.
-    /// Command implementations live in <c>Commands/GameplayModule/</c> as
-    /// partial declarations of this class.
+    /// Custom gameplay rules.
     /// </summary>
     public sealed partial class GameplayModule : CommandsModule
     {
         public override string Name => "Gameplay";
 
-        public override string Description => "Change how the match itself behaves.";
+        public override string Description => "Gameplay module";
 
         public GameplayModule()
         {
-            AddCommand("rsboard", Rsboard,
-                "- Resets the stored win ratio statistics. Moderator-only.",
-                moderatorOnly: true);
-            AddCommand("wpnspawn", Wpnspawn,
+            AddCommand(new Command(
+                "rsboard",
+                "Resets the stored win ratio statistics. Moderator-only.",
+                Rsboard
+            ));
+
+            AddCommand(new Command(
+                "wpnspawn",
                 "[true|false] - Toggles or sets whether weapons spawn on the map. Moderator-only, not persisted.",
-                moderatorOnly: true);
-            AddCommand("refill_all", RefillAll,
+                Wpnspawn
+            ));
+
+            AddCommand(new Command(
+                "refill_all",
                 "[true|false] - Toggles or sets whether ammo is constantly refilled for all players.",
-                hostOnly: true);
-            AddCommand("grab", Grab,
+                RefillAll, CommandPermision.Host
+            ));
+
+            AddCommand(new Command(
+                "grab",
                 "[true|false] - Toggles or sets whether players are able to grab and throw each other.",
-                hostOnly: true);
-            AddCommand("throw", ThrowCommand,
+                Grab, CommandPermision.Host
+            ));
+
+            AddCommand(new Command(
+                "throw",
                 "[true|false] - Toggles or sets whether players can throw objects.",
-                hostOnly: true);
-            AddCommand("regen", Regen,
+                ThrowCommand, CommandPermision.Host
+            ));
+
+            AddCommand(new Command(
+                "regen",
                 "<hp> - Sets health regenerated per second for all players. Set to `0` or below to disable.",
-                hostOnly: true);
-            AddCommand("dmg_numbers", DmgNumbers,
+                Regen, CommandPermision.Host
+            ));
+
+            AddCommand(new Command(
+                "dmg_numbers",
                 "[true|false] [players|objects|all] - Toggles or sets whether damage is displayed.",
-                hostOnly: true);
-            AddCommand("speech", Speech,
+                DmgNumbers, CommandPermision.Host
+            ));
+
+            AddCommand(new Command(
+                "speech",
                 "[true|false] - Toggles custom speech bubbles above players. Second parameter plays a sound when speech appears (default to `false`).",
-                hostOnly: true);
-            AddCommand("dropin", Dropin,
+                Speech, CommandPermision.Host
+            ));
+
+            AddCommand(new Command(
+                "dropin",
                 "<delay> - Sets the drop-in spawn delay. Set to `0` or below to disable.",
-                hostOnly: true);
-            AddCommand("respawn", Respawn,
+                Dropin, CommandPermision.Host
+            ));
+
+            AddCommand(new Command(
+                "respawn",
                 "<delay> - Sets the custom respawn delay. Set to `0` or below to disable.",
-                hostOnly: true);
-            AddCommand("friendly_fire", FriendlyFire,
+                Respawn, CommandPermision.Host
+            ));
+
+            AddCommand(new Command(
+                "friendly_fire",
                 "[true|false] - Toggles friendly fire.",
-                hostOnly: true);
-            AddCommand("gravity", Gravity,
+                FriendlyFire, CommandPermision.Host
+            ));
+
+            AddCommand(new Command(
+                "gravity",
                 "<constant> - Sets a constant applied to gravity. Set to `0` to disable.",
-                hostOnly: true);
-            AddCommand("camera", Camera,
+                Gravity, CommandPermision.Host
+            ));
+
+            AddCommand(new Command(
+                "camera",
                 "{static|dynamic|individual} [zoom] - Sets camera type and optional zoom level for the current round. Not persisted.",
-                hostOnly: true);
-            AddCommand("gmover", Gmover,
+                Camera, CommandPermision.Host
+            ));
+
+            AddCommand(new Command(
+                "gmover",
                 "{true|false|players} - Controls automatic victory detection, i.e. whether the round may end. Host-only.",
-                hostOnly: true);
-            AddCommand("weather", Weather,
+                Gmover, CommandPermision.Host
+            ));
+
+            AddCommand(new Command(
+                "weather",
                 "<none|snow|rain> - Sets the weather. Moderator-only, not persisted.",
-                moderatorOnly: true);
-            AddCommand("clear_obj", ClearObj,
+                Weather
+            ));
+
+            AddCommand(new Command(
+                "clear_obj",
                 "<id> - Removes all objects with the given ID. Moderator-only.",
-                moderatorOnly: true);
+                ClearObj
+            ));
         }
     }
 }

@@ -53,16 +53,16 @@ public partial class GameScript : GameScriptInterfaceExtended
                 }
             }
 
-            string name = tokens.Length >= 3 ? tokens[2] : $"ROBOT-{_random.Next(1000, 10000)}K";
+            string name = tokens.Length >= 3 ? tokens[2] : $"ROBOT-{Random.Shared.Next(1000, 10000)}K";
 
-            IPlayer bot = Game.CreatePlayer(PathGridHelper.GetRandomSpawnPosition(_random));
+            IPlayer bot = Game.CreatePlayer(PathGridHelper.GetRandomSpawnPosition(Random.Shared));
 
             bot.SetBotBehavior(new(true, ai));
             bot.SetTeam(team);
             bot.SetProfile(new()
             {
                 Skin = new IProfileClothingItem("MechSkin", "ClothingLightGray",
-                    _botSecondaryColors[_random.Next(_botSecondaryColors.Length)]),
+                    _botSecondaryColors[Random.Shared.Next(_botSecondaryColors.Length)]),
             });
 
             bot.SetBotName(name);

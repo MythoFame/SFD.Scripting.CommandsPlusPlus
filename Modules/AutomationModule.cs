@@ -16,15 +16,23 @@ public partial class GameScript : GameScriptInterfaceExtended
 
         public AutomationModule()
         {
-            AddCommand("jobs", Jobs,
+            AddCommand(new Command(
+                "jobs",
                 "- Lists all jobs along with their index, trigger, arguments and command.",
-                hostOnly: true);
-            AddCommand("add_job", AddJob,
+                Jobs, CommandPermision.Host
+            ));
+
+            AddCommand(new Command(
+                "add_job",
                 "{startup|shutdown|gameover|spawn|time} <args> <command...> - Adds a job that runs a command on a certain trigger. Arguments depend on the trigger.",
-                hostOnly: true);
-            AddCommand("remove_job", RemoveJob,
+                AddJob, CommandPermision.Host
+            ));
+
+            AddCommand(new Command(
+                "remove_job",
                 "<index> - Removes the job with the given index, * removes all.",
-                hostOnly: true);
+                RemoveJob, CommandPermision.Host
+            ));
         }
     }
 }
