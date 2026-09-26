@@ -1,9 +1,6 @@
 using SFDGameScriptInterface;
-using static SFD.Scripting.CommandsPlusPlus.Commands.GameScript;
-using static SFD.Scripting.CommandsPlusPlus.Modules.GameScript;
-using static SFD.Scripting.CommandsPlusPlus.Utils.GameScript;
 
-namespace SFD.Scripting.CommandsPlusPlus.Modules.Management;
+namespace SFD.Scripting.CommandsPlusPlus;
 
 public partial class GameScript : GameScriptInterfaceExtended
 {

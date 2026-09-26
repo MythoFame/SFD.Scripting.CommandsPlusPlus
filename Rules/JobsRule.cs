@@ -199,7 +199,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             UserMessageCallbackArgs args = new(null, message);
 
-            CommandHandler.Command command = CommandHandler.ActiveCommands
+            Command command = ModuleRegistry.Commands
                 .FirstOrDefault(c => c.Name == args.Command);
 
             if (command == null)

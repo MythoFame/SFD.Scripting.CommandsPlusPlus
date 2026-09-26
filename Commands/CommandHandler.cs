@@ -1,7 +1,6 @@
 using SFDGameScriptInterface;
-using static SFD.Scripting.CommandsPlusPlus.Modules.GameScript;
 
-namespace SFD.Scripting.CommandsPlusPlus.Commands;
+namespace SFD.Scripting.CommandsPlusPlus;
 
 public partial class GameScript : GameScriptInterfaceExtended
 {
@@ -30,7 +29,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             foreach (CommandsModule module in ModuleRegistry.Modules)
             {
-                if (!module.IsEnabled && !args.User.IsHost) continue;
+                if (!module.IsRestricted && !args.User.IsHost) continue;
 
                 foreach (Command command in module.Commands)
                 {

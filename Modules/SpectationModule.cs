@@ -13,21 +13,21 @@ public partial class GameScript : GameScriptInterfaceExtended
 
         public override string Description => "Choose who plays and who watches.";
 
-        public override bool DefaultRestricted => true;
+        // public override bool DefaultRestricted => true;
 
         public SpectationModule()
         {
-            AddCommand("spec", Spectate,
-                "[user] - Toggles spectation for next round. Moderators can force-spectate a user.");
-            AddCommand("spec_wl", SpectateWhitelist,
-                "- Toggles whitelist-only mode. Moderator-only.",
-                moderatorOnly: true);
-            AddCommand("spec_add", SpectateAddWhitelist,
-                "<user> - Adds user to whitelist. Moderator-only.",
-                moderatorOnly: true);
-            AddCommand("spec_rm", SpectateRmWhitelist,
-                "<account> - Removes account from whitelist (`*` clears all). Moderator-only.",
-                moderatorOnly: true);
+            // AddCommand("spec", Spectate,
+            //     "[user] - Toggles spectation for next round. Moderators can force-spectate a user.");
+            // AddCommand("spec_wl", SpectateWhitelist,
+            //     "- Toggles whitelist-only mode. Moderator-only.",
+            //     moderatorOnly: true);
+            // AddCommand("spec_add", SpectateAddWhitelist,
+            //     "<user> - Adds user to whitelist. Moderator-only.",
+            //     moderatorOnly: true);
+            // AddCommand("spec_rm", SpectateRmWhitelist,
+            //     "<account> - Removes account from whitelist (`*` clears all). Moderator-only.",
+            //     moderatorOnly: true);
         }
     }
 }

@@ -2,7 +2,7 @@
 
 using SFDGameScriptInterface;
 
-namespace SFD.Scripting.CommandsPlusPlus.Utils;
+namespace SFD.Scripting.CommandsPlusPlus;
 
 public partial class GameScript : GameScriptInterfaceExtended
 {

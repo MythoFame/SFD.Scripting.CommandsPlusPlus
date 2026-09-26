@@ -1,13 +1,11 @@
-using static SFD.Scripting.CommandsPlusPlus.Commands.GameScript;
-
-namespace SFD.Scripting.CommandsPlusPlus.Modules;
+namespace SFD.Scripting.CommandsPlusPlus;
 
 public partial class GameScript : GameScriptInterfaceExtended
 {
     /// <summary>
     /// Base class for a Commands++ module.
     /// Each module contains a <see cref="CommandHandler.CommandCollection"/> list.
-    /// <see cref="IsEnabled"/> restricts all of its commands to the host only.
+    /// <see cref="IsRestricted"/> restricts all of its commands to the host only.
     /// </summary>
     public abstract class CommandsModule
     {
@@ -22,16 +20,16 @@ public partial class GameScript : GameScriptInterfaceExtended
 
         private string StorageKey => StorageKeyPrefix + Name + ".Blocked";
 
-        private bool _isEnabled;
+        private bool _isRestricted;
 
-        public bool IsEnabled
+        public bool IsRestricted
         {
-            get => _isEnabled;
+            get => _isRestricted;
             private set
             {
-                if (_isEnabled == value) return;
+                if (_isRestricted == value) return;
 
-                _isEnabled = value;
+                _isRestricted = value;
                 Game.LocalStorage.SetItem(StorageKey, value);
 
                 if (value)
@@ -41,7 +39,7 @@ public partial class GameScript : GameScriptInterfaceExtended
             }
         }
 
-        protected CommandsModule() => IsEnabled = Game.LocalStorage.TryGetItemBool(StorageKey, out bool result) && result;
+        protected CommandsModule() => IsRestricted = Game.LocalStorage.TryGetItemBool(StorageKey, out bool result) && result;
 
         public void Reset() => Game.LocalStorage.RemoveItem(StorageKey);
 
@@ -54,7 +52,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
         public virtual void OnEnabled() { }
 
-        public bool Toggle() => IsEnabled = !_isEnabled;
+        public bool Toggle() => IsRestricted = !_isRestricted;
 
         /// <summary>
         /// Helper to create and track a command owned by this module.

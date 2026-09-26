@@ -1,5 +1,4 @@
 ﻿using SFDGameScriptInterface;
-using static SFD.Scripting.CommandsPlusPlus.Modules.GameScript;
 
 namespace SFD.Scripting.CommandsPlusPlus;
 
@@ -10,17 +9,10 @@ public abstract class GameScriptInterfaceExtended : GameScriptInterface
 
 public partial class GameScript : GameScriptInterfaceExtended
 {
-<<<<<<< HEAD
     public static void OnStartup()
-=======
-    private static readonly Random _random = Random.Shared;
-
-    public static void OnStartup() => ModuleRegistry.RegisterAll();
-
-    public static void OnShutdown()
->>>>>>> cf508c181bd9486ea397da7250feb8128dd8b058
     {
         JobsRule.Shutdown();
+        ModuleRegistry.RegisterAll();
     }
 
     public static void AfterStartup()

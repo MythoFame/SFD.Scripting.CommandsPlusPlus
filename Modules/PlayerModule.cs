@@ -1,104 +1,133 @@
+using SFDGameScriptInterface;
+
 namespace SFD.Scripting.CommandsPlusPlus;
 
 public partial class GameScript : GameScriptInterfaceExtended
 {
     /// <summary>
-    /// Moderator tools to directly control players, their gear and movement.
-    /// Command implementations live in <c>Commands/PlayerModule/</c> as
-    /// partial declarations of this class.
+    /// Player interaction commands (kill, revive, teleport, etc).
     /// </summary>
     public sealed partial class PlayerModule : CommandsModule
     {
         public override string Name => "Player";
 
-        public override string Description => "Moderator tools to directly control players.";
+        public override string Description => "Player module";
 
         public PlayerModule()
         {
-            AddCommand("kill", Kill,
-                "<player> - Kills a player.",
-                moderatorOnly: true);
-            AddCommand("gib", Gib,
-                "<player> - Gibs a player.",
-                moderatorOnly: true);
-            AddCommand("remove", Remove,
-                "<player> - Removes a player.",
-                moderatorOnly: true);
-            AddCommand("dmg", Dmg,
-                "<player> <amount> - Deals damage to a player.",
-                moderatorOnly: true);
-            AddCommand("notarget", NoTarget,
-                "<player> - Toggles whether bots target a player.",
-                moderatorOnly: true);
-            AddCommand("tp", Tp,
-                "<to> - Teleports you to a player.",
-                moderatorOnly: true);
-            AddCommand("tphere", Tphere,
-                "<player> - Teleports a player to you.",
-                moderatorOnly: true);
-            AddCommand("tppos", Tppos,
-                "<player> <x> <y> - Teleports a player to a world position.",
-                moderatorOnly: true);
-            AddCommand("trip", Trip,
-                "<player> - Trips a player, knocking them down.",
-                moderatorOnly: true);
-            AddCommand("pos", Pos,
-                "<player> - Displays the world position of a player. Moderator-only.",
-                moderatorOnly: true);
-            AddCommand("modifier", Modifier,
-                "<player> <modifier> <value> - Sets a player modifier to the given value.",
-                moderatorOnly: true);
-            AddCommand("tag", Tag,
-                "<player> [name|status] - Toggles nametag and status bar visibility for a player.",
-                moderatorOnly: true);
-            AddCommand("input", Input,
-                "<player> - Toggles whether a player can provide input, effectively freezing or unfreezing them.",
-                moderatorOnly: true);
-            AddCommand("team", Team,
-                "<player> <team> - Sets the team of a player.",
-                moderatorOnly: true);
-            AddCommand("burn", Burn,
-                "<player> - Toggles whether a player is burning.",
-                moderatorOnly: true);
-            AddCommand("spawn", Spawn,
-                "<id> - Spawns an object with the given ID at your position.",
-                moderatorOnly: true);
-            AddCommand("revive", Revive,
-                "<player> - Revives a dead player.",
-                moderatorOnly: true);
-            AddCommand("refill", Refill,
-                "<player> - Refills a player's ammo as if they used an ammo stash.",
-                moderatorOnly: true);
-            AddCommand("fly", FlyCommand,
-                "<player> - Toggles flying for a player.",
-                moderatorOnly: true);
-            AddCommand("noclip", Noclip,
-                "<player> - Toggles noclip for a player, allowing them to pass through walls.",
-                moderatorOnly: true);
-            AddCommand("copy", Copy,
-                "<from> <to> - Copies one player's profile onto another player.",
-                moderatorOnly: true);
-            AddCommand("swap", Swap,
-                "<from> <to> - Swaps the profiles of two players.",
-                moderatorOnly: true);
-            AddCommand("user", User,
-                "<from> <to> - Swaps the users of two players.",
-                moderatorOnly: true);
-            AddCommand("wear", Wear,
-                "<player> <slot> <name> [color1] [color2] - Gives a player a cosmetic item in the given slot with the given colors.",
-                moderatorOnly: true);
-            AddCommand("action", ActionCommand,
-                "<player> <action> - Queues an action for a player whose input is disabled.",
-                moderatorOnly: true);
-            AddCommand("magnet", MagnetCommand,
-                "<player> [area_size] [players|objects|all] - Toggles attraction of nearby players and/or objects toward a player.",
-                moderatorOnly: true);
-            AddCommand("repulse", RepulseCommand,
-                "<player> [area_size] [players|objects|all] - Toggles repulsion of nearby players and/or objects away from a player.",
-                moderatorOnly: true);
-            AddCommand("boost", Boost,
-                "<player> <left|down|up|right> [speed] - Boosts a player in a direction.",
-                moderatorOnly: true);
+            AddCommand(new Command(
+                "kill",
+                "<player> - Kills a player",
+                Kill
+            ));
+
+            AddCommand(new Command(
+                "gib",
+                "<player> - Gibs a player",
+                Gib
+            ));
+
+            AddCommand(new Command(
+                "remove",
+                "<player> - Removes a player",
+                Remove
+            ));
+
+            AddCommand(new Command(
+                "dmg",
+                "<player> <amount> - Deals damage to a player",
+                Dmg
+            ));
+
+            AddCommand(new Command(
+                "notarget",
+                "<player> - Toggles whether bots target a player",
+                NoTarget
+            ));
+
+            AddCommand(new Command(
+                "tp",
+                "<from> <to> - Teleports a player to another player, or to you if no target is given",
+                Tp
+            ));
+
+            AddCommand(new Command(
+                "trip",
+                "<player> - Trips a player, knocking them down",
+                Trip
+            ));
+
+            AddCommand(new Command(
+                "input",
+                "<player> - Toggles whether a player can provide input",
+                Input
+            ));
+
+            AddCommand(new Command(
+                "team",
+                "<player> <team> - Sets the team of a player",
+                Team
+            ));
+
+            AddCommand(new Command(
+                "burn",
+                "<player> - Toggles whether a player is burning",
+                Burn
+            ));
+
+            AddCommand(new Command(
+                "spawn",
+                "<id> - Spawns an object with the given ID at your position",
+                Spawn
+            ));
+
+            AddCommand(new Command(
+                "revive",
+                "<player> - Revives a dead player",
+                Revive
+            ));
+
+            AddCommand(new Command(
+                "refill",
+                "<player> - Refills a player's ammo as if they used an ammo stash",
+                Refill
+            ));
+
+            AddCommand(new Command(
+                "fly",
+                "<player> - Toggles flying for a player",
+                FlyCommand
+            ));
+
+            AddCommand(new Command(
+                "noclip",
+                "<player> - Toggles noclip for a player, allowing them to pass through walls",
+                Noclip
+            ));
+
+            AddCommand(new Command(
+                "copy",
+                "<from> <to> - Copies one player's profile onto another player",
+                Copy
+            ));
+
+            AddCommand(new Command(
+                "swap",
+                "<from> <to> - Swaps the profiles of two players",
+                Swap
+            ));
+
+            AddCommand(new Command(
+                "user",
+                "<from> <to> - Swaps the users of two players",
+                User
+            ));
+
+            AddCommand(new Command(
+                "action",
+                "<player> <action> - Queues an action for a player whose input is disabled",
+                ActionCommand
+            ));
         }
     }
 }

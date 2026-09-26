@@ -1,7 +1,6 @@
 using SFDGameScriptInterface;
-using static SFD.Scripting.CommandsPlusPlus.Modules.GameScript;
 
-namespace SFD.Scripting.CommandsPlusPlus.Modules.Management;
+namespace SFD.Scripting.CommandsPlusPlus;
 
 public partial class GameScript : GameScriptInterfaceExtended
 {
@@ -11,12 +10,8 @@ public partial class GameScript : GameScriptInterfaceExtended
         {
             int uid = args.User?.UserIdentifier ?? -1;
             ModuleRegistry.ResetAll();
-<<<<<<< HEAD:Modules/Management/ResetModules.cs
-            Game.ShowChatMessage("All modules reset to their default enabled state.", Color.Green, args.User.UserIdentifier);
-=======
 
             Game.ShowChatMessage("All modules reset to their default state.", Color.Green, uid);
->>>>>>> cf508c181bd9486ea397da7250feb8128dd8b058:Commands/ManagementModule/ResetModules.cs
         }
     }
 }
