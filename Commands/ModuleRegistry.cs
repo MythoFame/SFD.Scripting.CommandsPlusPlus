@@ -24,7 +24,7 @@ public partial class GameScript : GameScriptInterfaceExtended
         {
             foreach (CommandsModule mod in Modules)
             {
-                if (mod.Name == name)
+                if (string.Equals(name, mod.Name, StringComparison.OrdinalIgnoreCase))
                 {
                     module = mod;
                     return true;
@@ -38,7 +38,9 @@ public partial class GameScript : GameScriptInterfaceExtended
         public static void ResetAll()
         {
             foreach (CommandsModule module in Modules)
-                module.Reset();
+            {
+                module.IsRestricted = module.DefaultRestricted;
+            }
         }
 
         /// <summary>

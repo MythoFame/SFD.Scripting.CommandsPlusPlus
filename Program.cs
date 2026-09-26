@@ -11,8 +11,12 @@ public partial class GameScript : GameScriptInterfaceExtended
 {
     public static void OnStartup()
     {
-        JobsRule.Shutdown();
         ModuleRegistry.RegisterAll();
+    }
+
+    public static void OnShutdown()
+    {
+        JobsRule.Shutdown();
     }
 
     public static void AfterStartup()

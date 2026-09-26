@@ -18,39 +18,40 @@ public partial class GameScript : GameScriptInterfaceExtended
         /// <summary>Storage prefix .</summary>
         public const string StorageKeyPrefix = "CommandsPlusPlus.Module.";
 
-        private string StorageKey => StorageKeyPrefix + Name + ".Blocked";
-
-        private bool _isRestricted;
-
-        public bool IsRestricted
-        {
-            get => _isRestricted;
-            private set
-            {
-                if (_isRestricted == value) return;
-
-                _isRestricted = value;
-                Game.LocalStorage.SetItem(StorageKey, value);
-
-                if (value)
-                    OnEnabled();
-                else
-                    OnDisabled();
-            }
-        }
-
-        protected CommandsModule() => IsRestricted = Game.LocalStorage.TryGetItemBool(StorageKey, out bool result) && result;
-
-        public void Reset() => Game.LocalStorage.RemoveItem(StorageKey);
+        private string StorageKey => StorageKeyPrefix + Name + ".Restricted";
+        public virtual bool DefaultRestricted => false;
 
         /// <summary>
         /// Commands owned by this module. 
         /// </summary>
         public readonly List<Command> Commands = [];
 
-        public virtual void OnDisabled() { }
+        /// <summary>
+        /// Restricts to host only
+        /// </summary>
+        private bool _isRestricted;
 
-        public virtual void OnEnabled() { }
+        public bool IsRestricted
+        {
+            get => _isRestricted;
+            set
+            {
+                if (_isRestricted == value) return;
+
+                _isRestricted = value;
+                Game.LocalStorage.SetItem(StorageKey, value);
+                OnRestricted(value);
+            }
+        }
+
+        protected CommandsModule()
+        {
+            IsRestricted = Game.LocalStorage.TryGetItemBool(StorageKey, out bool result)
+                ? result
+                : DefaultRestricted;
+        }
+
+        public virtual void OnRestricted(bool value) { }
 
         public bool Toggle() => IsRestricted = !_isRestricted;
 

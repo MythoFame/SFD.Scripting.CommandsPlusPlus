@@ -29,7 +29,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             foreach (CommandsModule module in ModuleRegistry.Modules)
             {
-                if (!module.IsRestricted && !args.User.IsHost) continue;
+                if (module.IsRestricted && !args.User.IsHost) continue;
 
                 foreach (Command command in module.Commands)
                 {
