@@ -10,10 +10,11 @@ public partial class GameScript : GameScriptInterfaceExtended
         private static void Spawn(UserMessageCallbackArgs args)
         {
             string[] tokens = [.. ParseHelper.SplitArguments(args.CommandArguments)];
+            int uid = args.User?.UserIdentifier ?? -1;
 
             if (tokens.Length != 1)
             {
-                Game.ShowChatMessage("Usage: /spawn <id>", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage("Usage: /spawn <id>", Color.Red, uid);
                 return;
             }
 
@@ -21,7 +22,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             if (self == null || self.IsRemoved)
             {
-                Game.ShowChatMessage("You have no live player to spawn at.", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage("You have no live player to spawn at.", Color.Red, uid);
                 return;
             }
 
@@ -31,7 +32,7 @@ public partial class GameScript : GameScriptInterfaceExtended
             Vector2 playerPos = self.GetWorldPosition();
             obj.SetWorldPosition(new(playerPos.X + (aabb.Width / 2f + 16f) * self.FacingDirection, playerPos.Y));
 
-            Game.ShowChatMessage($"Spawned '{tokens[0]}'.", Color.Green, args.User.UserIdentifier);
+            Game.ShowChatMessage($"Spawned '{tokens[0]}'.", Color.Green, uid);
         }
     }
 }

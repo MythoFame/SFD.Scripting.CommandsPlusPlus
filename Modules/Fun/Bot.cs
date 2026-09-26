@@ -24,10 +24,11 @@ public partial class GameScript : GameScriptInterfaceExtended
         private static void Bot(UserMessageCallbackArgs args)
         {
             string[] tokens = [.. ParseHelper.SplitArguments(args.CommandArguments)];
+            int uid = args.User?.UserIdentifier ?? -1;
 
             if (tokens.Length > 3)
             {
-                Game.ShowChatMessage("Usage: /bot [team] [ai] [name]", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage("Usage: /bot [team] [ai] [name]", Color.Red, uid);
                 return;
             }
 
@@ -37,7 +38,7 @@ public partial class GameScript : GameScriptInterfaceExtended
             {
                 if (!Enum.TryParse(tokens[0], true, out team) || !Enum.IsDefined(team))
                 {
-                    Game.ShowChatMessage("Invalid team. Use independent (or 0) or team 1-8.", Color.Red, args.User.UserIdentifier);
+                    Game.ShowChatMessage("Invalid team. Use independent (or 0) or team 1-8.", Color.Red, uid);
                     return;
                 }
             }
@@ -48,7 +49,7 @@ public partial class GameScript : GameScriptInterfaceExtended
             {
                 if (!Enum.TryParse(tokens[1], true, out ai) || !Enum.IsDefined(ai))
                 {
-                    Game.ShowChatMessage("Invalid AI type.", Color.Red, args.User.UserIdentifier);
+                    Game.ShowChatMessage("Invalid AI type.", Color.Red, uid);
                     return;
                 }
             }
@@ -70,7 +71,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             EffectsWrapper.PlayTraceSpawner(bot, EffectName.Electric, 1);
 
-            Game.ShowChatMessage($"Spawned bot '{name}' (team {team}, AI {ai}).", Color.Green, args.User.UserIdentifier);
+            Game.ShowChatMessage($"Spawned bot '{name}' (team {team}, AI {ai}).", Color.Green, uid);
         }
     }
 }

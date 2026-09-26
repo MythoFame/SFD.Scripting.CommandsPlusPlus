@@ -10,60 +10,56 @@ public partial class GameScript : GameScriptInterfaceExtended
         private static void Tp(UserMessageCallbackArgs args)
         {
             string[] tokens = [.. ParseHelper.SplitArguments(args.CommandArguments)];
+            int uid = args.User?.UserIdentifier ?? -1;
 
-            if (tokens.Length == 0 || tokens.Length > 2)
+            if (tokens.Length != 1)
             {
-                Game.ShowChatMessage("Usage: /tp <from> [to]", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage("Usage: /tp <to>", Color.Red, uid);
                 return;
             }
 
-            IPlayer[] sources = [.. ParseHelper.ParsePlayers(tokens[0], args.User)];
+            IPlayer self = args.User.GetPlayer();
 
-            if (sources.Length == 0)
+            if (self == null || self.IsRemoved)
             {
-                Game.ShowChatMessage($"Player '{tokens[0]}' not found.", Color.Red, args.User.UserIdentifier);
+                Game.ShowChatMessage("You have no live player to teleport.", Color.Red, uid);
                 return;
             }
 
-            Vector2 targetPos;
-            string targetLabel;
+            IPlayer target = null;
 
-            if (tokens.Length == 2)
+            foreach (IPlayer candidate in ParseHelper.ParsePlayers(tokens[0], args.User))
             {
-                IPlayer target = null;
-
-                foreach (IPlayer candidate in ParseHelper.ParsePlayers(tokens[1], args.User))
+                if (candidate != null && !candidate.IsRemoved)
                 {
-                    if (candidate != null && !candidate.IsRemoved)
-                    {
-                        target = candidate;
-                        break;
-                    }
+                    target = candidate;
+                    break;
                 }
-
-                if (target == null)
-                {
-                    Game.ShowChatMessage($"Player '{tokens[1]}' not found.", Color.Red, args.User.UserIdentifier);
-                    return;
-                }
-
-                targetPos = target.GetWorldPosition();
-                targetLabel = target.Name;
-            }
-            else
-            {
-                IPlayer self = args.User.GetPlayer();
-
-                if (self == null || self.IsRemoved)
-                {
-                    Game.ShowChatMessage("You have no live player to teleport to.", Color.Red, args.User.UserIdentifier);
-                    return;
-                }
-
-                targetPos = self.GetWorldPosition();
-                targetLabel = "you";
             }
 
+            if (target == null)
+            {
+                Game.ShowChatMessage($"Player '{tokens[0]}' not found.", Color.Red, uid);
+                return;
+            }
+
+            if (target.UniqueID == self.UniqueID)
+            {
+                Game.ShowChatMessage("You cannot teleport to yourself.", Color.Red, uid);
+                return;
+            }
+
+            TeleportPlayers(args, [self], target.GetWorldPosition(), target.Name);
+        }
+
+        /// <summary>
+        /// Shared teleport core for <c>/tp</c>, <c>/tphere</c> and <c>/tppos</c>:
+        /// moves every live source player to the destination with a gleam trail
+        /// and reports the count to the caller.
+        /// </summary>
+        private static void TeleportPlayers(UserMessageCallbackArgs args, IPlayer[] sources, Vector2 targetPos, string targetLabel)
+        {
+            int uid = args.User?.UserIdentifier ?? -1;
             int affected = 0;
 
             foreach (IPlayer player in sources)
@@ -77,7 +73,7 @@ public partial class GameScript : GameScriptInterfaceExtended
                 PointShape.Trail(pos => Game.PlayEffect(EffectName.ItemGleam, pos), from, targetPos, 15f);
             }
 
-            Game.ShowChatMessage($"Teleported {affected} player(s) to {targetLabel}.", Color.Green, args.User.UserIdentifier);
+            Game.ShowChatMessage($"Teleported {affected} player(s) to {targetLabel}.", Color.Green, uid);
         }
     }
 }
