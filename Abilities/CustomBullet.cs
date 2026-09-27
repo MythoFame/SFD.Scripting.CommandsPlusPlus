@@ -14,6 +14,8 @@ public partial class GameScript : GameScriptInterfaceExtended
         /// <summary>Every live instance, at most one per player UniqueID. Instances self-register on construction.</summary>
         private static readonly List<CustomBullet> _instances = [];
 
+        private static readonly Vector2 _max = new(float.MaxValue);
+
         private Events.ProjectileCreatedCallback _projectileCreated = null;
 
         public string ObjectID = string.Empty;
@@ -86,6 +88,7 @@ public partial class GameScript : GameScriptInterfaceExtended
                 }
 
                 proj.FlagForRemoval();
+                proj.Position = _max;
 
                 Game.Events.StartUpdateCallback(_ =>
                 {
