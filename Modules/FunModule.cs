@@ -3,42 +3,69 @@ namespace SFD.Scripting.CommandsPlusPlus;
 public partial class GameScript : GameScriptInterfaceExtended
 {
     /// <summary>
-    /// Light-hearted extras and visual gags. Permission varies per command.
-    /// Command implementations live in <c>Commands/FunModule/</c> as
-    /// partial declarations of this class.
+    /// Fun commands.
     /// </summary>
     public sealed partial class FunModule : CommandsModule
     {
         public override string Name => "Fun";
 
-        public override string Description => "Light-hearted extras and visual gags.";
+        public override string Description => "Fun module";
 
         public FunModule()
         {
-            AddCommand("lightning", Lightning,
+            AddCommand(new Command(
+                "lightning",
                 "<player> - Summons a lightning strike upon a player. Moderator-only.",
-                moderatorOnly: true);
-            AddCommand("graffiti", Graffiti,
-                "<text> - Creates floating graffiti text at your position.");
-            AddCommand("fart", Fart,
-                "- Makes you fart.");
-            AddCommand("suicide", Suicide,
-                "- Die dramatically.");
-            AddCommand("clone", Clone,
+                Lightning
+            ));
+
+            AddCommand(new Command(
+                "graffiti",
+                "<text> - Creates floating graffiti text at your position.",
+                Graffiti, CommandPermision.Everyone
+            ));
+
+            AddCommand(new Command(
+                "fart",
+                "- Makes you fart.",
+                Fart, CommandPermision.Everyone
+            ));
+
+            AddCommand(new Command(
+                "suicide",
+                "- Die dramatically.",
+                Suicide, CommandPermision.Everyone
+            ));
+
+            AddCommand(new Command(
+                "clone",
                 "<player> [team] [ai] - Spawns a clone of a player, optionally on a given team with the given AI. Moderator-only.",
-                moderatorOnly: true);
-            AddCommand("anvil", Anvil,
+                Clone
+            ));
+
+            AddCommand(new Command(
+                "anvil",
                 "<player> - Drops a heavy object onto a player. Moderator-only.",
-                moderatorOnly: true);
-            AddCommand("bot", Bot,
+                Anvil
+            ));
+
+            AddCommand(new Command(
+                "bot",
                 "[team] [ai] [name] - Spawns a robot, optionally on a given team with the given AI and name. Moderator-only.",
-                moderatorOnly: true);
-            AddCommand("color", ColorCommand,
+                Bot
+            ));
+
+            AddCommand(new Command(
+                "color",
                 "<player> <color> - Recolors all of a player's clothing. Moderator-only.",
-                moderatorOnly: true);
-            AddCommand("bullet", Bullet,
+                ColorCommand
+            ));
+
+            AddCommand(new Command(
+                "bullet",
                 "<player> [id] - Sets custom bullets for a player, or disables them if no ID is given. Moderator-only.",
-                moderatorOnly: true);
+                Bullet
+            ));
         }
     }
 }

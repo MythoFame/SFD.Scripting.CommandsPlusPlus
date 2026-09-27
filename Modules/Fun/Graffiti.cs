@@ -43,7 +43,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             Vector2 graffitiPos = self.GetWorldPosition() + _offset;
 
-            IObjectText graffiti = (IObjectText) Game.CreateObject("BgText", graffitiPos);
+            IObjectText graffiti = (IObjectText)Game.CreateObject("BgText", graffitiPos);
 
             graffiti.SetText(text);
             graffiti.SetTextAlignment(TextAlignment.Middle);
@@ -51,7 +51,7 @@ public partial class GameScript : GameScriptInterfaceExtended
             Color color = ColorHelper.GetTeamColor(self.GetTeam());
 
             graffiti.SetTextColor(color);
-            graffiti.SetAngle((_random.NextSingle() * 2 - 1) * GRAFFITI_MAX_TILT);
+            graffiti.SetAngle((Random.Shared.NextSingle() * 2 - 1) * GRAFFITI_MAX_TILT);
             graffiti.SetTextScale(GRAFFITI_MAX_SCALE - text.Length / (float)GRAFFITI_TEXT_LIMIT * (GRAFFITI_MAX_SCALE - GRAFFITI_MIN_SCALE));
             graffiti.CustomID = GRAFFITI_ID;
 

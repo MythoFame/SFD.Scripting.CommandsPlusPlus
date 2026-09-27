@@ -112,7 +112,7 @@ public partial class GameScript : GameScriptInterfaceExtended
             PointShape.Random(v =>
             {
                 EffectsWrapper.PlayCustomFloatText(v, $"-{(int)damage}", color, duration, scale);
-            }, target.GetAABB(), _random);
+            }, target.GetAABB(), Random.Shared);
         }
     }
 }

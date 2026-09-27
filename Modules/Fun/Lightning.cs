@@ -31,7 +31,7 @@ public partial class GameScript : GameScriptInterfaceExtended
             {
                 if (player == null || player.IsRemoved) continue;
 
-                LightningHelper.Strike(player.GetWorldPosition(), _random);
+                LightningHelper.Strike(player.GetWorldPosition(), Random.Shared);
                 affected++;
             }
 
