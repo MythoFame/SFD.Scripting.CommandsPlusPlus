@@ -6,6 +6,12 @@ public partial class GameScript : GameScriptInterfaceExtended
 {
     public sealed partial class FunModule
     {
+        private static readonly string[] _colorSlots =
+        [
+            "Accessory", "ChestOver", "ChestUnder", "Feet",
+            "Hands", "Head", "Legs", "Waist"
+        ];
+
         private static void ColorCommand(UserMessageCallbackArgs args)
         {
             string[] tokens = [.. ParseHelper.SplitArguments(args.CommandArguments)];
@@ -17,8 +23,6 @@ public partial class GameScript : GameScriptInterfaceExtended
                 return;
             }
 
-            string package = ColorHelper.ToColorPackage(tokens[1]);
-
             IPlayer[] players = [.. ParseHelper.ParsePlayers(tokens[0], args.User)];
 
             if (players.Length == 0)
@@ -28,51 +32,70 @@ public partial class GameScript : GameScriptInterfaceExtended
             }
 
             int affected = 0;
+            string[] suggestions = [];
 
             foreach (IPlayer player in players)
             {
                 if (player == null || player.IsRemoved) continue;
 
-                player.SetProfile(ColorProfile(player.GetProfile(), package));
+                IProfile profile = player.GetProfile();
+
+                if (!RecolorProfile(profile, tokens[1], ref suggestions))
+                    continue;
+
+                player.SetProfile(profile);
                 affected++;
             }
 
-            if (affected == 0) return;
+            if (affected == 0)
+            {
+                Game.ShowChatMessage($"Unknown color '{tokens[1]}'.", Color.Red, uid);
 
-            Game.ShowChatMessage($"Applied {package} to {affected} player(s).", Color.Green, uid);
+                if (suggestions.Length > 0)
+                    Game.ShowChatMessage(ClothingHelper.DidYouMean(suggestions), Color.Red, uid);
+
+                return;
+            }
+
+            Game.ShowChatMessage($"Applied '{tokens[1]}' to {affected} player(s).", Color.Green, uid);
         }
 
         /// <summary>
         /// Recolors every clothing item on a profile, keeping item names.
-        /// Empty slots stay empty and Skin is left untouched.
+        /// Each item resolves the color against its own palette, falling back
+        /// to the secondary list when the primary list has no match. Items
+        /// with no match keep their colors. Empty slots stay empty and Skin
+        /// is left untouched. Returns whether any item changed.
         /// </summary>
-        private static IProfile ColorProfile(IProfile profile, string package)
+        private static bool RecolorProfile(IProfile profile, string input, ref string[] suggestions)
         {
-            if (profile.Accessory != null)
-                profile.Accessory = new IProfileClothingItem(profile.Accessory.Name, package, package);
+            bool changed = false;
 
-            if (profile.ChestOver != null)
-                profile.ChestOver = new IProfileClothingItem(profile.ChestOver.Name, package, package);
+            foreach (string slot in _colorSlots)
+            {
+                var field = typeof(IProfile).GetField(slot,
+                    System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
 
-            if (profile.ChestUnder != null)
-                profile.ChestUnder = new IProfileClothingItem(profile.ChestUnder.Name, package, package);
+                if (field == null || field.FieldType != typeof(IProfileClothingItem)) continue;
 
-            if (profile.Feet != null)
-                profile.Feet = new IProfileClothingItem(profile.Feet.Name, package, package);
+                if (field.GetValue(profile) is not IProfileClothingItem item) continue;
 
-            if (profile.Hands != null)
-                profile.Hands = new IProfileClothingItem(profile.Hands.Name, package, package);
+                string package = ClothingHelper.ResolveColorPackage(
+                    ClothingHelper.GetColorPackages(item.Name, false), input, out string[] primarySuggestions);
 
-            if (profile.Head != null)
-                profile.Head = new IProfileClothingItem(profile.Head.Name, package, package);
+                if (suggestions.Length == 0)
+                    suggestions = primarySuggestions;
 
-            if (profile.Legs != null)
-                profile.Legs = new IProfileClothingItem(profile.Legs.Name, package, package);
+                package ??= ClothingHelper.ResolveColorPackage(
+                    ClothingHelper.GetColorPackages(item.Name, true), input, out _);
 
-            if (profile.Waist != null)
-                profile.Waist = new IProfileClothingItem(profile.Waist.Name, package, package);
+                if (package == null) continue;
 
-            return profile;
+                field.SetValue(profile, new IProfileClothingItem(item.Name, package, package));
+                changed = true;
+            }
+
+            return changed;
         }
     }
 }

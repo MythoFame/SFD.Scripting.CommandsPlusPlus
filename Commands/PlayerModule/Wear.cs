@@ -30,11 +30,6 @@ public partial class GameScript : GameScriptInterfaceExtended
                 return;
             }
 
-            string color1 = tokens.Length > 3 ? ColorHelper.ToColorPackage(tokens[3]) : "";
-            string color2 = tokens.Length > 4 ? ColorHelper.ToColorPackage(tokens[4]) : "";
-
-            IProfileClothingItem item = new(ColorHelper.Capitalize(tokens[2]), color1, color2);
-
             IPlayer[] players = [.. ParseHelper.ParsePlayers(tokens[0], args.User)];
 
             if (players.Length == 0)
@@ -50,7 +45,53 @@ public partial class GameScript : GameScriptInterfaceExtended
                 if (player == null || player.IsRemoved) continue;
 
                 IProfile profile = player.GetProfile();
-                slot.SetValue(profile, item);
+
+                string itemName = ClothingHelper.ResolveItemName(slot.Name, profile.Gender, tokens[2], out string[] itemSuggestions);
+
+                if (itemName == null)
+                {
+                    Game.ShowChatMessage($"Unknown item '{tokens[2]}'.", Color.Red, uid);
+
+                    if (itemSuggestions.Length > 0)
+                        Game.ShowChatMessage(ClothingHelper.DidYouMean(itemSuggestions), Color.Red, uid);
+
+                    continue;
+                }
+
+                string color1 = string.Empty;
+                string color2 = string.Empty;
+
+                if (tokens.Length > 3)
+                {
+                    color1 = ClothingHelper.ResolveColorPackage(ClothingHelper.GetColorPackages(itemName, false), tokens[3], out string[] colorSuggestions);
+
+                    if (color1 == null)
+                    {
+                        Game.ShowChatMessage($"Unknown color '{tokens[3]}'.", Color.Red, uid);
+
+                        if (colorSuggestions.Length > 0)
+                            Game.ShowChatMessage(ClothingHelper.DidYouMean(colorSuggestions), Color.Red, uid);
+
+                        continue;
+                    }
+                }
+
+                if (tokens.Length > 4)
+                {
+                    color2 = ClothingHelper.ResolveColorPackage(ClothingHelper.GetColorPackages(itemName, true), tokens[4], out string[] colorSuggestions);
+
+                    if (color2 == null)
+                    {
+                        Game.ShowChatMessage($"Unknown color '{tokens[4]}'.", Color.Red, uid);
+
+                        if (colorSuggestions.Length > 0)
+                            Game.ShowChatMessage(ClothingHelper.DidYouMean(colorSuggestions), Color.Red, uid);
+
+                        continue;
+                    }
+                }
+
+                slot.SetValue(profile, new IProfileClothingItem(itemName, color1, color2));
                 player.SetProfile(profile);
                 affected++;
             }
