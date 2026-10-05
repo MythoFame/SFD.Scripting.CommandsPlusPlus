@@ -24,7 +24,7 @@ public partial class GameScript : GameScriptInterfaceExtended
                 "<module> - Toggles whether a module is restricted. Restricted modules have all their commands limited to the host.",
                 permission: CommandHandler.Permission.HostOnly);
             AddCommand("reset_modules", ResetModules,
-                "- Resets all modules to their default allowed state. Host-only, persisted.",
+                "- Resets all modules to their default allowed state. Persisted.",
                 permission: CommandHandler.Permission.HostOnly);
         }
     }

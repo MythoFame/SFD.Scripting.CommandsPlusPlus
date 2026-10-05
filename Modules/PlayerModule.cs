@@ -43,7 +43,7 @@ public partial class GameScript : GameScriptInterfaceExtended
                 "<player> - Trips a player, knocking them down.",
                 permission: CommandHandler.Permission.ModeratorOnly);
             AddCommand("pos", Pos,
-                "<player> - Displays the world position of a player. Moderator-only.",
+                "<player> - Displays the world position of a player.",
                 permission: CommandHandler.Permission.ModeratorOnly);
             AddCommand("modifier", Modifier,
                 "<player> <modifier> <value> - Sets a player modifier to the given value.",

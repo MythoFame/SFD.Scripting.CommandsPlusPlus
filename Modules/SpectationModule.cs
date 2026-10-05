@@ -20,13 +20,13 @@ public partial class GameScript : GameScriptInterfaceExtended
             AddCommand("spec", Spectate,
                 "[user] - Toggles spectation for next round. Moderators can force-spectate a user.");
             AddCommand("spec_wl", SpectateWhitelist,
-                "- Toggles whitelist-only mode. Moderator-only.",
+                "- Toggles whitelist-only mode.",
                 permission: CommandHandler.Permission.ModeratorOnly);
             AddCommand("spec_add", SpectateAddWhitelist,
-                "<user> - Adds user to whitelist. Moderator-only.",
+                "<user> - Adds user to whitelist.",
                 permission: CommandHandler.Permission.ModeratorOnly);
             AddCommand("spec_rm", SpectateRmWhitelist,
-                "<account> - Removes account from whitelist (`*` clears all). Moderator-only.",
+                "<account> - Removes account from whitelist (`*` clears all).",
                 permission: CommandHandler.Permission.ModeratorOnly);
         }
     }

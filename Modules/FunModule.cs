@@ -16,7 +16,7 @@ public partial class GameScript : GameScriptInterfaceExtended
         public FunModule()
         {
             AddCommand("lightning", Lightning,
-                "<player> - Summons a lightning strike upon a player. Moderator-only.",
+                "<player> - Summons a lightning strike upon a player.",
                 permission: CommandHandler.Permission.ModeratorOnly);
             AddCommand("graffiti", Graffiti,
                 "<text> - Creates floating graffiti text at your position.");
@@ -25,19 +25,19 @@ public partial class GameScript : GameScriptInterfaceExtended
             AddCommand("suicide", Suicide,
                 "- Die dramatically.");
             AddCommand("clone", Clone,
-                "<player> [team] [ai] - Spawns a clone of a player, optionally on a given team with the given AI. Moderator-only.",
+                "<player> [team] [ai] - Spawns a clone of a player, optionally on a given team with the given AI.",
                 permission: CommandHandler.Permission.ModeratorOnly);
             AddCommand("anvil", Anvil,
-                "<player> - Drops a heavy object onto a player. Moderator-only.",
+                "<player> - Drops a heavy object onto a player.",
                 permission: CommandHandler.Permission.ModeratorOnly);
             AddCommand("bot", Bot,
-                "[team] [ai] [name] - Spawns a robot, optionally on a given team with the given AI and name. Moderator-only.",
+                "[team] [ai] [name] - Spawns a robot, optionally on a given team with the given AI and name.",
                 permission: CommandHandler.Permission.ModeratorOnly);
             AddCommand("color", ColorCommand,
-                "<player> <color> - Recolors all of a player's clothing. Moderator-only.",
+                "<player> <color> - Recolors all of a player's clothing.",
                 permission: CommandHandler.Permission.ModeratorOnly);
             AddCommand("bullet", Bullet,
-                "<player> [id] - Sets custom bullets for a player, or disables them if no ID is given. Moderator-only.",
+                "<player> [id] - Sets custom bullets for a player, or disables them if no ID is given.",
                 permission: CommandHandler.Permission.ModeratorOnly);
         }
     }

@@ -17,10 +17,10 @@ public partial class GameScript : GameScriptInterfaceExtended
         public GameplayModule()
         {
             AddCommand("rsboard", Rsboard,
-                "- Resets the stored win ratio statistics. Moderator-only.",
+                "- Resets the stored win ratio statistics.",
                 permission: CommandHandler.Permission.ModeratorOnly);
             AddCommand("wpnspawn", Wpnspawn,
-                "[true|false] - Toggles or sets whether weapons spawn on the map. Moderator-only, not persisted.",
+                "[true|false] - Toggles or sets whether weapons spawn on the map, not persisted.",
                 permission: CommandHandler.Permission.ModeratorOnly);
             AddCommand("refill_all", RefillAll,
                 "[true|false] - Toggles or sets whether ammo is constantly refilled for all players.",
@@ -56,13 +56,13 @@ public partial class GameScript : GameScriptInterfaceExtended
                 "{static|dynamic|individual} [zoom] - Sets camera type and optional zoom level for the current round. Not persisted.",
                 permission: CommandHandler.Permission.HostOnly);
             AddCommand("gmover", Gmover,
-                "{true|false|players} - Controls automatic victory detection, i.e. whether the round may end. Host-only.",
+                "{true|false|players} - Controls automatic victory detection, i.e. whether the round may end.",
                 permission: CommandHandler.Permission.HostOnly);
             AddCommand("weather", Weather,
-                "<none|snow|rain> - Sets the weather. Moderator-only, not persisted.",
+                "<none|snow|rain> - Sets the weather, not persisted.",
                 permission: CommandHandler.Permission.ModeratorOnly);
             AddCommand("clear_obj", ClearObj,
-                "<id> - Removes all objects with the given ID. Moderator-only.",
+                "<id> - Removes all objects with the given ID.",
                 permission: CommandHandler.Permission.ModeratorOnly);
         }
     }
