@@ -40,8 +40,9 @@ Schedule commands to run automatically when events happen. Great for announcemen
 | Command | Description |
 |---------|-------------|
 | `/jobs` | Lists all jobs along with their index, trigger, arguments and command. |
-| `/add_job {startup\|shutdown\|gameover\|spawn\|time} <args> <command...>` | Adds a job that runs a command on a certain trigger. Arguments depend on the trigger. |
+| `/add_job {startup\|shutdown\|gameover\|spawn\|time\|manual} <args> <command...>` | Adds a job that runs a command on a certain trigger. Arguments depend on the trigger. `manual` jobs only run via `/run_job`. |
 | `/remove_job <index>` | Removes the job with the given index. Use `*` to remove all. |
+| `/run_job <index>` | Runs the job with the given index. |
 
 #### Examples
 

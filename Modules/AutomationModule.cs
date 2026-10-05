@@ -25,6 +25,9 @@ public partial class GameScript : GameScriptInterfaceExtended
             AddCommand("remove_job", RemoveJob,
                 "<index> - Removes the job with the given index, * removes all.",
                 permission: CommandHandler.Permission.HostOnly);
+            AddCommand("run_job", RunJob,
+                "<index> - Runs the job with the given index.",
+                permission: CommandHandler.Permission.HostOnly);
         }
     }
 }

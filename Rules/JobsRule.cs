@@ -16,7 +16,8 @@ public partial class GameScript : GameScriptInterfaceExtended
             Shutdown,
             GameOver,
             Spawn,
-            Time
+            Time,
+            Manual
         }
 
         public class Job
@@ -184,6 +185,16 @@ public partial class GameScript : GameScriptInterfaceExtended
 
                 Run(job);
             }
+        }
+
+        /// <summary>Runs the job at the given index. Returns false when out of range.</summary>
+        public static bool Run(int index)
+        {
+            if (index < 0 || index >= Jobs.Count)
+                return false;
+
+            Run(Jobs[index]);
+            return true;
         }
 
         private static void Run(Job job, string playerName = null)

@@ -39,8 +39,9 @@ Required core module for managing all other modules. Always allowed and cannot b
 Run commands automatically on events. Host-only, persisted.
 
 - [x] `/jobs`: Lists all jobs along with their index, trigger, arguments and command.
-- [x] `/add_job {startup|shutdown|gameover|spawn|time} <args> <command...>`: Adds a job that runs a command on a certain trigger. Arguments depend on the trigger.
+- [x] `/add_job {startup|shutdown|gameover|spawn|time|manual} <args> <command...>`: Adds a job that runs a command on a certain trigger. Arguments depend on the trigger.
 - [x] `/remove_job <index>`: Removes the job with the given index. Use `*` to remove all.
+- [x] `/run_job <index>`: Runs the job with the given index.
 
 ## Gameplay
 

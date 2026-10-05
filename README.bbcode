@@ -19,8 +19,9 @@ Required parameters are shown with <>, optional with [], choices with {}.
 [table]
 [tr][th]Command[/th][th]Description[/th][/tr]
 [tr][td]/jobs[/td][td]Lists all jobs along with their index, trigger, arguments and command.[/td][/tr]
-[tr][td]/add_job {startup|shutdown|gameover|spawn|time} <args> <command...>[/td][td]Adds a job that runs a command on a certain trigger. Arguments depend on the trigger.[/td][/tr]
+[tr][td]/add_job {startup|shutdown|gameover|spawn|time|manual} <args> <command...>[/td][td]Adds a job that runs a command on a certain trigger. Arguments depend on the trigger. manual jobs only run via /run_job.[/td][/tr]
 [tr][td]/remove_job <index>[/td][td]Removes the job with the given index. Use * to remove all.[/td][/tr]
+[tr][td]/run_job <index>[/td][td]Runs the job with the given index.[/td][/tr]
 [/table]
 Any command works, including built-in game commands.
 [b]Examples:[/b]

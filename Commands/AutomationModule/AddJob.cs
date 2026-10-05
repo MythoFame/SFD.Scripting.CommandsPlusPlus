@@ -13,7 +13,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             if (tokens.Length < 2)
             {
-                Game.ShowChatMessage("Usage: /add_job {startup|shutdown|gameover|spawn|time} <args> <command...>", Color.Red, uid);
+                Game.ShowChatMessage("Usage: /add_job {startup|shutdown|gameover|spawn|time|manual} <args> <command...>", Color.Red, uid);
                 return;
             }
 
