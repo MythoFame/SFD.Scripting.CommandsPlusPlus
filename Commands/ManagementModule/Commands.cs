@@ -36,8 +36,8 @@ public partial class GameScript : GameScriptInterfaceExtended
             {
                 CommandHandler.Command[] visible = [.. module.Commands
                     .OrderBy(command => command.Name)
-                    .Where(command => (!command.ModeratorOnly || args.User.IsModerator)
-                        && (!command.HostOnly || args.User.IsHost))];
+                    .Where(command => (command.Permission != CommandHandler.Permission.ModeratorOnly || args.User.IsModerator)
+                        && (command.Permission != CommandHandler.Permission.HostOnly || args.User.IsHost))];
 
                 if (visible.Length == 0) continue;
 
@@ -51,8 +51,8 @@ public partial class GameScript : GameScriptInterfaceExtended
                     if (command.Description != null)
                         displayText += command.Description;
 
-                    Color color = command.HostOnly ? Color.Magenta
-                        : command.ModeratorOnly ? Color.Yellow
+                    Color color = command.Permission == CommandHandler.Permission.HostOnly ? Color.Magenta
+                        : command.Permission == CommandHandler.Permission.ModeratorOnly ? Color.Yellow
                         : Color.Green;
 
                     Game.ShowChatMessage(displayText, color, uid);

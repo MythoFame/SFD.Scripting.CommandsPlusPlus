@@ -91,7 +91,7 @@ public partial class GameScript : GameScriptInterfaceExtended
         /// overrode them. Captured on first restriction, restored on
         /// <see cref="Allow"/>.
         /// </summary>
-        private readonly Dictionary<CommandHandler.Command, (bool hostOnly, bool moderatorOnly)> _originalPermissions = [];
+        private readonly Dictionary<CommandHandler.Command, CommandHandler.Permission> _originalPermissions = [];
 
         /// <summary>
         /// Called once per allow/restrict transition. React to the restriction
@@ -124,9 +124,9 @@ public partial class GameScript : GameScriptInterfaceExtended
             foreach (CommandHandler.Command command in Commands)
             {
                 if (!_originalPermissions.ContainsKey(command))
-                    _originalPermissions[command] = (command.HostOnly, command.ModeratorOnly);
+                    _originalPermissions[command] = command.Permission;
 
-                command.HostOnly = true;
+                command.Permission = CommandHandler.Permission.HostOnly;
             }
 
             IsRestricted = true;
@@ -143,8 +143,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             foreach (var entry in _originalPermissions)
             {
-                entry.Key.HostOnly = entry.Value.hostOnly;
-                entry.Key.ModeratorOnly = entry.Value.moderatorOnly;
+                entry.Key.Permission = entry.Value;
             }
 
             _originalPermissions.Clear();
@@ -166,13 +165,12 @@ public partial class GameScript : GameScriptInterfaceExtended
         /// Helper to create, configure and track a command owned by this module.
         /// </summary>
         protected CommandHandler.Command AddCommand(string name, Action<UserMessageCallbackArgs> onCommand,
-            string description = null, bool hostOnly = false, bool moderatorOnly = false)
+            string description = null, CommandHandler.Permission permission = CommandHandler.Permission.All)
         {
             CommandHandler.Command command = new(name, onCommand)
             {
                 Description = description,
-                HostOnly = hostOnly,
-                ModeratorOnly = moderatorOnly
+                Permission = permission
             };
 
             Commands.Add(command);

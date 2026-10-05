@@ -18,52 +18,52 @@ public partial class GameScript : GameScriptInterfaceExtended
         {
             AddCommand("rsboard", Rsboard,
                 "- Resets the stored win ratio statistics. Moderator-only.",
-                moderatorOnly: true);
+                permission: CommandHandler.Permission.ModeratorOnly);
             AddCommand("wpnspawn", Wpnspawn,
                 "[true|false] - Toggles or sets whether weapons spawn on the map. Moderator-only, not persisted.",
-                moderatorOnly: true);
+                permission: CommandHandler.Permission.ModeratorOnly);
             AddCommand("refill_all", RefillAll,
                 "[true|false] - Toggles or sets whether ammo is constantly refilled for all players.",
-                hostOnly: true);
+                permission: CommandHandler.Permission.HostOnly);
             AddCommand("grab", Grab,
                 "[true|false] - Toggles or sets whether players are able to grab and throw each other.",
-                hostOnly: true);
+                permission: CommandHandler.Permission.HostOnly);
             AddCommand("throw", ThrowCommand,
                 "[true|false] - Toggles or sets whether players can throw objects.",
-                hostOnly: true);
+                permission: CommandHandler.Permission.HostOnly);
             AddCommand("regen", Regen,
                 "<hp> - Sets health regenerated per second for all players. Set to `0` or below to disable.",
-                hostOnly: true);
+                permission: CommandHandler.Permission.HostOnly);
             AddCommand("dmg_numbers", DmgNumbers,
                 "[true|false] [players|objects|all] - Toggles or sets whether damage is displayed.",
-                hostOnly: true);
+                permission: CommandHandler.Permission.HostOnly);
             AddCommand("speech", Speech,
                 "[true|false] - Toggles custom speech bubbles above players. Second parameter plays a sound when speech appears (default to `false`).",
-                hostOnly: true);
+                permission: CommandHandler.Permission.HostOnly);
             AddCommand("dropin", Dropin,
                 "<delay> - Sets the drop-in spawn delay. Set to `0` or below to disable.",
-                hostOnly: true);
+                permission: CommandHandler.Permission.HostOnly);
             AddCommand("respawn", Respawn,
                 "<delay> - Sets the custom respawn delay. Set to `0` or below to disable.",
-                hostOnly: true);
+                permission: CommandHandler.Permission.HostOnly);
             AddCommand("friendly_fire", FriendlyFire,
                 "[true|false] - Toggles friendly fire.",
-                hostOnly: true);
+                permission: CommandHandler.Permission.HostOnly);
             AddCommand("gravity", Gravity,
                 "<constant> - Sets a constant applied to gravity. Set to `0` to disable.",
-                hostOnly: true);
+                permission: CommandHandler.Permission.HostOnly);
             AddCommand("camera", Camera,
                 "{static|dynamic|individual} [zoom] - Sets camera type and optional zoom level for the current round. Not persisted.",
-                hostOnly: true);
+                permission: CommandHandler.Permission.HostOnly);
             AddCommand("gmover", Gmover,
                 "{true|false|players} - Controls automatic victory detection, i.e. whether the round may end. Host-only.",
-                hostOnly: true);
+                permission: CommandHandler.Permission.HostOnly);
             AddCommand("weather", Weather,
                 "<none|snow|rain> - Sets the weather. Moderator-only, not persisted.",
-                moderatorOnly: true);
+                permission: CommandHandler.Permission.ModeratorOnly);
             AddCommand("clear_obj", ClearObj,
                 "<id> - Removes all objects with the given ID. Moderator-only.",
-                moderatorOnly: true);
+                permission: CommandHandler.Permission.ModeratorOnly);
         }
     }
 }

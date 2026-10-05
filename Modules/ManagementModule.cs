@@ -22,10 +22,10 @@ public partial class GameScript : GameScriptInterfaceExtended
                 "[module] - Display all commands along with their help. If a module is provided, then display only that module's commands and help.");
             AddCommand("toggle_module", ToggleModule,
                 "<module> - Toggles whether a module is restricted. Restricted modules have all their commands limited to the host.",
-                hostOnly: true);
+                permission: CommandHandler.Permission.HostOnly);
             AddCommand("reset_modules", ResetModules,
                 "- Resets all modules to their default allowed state. Host-only, persisted.",
-                hostOnly: true);
+                permission: CommandHandler.Permission.HostOnly);
         }
     }
 }
