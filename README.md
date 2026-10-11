@@ -152,6 +152,7 @@ Light-hearted extras and visual gags. Permission varies per command.
 | `/clone <player> [team] [ai]` | Spawns a clone of a player, optionally on a given team with the given AI. Moderator-only. |
 | `/fart` | Makes you fart. |
 | `/suicide` | Die dramatically. |
+| `/img [bg\|fg]` | Renders the stored image at your position. Moderator-only. |
 
 ## ✍️ Special thanks
 
