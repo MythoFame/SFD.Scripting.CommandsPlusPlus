@@ -40,7 +40,7 @@ public partial class GameScript : GameScriptInterfaceExtended
                 "<player> [id] - Sets custom bullets for a player, or disables them if no ID is given.",
                 permission: CommandHandler.Permission.ModeratorOnly);
             AddCommand("img", Img,
-                "[bg|fg] - Renders the stored image at your position.",
+                "<index> [bg|fg] - Renders a stored image at your position.",
                 permission: CommandHandler.Permission.ModeratorOnly);
         }
     }

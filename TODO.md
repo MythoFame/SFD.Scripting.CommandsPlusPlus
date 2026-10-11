@@ -125,4 +125,4 @@ Lightweight fun commands for everyone unless noted otherwise.
 - [x] `/clone <player> [team] [ai]`: Spawns a clone of a player, optionally on a given team with the given AI. Moderator-only.
 - [x] `/fart`: Makes you fart.
 - [x] `/suicide`: Die dramatically.
-- [x] `/img [bg|fg]`: Renders the stored image at your position. Moderator-only.
+- [x] `/img <index> [bg|fg]`: Renders a stored image at your position. Moderator-only.
