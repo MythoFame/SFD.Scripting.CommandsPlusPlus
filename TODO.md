@@ -58,6 +58,7 @@ Custom gameplay rules. Host-only, persisted unless noted otherwise.
   - `/gmover players`: enables players-only mode — the round ends automatically when only bots are left. Persisted.
 - [x] `/weather <none|snow|rain>`: Sets the weather. Moderator-only, not persisted.
 - [x] `/clear_obj <id>`: Removes all objects with the given ID. Moderator-only.
+- [x] `/bottom <height>`: Sets the world bottom. Moderator-only, not persisted.
 - [x] `/wpnspawn [true|false]`: Toggles or sets whether weapons spawn on the map. Moderator-only, not persisted.
 - [x] `/camera {static|dynamic|individual} [zoom]`: Sets camera type and optional zoom level for the current round. Not persisted.
   - `/camera static`: sets static camera.

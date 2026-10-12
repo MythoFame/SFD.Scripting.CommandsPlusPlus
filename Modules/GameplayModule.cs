@@ -64,6 +64,9 @@ public partial class GameScript : GameScriptInterfaceExtended
             AddCommand("clear_obj", ClearObj,
                 "<id> - Removes all objects with the given ID.",
                 permission: CommandHandler.Permission.ModeratorOnly);
+            AddCommand("bottom", Bottom,
+                "<height> - Sets the world bottom, not persisted.",
+                permission: CommandHandler.Permission.ModeratorOnly);
         }
     }
 }
