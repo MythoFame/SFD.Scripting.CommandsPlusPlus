@@ -102,6 +102,9 @@ public partial class GameScript : GameScriptInterfaceExtended
             AddCommand("destructor", DestructorCommand,
                 "<player> - Toggles destructive bullets for a player.",
                 permission: CommandHandler.Permission.ModeratorOnly);
+            AddCommand("win", Win,
+                "<user> - Makes a user win upon game over.",
+                permission: CommandHandler.Permission.ModeratorOnly);
         }
     }
 }

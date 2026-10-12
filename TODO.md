@@ -114,6 +114,7 @@ Interact with players. Moderator-only.
 - [x] `/repulse <player> [area_size] [players|objects|all]`: Toggles repulsion of nearby players and/or objects away from a player.
 - [x] `/boost <player> <left|down|up|right> [speed]`: Boosts a player in a direction.
 - [x] `/destructor <player>`: Toggles destructive bullets for a player.
+- [x] `/win <user>`: Makes a user win upon game over. Moderator-only.
 
 ## Fun
 
