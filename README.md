@@ -84,6 +84,7 @@ Change how the match itself behaves. Persistent rules like respawns and physics 
 | `/weather <none\|snow\|rain>` | Sets the weather. Moderator-only, not persisted. |
 | `/clear_obj <id>` | Removes all objects with the given ID. Moderator-only. |
 | `/bottom <height>` | Sets the world bottom. Moderator-only, not persisted. |
+| `/score <amount>` | Sets the total score. Survival games only. Moderator-only, not persisted. |
 | `/wpnspawn [true\|false]` | Toggles or sets whether weapons spawn on the map. Moderator-only, not persisted. |
 | `/camera {static\|dynamic\|individual} [zoom]` | Sets camera type and optional zoom level for the current round. Not persisted. |
 | `/rsboard` | Resets the stored win ratio statistics. Moderator-only. |

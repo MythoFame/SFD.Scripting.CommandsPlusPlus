@@ -67,6 +67,9 @@ public partial class GameScript : GameScriptInterfaceExtended
             AddCommand("bottom", Bottom,
                 "<height> - Sets the world bottom, not persisted.",
                 permission: CommandHandler.Permission.ModeratorOnly);
+            AddCommand("score", Score,
+                "<amount> - Sets the total score (survival only), not persisted.",
+                permission: CommandHandler.Permission.ModeratorOnly);
         }
     }
 }
