@@ -136,6 +136,7 @@ Moderator tools to directly control players, their gear and movement.
 | `/magnet <player> [area_size] [players\|objects\|all]` | Toggles attraction of nearby players and/or objects toward a player. |
 | `/repulse <player> [area_size] [players\|objects\|all]` | Toggles repulsion of nearby players and/or objects away from a player. |
 | `/boost <player> <left\|down\|up\|right> [speed]` | Boosts a player in a direction. |
+| `/destructor <player>` | Toggles destructive bullets for a player. |
 
 ### Fun
 

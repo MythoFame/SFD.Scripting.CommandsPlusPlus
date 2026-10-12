@@ -99,6 +99,9 @@ public partial class GameScript : GameScriptInterfaceExtended
             AddCommand("boost", Boost,
                 "<player> <left|down|up|right> [speed] - Boosts a player in a direction.",
                 permission: CommandHandler.Permission.ModeratorOnly);
+            AddCommand("destructor", DestructorCommand,
+                "<player> - Toggles destructive bullets for a player.",
+                permission: CommandHandler.Permission.ModeratorOnly);
         }
     }
 }
