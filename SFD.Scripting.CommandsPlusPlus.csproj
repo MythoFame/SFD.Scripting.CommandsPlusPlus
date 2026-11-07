@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <RequiredGameSdkVersion>1.0.0+3196d654e97d246d45759eeca785e6c79709d716</RequiredGameSdkVersion>
+        <RequiredGameSdkVersion>1.0.0+1c75ae9d6d98d25c4b34afe528ecdab7ddc71be9</RequiredGameSdkVersion>
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
 
