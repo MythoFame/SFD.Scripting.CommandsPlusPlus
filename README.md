@@ -160,6 +160,10 @@ Light-hearted extras and visual gags. Permission varies per command.
 | `/effect <effect> [player]` | Plays an effect at a player's position, or yours if omitted. Moderator-only. |
 | `/sound <sound_id>` | Plays a sound. Moderator-only. |
 
+## 🖼️ Images
+
+`/img` renders custom images and animated GIFs in-game. Use the [SFD Image Generator](https://github.com/MythoFame/SFD.ImageGenerator) to convert an image into the script's storage format, then load it in-game and render it with `/img <index> [bg|fg]` at your position.
+
 ## ✍️ Special thanks
 
 - [MNC](https://steamcommunity.com/id/ManiacMNC/) for the banner.
