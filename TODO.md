@@ -130,3 +130,4 @@ Lightweight fun commands for everyone unless noted otherwise.
 - [x] `/fart`: Makes you fart.
 - [x] `/suicide`: Die dramatically.
 - [x] `/img <index> [bg|fg]`: Renders a stored image at your position. Moderator-only.
+- [x] `/effect <effect> [player]`: Plays an effect at a player's position, or yours if omitted. Moderator-only.

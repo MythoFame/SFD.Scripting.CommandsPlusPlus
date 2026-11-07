@@ -42,6 +42,9 @@ public partial class GameScript : GameScriptInterfaceExtended
             AddCommand("img", Img,
                 "<index> [bg|fg] - Renders a stored image at your position.",
                 permission: CommandHandler.Permission.ModeratorOnly);
+            AddCommand("effect", Effect,
+                "<effect> [player] - Plays an effect at a player's position, or yours if omitted.",
+                permission: CommandHandler.Permission.ModeratorOnly);
         }
     }
 }

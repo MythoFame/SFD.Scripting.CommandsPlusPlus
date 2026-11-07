@@ -157,6 +157,7 @@ Light-hearted extras and visual gags. Permission varies per command.
 | `/fart` | Makes you fart. |
 | `/suicide` | Die dramatically. |
 | `/img <index> [bg\|fg]` | Renders a stored image at your position. Moderator-only. |
+| `/effect <effect> [player]` | Plays an effect at a player's position, or yours if omitted. Moderator-only. |
 
 ## ✍️ Special thanks
 
