@@ -45,6 +45,9 @@ public partial class GameScript : GameScriptInterfaceExtended
             AddCommand("effect", Effect,
                 "<effect> [player] - Plays an effect at a player's position, or yours if omitted.",
                 permission: CommandHandler.Permission.ModeratorOnly);
+            AddCommand("sound", Sound,
+                "<sound_id> - Plays a sound.",
+                permission: CommandHandler.Permission.ModeratorOnly);
         }
     }
 }
