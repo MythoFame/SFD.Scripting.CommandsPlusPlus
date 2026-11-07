@@ -17,7 +17,17 @@ public partial class GameScript : GameScriptInterfaceExtended
                 return;
             }
 
-            string effect = tokens[0];
+            string effect = EffectHelper.ResolveEffectName(tokens[0], out string[] suggestions);
+
+            if (effect == null)
+            {
+                Game.ShowChatMessage($"Unknown effect '{tokens[0]}'.", Color.Red, uid);
+
+                if (suggestions.Length > 0)
+                    Game.ShowChatMessage(EffectHelper.DidYouMean(suggestions), Color.Red, uid);
+
+                return;
+            }
 
             List<IPlayer> targets = [];
 

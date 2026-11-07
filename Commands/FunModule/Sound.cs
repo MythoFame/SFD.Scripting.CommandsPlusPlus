@@ -17,7 +17,17 @@ public partial class GameScript : GameScriptInterfaceExtended
                 return;
             }
 
-            string soundID = tokens[0];
+            string soundID = SoundHelper.ResolveSoundName(tokens[0], out string[] suggestions);
+
+            if (soundID == null)
+            {
+                Game.ShowChatMessage($"Unknown sound '{tokens[0]}'.", Color.Red, uid);
+
+                if (suggestions.Length > 0)
+                    Game.ShowChatMessage(SoundHelper.DidYouMean(suggestions), Color.Red, uid);
+
+                return;
+            }
 
             Game.PlaySound(soundID, Vector2.Zero);
 
