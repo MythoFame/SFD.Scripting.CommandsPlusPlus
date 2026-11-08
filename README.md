@@ -21,6 +21,20 @@ Use `/modules` to see all modules, `/commands [module]` to browse help, and `/to
 
 Required parameters are shown with `<>`, optional with `[]`, choices with `{}`.
 
+## 🎯 Target parsing
+
+Several commands take a `<player>` or `<user>` argument. These are resolved in the following order:
+
+1. **Slot index or range**: a number matches the game slot (e.g. `1`), and `start..end` matches an inclusive slot range (e.g. `1..4`).
+2. **Account name**: the literal account name, case-insensitive.
+3. **Player name**: the name shown above the character, case-insensitive.
+4. **Special tokens**:
+   - `me`: you, the one running the command.
+   - `*`: everyone.
+   - `?`: one random player.
+
+Arguments with spaces can be passed by wrapping them in double quotes: `/kill "my player"`. Unmatched quotes run to the end of the string.
+
 ## 🧩 Modules
 
 ### Management
