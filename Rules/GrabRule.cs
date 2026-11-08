@@ -5,30 +5,32 @@ namespace SFD.Scripting.CommandsPlusPlus;
 public partial class GameScript : GameScriptInterfaceExtended
 {
     /// <summary>
-    /// Prevents grabbing by dragging grabbers down. While enabled, every
-    /// update offsets the vertical position of grabbing players by -1,
-    /// which breaks their hold.
+    /// Prevents grabbing by dragging grabbers down. While grabbing is
+    /// suppressed, every update offsets the vertical position of grabbing
+    /// players by -1, which breaks their hold.
     /// </summary>
     public static class GrabRule
     {
-        private const string ENABLED_KEY = "CommandsPlusPlus.Rule.Grab.Enabled";
+        private const string SUPPRESSED_KEY = "CommandsPlusPlus.Rule.Grab.Suppressed";
 
         private static Events.UpdateCallback _update = null;
 
         /// <summary>
-        /// Gets or sets whether the rule is active. Backed directly by storage,
-        /// so there is no shadow state to drift. Setting it starts or stops
-        /// the update hook exactly once per transition.
+        /// Gets or sets whether grabbing is allowed. Backed directly by
+        /// storage, so there is no shadow state to drift. Setting it starts
+        /// or stops the update hook exactly once per transition.
         /// </summary>
-        public static bool IsEnabled
+        public static bool IsAllowed
         {
-            get => Game.LocalStorage.GetItem(ENABLED_KEY) as bool? ?? false;
+            get => !(Game.LocalStorage.GetItem(SUPPRESSED_KEY) as bool? ?? false);
             set
             {
-                if (IsEnabled == value) return;
+                bool suppressed = !value;
 
-                Game.LocalStorage.SetItem(ENABLED_KEY, value);
-                OnEnabled(value);
+                if ((Game.LocalStorage.GetItem(SUPPRESSED_KEY) as bool? ?? false) == suppressed) return;
+
+                Game.LocalStorage.SetItem(SUPPRESSED_KEY, suppressed);
+                OnSuppressed(suppressed);
             }
         }
 
@@ -37,13 +39,13 @@ public partial class GameScript : GameScriptInterfaceExtended
         /// </summary>
         public static void Initialize()
         {
-            if (IsEnabled)
-                OnEnabled(true);
+            if (Game.LocalStorage.GetItem(SUPPRESSED_KEY) as bool? ?? false)
+                OnSuppressed(true);
         }
 
-        private static void OnEnabled(bool enabled)
+        private static void OnSuppressed(bool suppressed)
         {
-            if (enabled)
+            if (suppressed)
             {
                 _update = Game.Events.StartUpdateCallback(OnUpdate);
             }

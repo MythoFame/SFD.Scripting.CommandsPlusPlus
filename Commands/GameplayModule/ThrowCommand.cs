@@ -21,7 +21,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             if (tokens.Length == 0)
             {
-                enable = !ThrowRule.IsEnabled;
+                enable = !ThrowRule.IsAllowed;
             }
             else if (!bool.TryParse(tokens[0], out enable))
             {
@@ -29,15 +29,15 @@ public partial class GameScript : GameScriptInterfaceExtended
                 return;
             }
 
-            if (enable == ThrowRule.IsEnabled)
+            if (enable == ThrowRule.IsAllowed)
             {
-                Game.ShowChatMessage($"Throwing is already {(enable ? "disabled" : "enabled")}.", Color.Yellow, uid);
+                Game.ShowChatMessage($"Throwing is already {(enable ? "enabled" : "disabled")}.", Color.Yellow, uid);
                 return;
             }
 
-            ThrowRule.IsEnabled = enable;
+            ThrowRule.IsAllowed = enable;
 
-            Game.ShowChatMessage($"Throwing {(enable ? "disabled" : "enabled")}.", Color.Green, uid);
+            Game.ShowChatMessage($"Throwing {(enable ? "enabled" : "disabled")}.", Color.Green, uid);
         }
     }
 }

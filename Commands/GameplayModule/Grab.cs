@@ -21,7 +21,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             if (tokens.Length == 0)
             {
-                enable = !GrabRule.IsEnabled;
+                enable = !GrabRule.IsAllowed;
             }
             else if (!bool.TryParse(tokens[0], out enable))
             {
@@ -29,15 +29,15 @@ public partial class GameScript : GameScriptInterfaceExtended
                 return;
             }
 
-            if (enable == GrabRule.IsEnabled)
+            if (enable == GrabRule.IsAllowed)
             {
-                Game.ShowChatMessage($"Grabbing is already {(enable ? "disabled" : "enabled")}.", Color.Yellow, uid);
+                Game.ShowChatMessage($"Grabbing is already {(enable ? "enabled" : "disabled")}.", Color.Yellow, uid);
                 return;
             }
 
-            GrabRule.IsEnabled = enable;
+            GrabRule.IsAllowed = enable;
 
-            Game.ShowChatMessage($"Grabbing {(enable ? "disabled" : "enabled")}.", Color.Green, uid);
+            Game.ShowChatMessage($"Grabbing {(enable ? "enabled" : "disabled")}.", Color.Green, uid);
         }
     }
 }

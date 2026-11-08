@@ -5,30 +5,32 @@ namespace SFD.Scripting.CommandsPlusPlus;
 public partial class GameScript : GameScriptInterfaceExtended
 {
     /// <summary>
-    /// Prevents throwing by untracking missiles. While enabled, every created
-    /// object gets TrackAsMissile(false), so thrown objects never become
-    /// live missiles.
+    /// Prevents throwing by untracking missiles. While throwing is
+    /// suppressed, every created object gets TrackAsMissile(false), so
+    /// thrown objects never become live missiles.
     /// </summary>
     public static class ThrowRule
     {
-        private const string ENABLED_KEY = "CommandsPlusPlus.Rule.Throw.Enabled";
+        private const string SUPPRESSED_KEY = "CommandsPlusPlus.Rule.Throw.Suppressed";
 
         private static Events.ObjectCreatedCallback _objectCreated = null;
 
         /// <summary>
-        /// Gets or sets whether the rule is active. Backed directly by storage,
-        /// so there is no shadow state to drift. Setting it starts or stops
-        /// the object hook exactly once per transition.
+        /// Gets or sets whether throwing is allowed. Backed directly by
+        /// storage, so there is no shadow state to drift. Setting it starts
+        /// or stops the object hook exactly once per transition.
         /// </summary>
-        public static bool IsEnabled
+        public static bool IsAllowed
         {
-            get => Game.LocalStorage.GetItem(ENABLED_KEY) as bool? ?? false;
+            get => !(Game.LocalStorage.GetItem(SUPPRESSED_KEY) as bool? ?? false);
             set
             {
-                if (IsEnabled == value) return;
+                bool suppressed = !value;
 
-                Game.LocalStorage.SetItem(ENABLED_KEY, value);
-                OnEnabled(value);
+                if ((Game.LocalStorage.GetItem(SUPPRESSED_KEY) as bool? ?? false) == suppressed) return;
+
+                Game.LocalStorage.SetItem(SUPPRESSED_KEY, suppressed);
+                OnSuppressed(suppressed);
             }
         }
 
@@ -37,13 +39,13 @@ public partial class GameScript : GameScriptInterfaceExtended
         /// </summary>
         public static void Initialize()
         {
-            if (IsEnabled)
-                OnEnabled(true);
+            if (Game.LocalStorage.GetItem(SUPPRESSED_KEY) as bool? ?? false)
+                OnSuppressed(true);
         }
 
-        private static void OnEnabled(bool enabled)
+        private static void OnSuppressed(bool suppressed)
         {
-            if (enabled)
+            if (suppressed)
             {
                 _objectCreated = Game.Events.StartObjectCreatedCallback(OnObjectCreated);
             }
