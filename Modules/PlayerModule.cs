@@ -64,7 +64,7 @@ public partial class GameScript : GameScriptInterfaceExtended
                 "<id> - Spawns an object with the given ID at your position.",
                 permission: CommandHandler.Permission.ModeratorOnly);
             AddCommand("revive", Revive,
-                "<player> - Revives a dead player.",
+                "<user> - Revives a dead user, or spawns their player if they don't have one.",
                 permission: CommandHandler.Permission.ModeratorOnly);
             AddCommand("refill", Refill,
                 "<player> - Refills a player's ammo as if they used an ammo stash.",

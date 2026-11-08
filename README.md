@@ -132,7 +132,7 @@ Moderator tools to directly control players, their gear and movement.
 | `/remove <player>` | Removes a player. |
 | `/dmg <player> <amount>` | Deals damage to a player. |
 | `/notarget <player>` | Toggles whether bots target a player. |
-| `/revive <player>` | Revives a dead player. |
+| `/revive <user>` | Revives a dead user, or spawns their player if they don't have one. Moderator-only. |
 | `/input <player>` | Toggles whether a player can provide input, effectively freezing or unfreezing them. |
 | `/tp <to>` | Teleports you to a player. |
 | `/tphere <player>` | Teleports a player to you. |

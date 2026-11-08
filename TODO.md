@@ -92,7 +92,7 @@ Interact with players. Moderator-only.
 - [x] `/remove <player>`: Removes a player.
 - [x] `/dmg <player> <amount>`: Deals damage to a player.
 - [x] `/notarget <player>`: Toggles whether bots target a player.
-- [x] `/revive <player>`: Revives a dead player.
+- [x] `/revive <user>`: Revives a dead user, or spawns their player if they don't have one. Moderator-only.
 - [x] `/input <player>`: Toggles whether a player can provide input, effectively freezing or unfreezing them.
 - [x] `/tp <to>`: Teleports you to a player.
 - [x] `/tphere <player>`: Teleports a player to you.

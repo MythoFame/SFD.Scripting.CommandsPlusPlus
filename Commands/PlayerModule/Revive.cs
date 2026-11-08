@@ -13,34 +13,52 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             if (tokens.Length != 1)
             {
-                Game.ShowChatMessage("Usage: /revive <player>", Color.Red, uid);
+                Game.ShowChatMessage("Usage: /revive <user>", Color.Red, uid);
                 return;
             }
 
-            IPlayer[] players = [.. ParseHelper.ParsePlayers(tokens[0], args.User)];
+            IUser[] users = [.. ParseHelper.ParseUsers(tokens[0], args.User)];
 
-            if (players.Length == 0)
+            if (users.Length == 0)
             {
-                Game.ShowChatMessage($"Player '{tokens[0]}' not found.", Color.Red, uid);
+                Game.ShowChatMessage($"User '{tokens[0]}' not found.", Color.Red, uid);
                 return;
             }
 
-            int affected = 0;
+            int revived = 0;
+            int spawned = 0;
             int skipped = 0;
 
-            foreach (IPlayer player in players)
+            foreach (IUser user in users)
             {
-                if (player == null || player.IsRemoved) continue;
+                if (user == null) continue;
 
-                if (PlayerHelper.Revive(player) != null)
-                    affected++;
+                IPlayer player = user.GetPlayer();
+
+                if (player == null)
+                {
+                    PlayerHelper.Spawn(user, PathGridHelper.GetRandomPathGridPosition(Random.Shared));
+                    spawned++;
+                }
+                else if (player.IsDead)
+                {
+                    PlayerHelper.Revive(player);
+                    revived++;
+                }
                 else
+                {
                     skipped++;
+                }
             }
 
-            if (affected > 0)
+            if (revived > 0)
             {
-                Game.ShowChatMessage($"Revived {affected} player(s).", Color.Green, uid);
+                Game.ShowChatMessage($"Revived {revived} player(s).", Color.Green, uid);
+            }
+
+            if (spawned > 0)
+            {
+                Game.ShowChatMessage($"Spawned {spawned} player(s).", Color.Green, uid);
             }
 
             if (skipped > 0)
