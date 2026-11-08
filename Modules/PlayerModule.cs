@@ -54,7 +54,7 @@ public partial class GameScript : GameScriptInterfaceExtended
             AddCommand("input", Input,
                 "<player> - Toggles whether a player can provide input, effectively freezing or unfreezing them.",
                 permission: CommandHandler.Permission.ModeratorOnly);
-            AddCommand("team", Team,
+            AddCommand("steam", Team,
                 "<player> <team> - Sets the team of a player.",
                 permission: CommandHandler.Permission.ModeratorOnly);
             AddCommand("burn", Burn,

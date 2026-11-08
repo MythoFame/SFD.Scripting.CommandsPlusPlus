@@ -13,7 +13,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             if (tokens.Length != 2)
             {
-                Game.ShowChatMessage("Usage: /team <player> <team>", Color.Red, uid);
+                Game.ShowChatMessage("Usage: /steam <player> <team>", Color.Red, uid);
                 return;
             }
 

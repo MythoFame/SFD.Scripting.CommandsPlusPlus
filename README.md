@@ -137,7 +137,7 @@ Moderator tools to directly control players, their gear and movement.
 | `/tp <to>` | Teleports you to a player. |
 | `/tphere <player>` | Teleports a player to you. |
 | `/tppos <player> <x> <y>` | Teleports a player to a world position. |
-| `/team <player> <team>` | Sets the team of a player. |
+| `/steam <player> <team>` | Sets the team of a player. |
 | `/trip <player>` | Trips a player, knocking them down. |
 | `/pos <player>` | Displays the world position of a player. Moderator-only. |
 | `/tag <player> [name\|status]` | Toggles nametag and status bar visibility for a player. |

@@ -97,7 +97,7 @@ Interact with players. Moderator-only.
 - [x] `/tp <to>`: Teleports you to a player.
 - [x] `/tphere <player>`: Teleports a player to you.
 - [x] `/tppos <player> <x> <y>`: Teleports a player to a world position.
-- [x] `/team <player> <team>`: Sets the team of a player.
+- [x] `/steam <player> <team>`: Sets the team of a player.
 - [x] `/trip <player>`: Trips a player, knocking them down.
 - [x] `/pos <player>`: Displays the world position of a player. Moderator-only.
 - [x] `/tag <player> [name|status]`: Toggles nametag and status bar visibility for a player.
