@@ -7,6 +7,7 @@
 Modular, persistent chat commands for Superfighters Deluxe
 
 [![GitHub License](https://img.shields.io/github/license/MythoFame/SFD.Scripting.CommandsPlusPlus)](LICENSE.txt)
+[![Steam Subscriptions](https://img.shields.io/steam/subscriptions/3835656968)](https://steamcommunity.com/sharedfiles/filedetails/?id=3835656968)
 
 ![Banner](.github/assets/banner.png)
 
