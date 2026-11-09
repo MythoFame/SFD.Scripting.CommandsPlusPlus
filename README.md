@@ -95,7 +95,7 @@ Change how the match itself behaves. Persistent rules like respawns and physics 
 | `/throw [true\|false]` | Toggles or sets whether players can throw objects. |
 | `/dmg_numbers [true\|false] [players\|objects\|all]` | Toggles or sets whether damage is displayed. |
 | `/dropin <delay>` | Sets the drop-in spawn delay. Set to `0` or below to disable. |
-| `/gmover {true\|false\|players}` | Controls automatic victory detection, i.e. whether the round may end. Host-only. `true`/`false` enables or disables game over for the current round (not persisted), `players` enables players-only mode — the round ends automatically when only bots are left (persisted). |
+| `/gmover {true\|false\|players}` | Controls automatic victory detection, i.e. whether the round may end. Host-only. `true`/`false` enables or disables game over for the current round (not persisted), `players` enables players-only mode; the round ends automatically when only bots are left (persisted). |
 | `/weather <none\|snow\|rain>` | Sets the weather. Moderator-only, not persisted. |
 | `/clear_obj <id>` | Removes all objects with the given ID. Moderator-only. |
 | `/bottom <height>` | Sets the world bottom. Moderator-only, not persisted. |
