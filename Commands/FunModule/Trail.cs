@@ -33,7 +33,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             TrailRule.SetTrail(args.User.AccountName, effect);
 
-            Game.ShowChatMessage($"Trail effect set to '{effect}'. Takes effect next round.", Color.Green, uid);
+            Game.ShowChatMessage($"Trail effect set to '{EffectHelper.GetDisplayName(effect)}'. Takes effect next round.", Color.Green, uid);
         }
     }
 }

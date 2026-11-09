@@ -68,7 +68,7 @@ public partial class GameScript : GameScriptInterfaceExtended
 
             if (affected == 0) return;
 
-            Game.ShowChatMessage($"Played effect '{effect}' for {affected} player(s).", Color.Green, uid);
+            Game.ShowChatMessage($"Played effect '{EffectHelper.GetDisplayName(effect)}' for {affected} player(s).", Color.Green, uid);
         }
     }
 }

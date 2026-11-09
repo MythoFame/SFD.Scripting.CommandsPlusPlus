@@ -6,29 +6,55 @@ public partial class GameScript : GameScriptInterfaceExtended
 {
     /// <summary>
     /// Helpers for resolving effect names against the game's
-    /// <c>EffectName</c> catalog, with fuzzy matching.
+    /// <c>EffectName</c> catalog, with fuzzy matching. Users type the
+    /// human-readable field names (e.g. <c>DustTrail</c>); the game
+    /// itself wants the raw values (e.g. <c>TR_D</c>).
     /// </summary>
     public static class EffectHelper
     {
         private const int MAX_SUGGESTIONS = 5;
 
-        private static readonly string[] _effectNames = [.. typeof(EffectName)
-            .GetFields(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static)
-            .Where(f => f.IsLiteral && !f.IsInitOnly && f.FieldType == typeof(string))
-            .Select(f => (string)f.GetRawConstantValue())
-            .Where(v => !string.IsNullOrEmpty(v))];
+        /// <summary>Human-readable field name to raw effect value.</summary>
+        private static readonly Dictionary<string, string> _effects = new(StringComparer.OrdinalIgnoreCase);
+
+        /// <summary>Raw effect value to human-readable field name.</summary>
+        private static readonly Dictionary<string, string> _names = [];
+
+        static EffectHelper()
+        {
+            foreach (var field in typeof(EffectName)
+                .GetFields(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static))
+            {
+                if (!field.IsLiteral || field.IsInitOnly || field.FieldType != typeof(string)) continue;
+
+                string value = (string)field.GetRawConstantValue();
+
+                if (string.IsNullOrEmpty(value)) continue;
+
+                _effects[field.Name] = value;
+                _names.TryAdd(value, field.Name);
+            }
+        }
 
         /// <summary>
-        /// All known effect names from the game's catalog.
+        /// All known human-readable effect names from the game's catalog.
         /// </summary>
-        public static string[] GetEffectNames() => _effectNames;
+        public static string[] GetEffectNames() => [.. _effects.Keys];
 
         /// <summary>
-        /// Fuzzy-matches an effect name. Returns null when nothing matches
-        /// unambiguously; suggestions holds close candidates then.
+        /// Fuzzy-matches a human-readable effect name. Returns the raw
+        /// effect value, or null when nothing matches unambiguously;
+        /// suggestions holds close candidate names then.
         /// </summary>
         public static string ResolveEffectName(string input, out string[] suggestions) =>
-            Resolve(_effectNames, input, out suggestions);
+            Resolve([.. _effects.Keys], input, out suggestions) is string name ? _effects[name] : null;
+
+        /// <summary>
+        /// Maps a raw effect value back to its human-readable name,
+        /// or the value itself when unknown.
+        /// </summary>
+        public static string GetDisplayName(string value) =>
+            value != null && _names.TryGetValue(value, out string name) ? name : value;
 
         /// <summary>
         /// Formats suggestions as a "Did you mean ...?" message.
