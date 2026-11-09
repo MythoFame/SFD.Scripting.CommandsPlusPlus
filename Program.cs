@@ -32,6 +32,7 @@ public partial class GameScript : GameScriptInterfaceExtended
         FriendlyFireRule.Initialize();
         GravityRule.Initialize();
         SpectationRule.Initialize();
+        TrailRule.Initialize();
         JobsRule.Initialize();
     }
 }
