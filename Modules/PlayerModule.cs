@@ -105,6 +105,12 @@ public partial class GameScript : GameScriptInterfaceExtended
             AddCommand("win", Win,
                 "<user> - Makes a user win upon game over.",
                 permission: CommandHandler.Permission.ModeratorOnly);
+            AddCommand("strength", Strength,
+                "<player> [time] - Gives a player a strength boost, optionally for the given time in ms (default 10000).",
+                permission: CommandHandler.Permission.ModeratorOnly);
+            AddCommand("speed", Speed,
+                "<player> [time] - Gives a player a speed boost, optionally for the given time in ms (default 10000).",
+                permission: CommandHandler.Permission.ModeratorOnly);
         }
     }
 }
