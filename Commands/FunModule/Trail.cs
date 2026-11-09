@@ -11,9 +11,19 @@ public partial class GameScript : GameScriptInterfaceExtended
             string[] tokens = [.. ParseHelper.SplitArguments(args.CommandArguments)];
             int uid = args.User?.UserIdentifier ?? -1;
 
-            if (tokens.Length != 1)
+            if (tokens.Length > 1)
             {
-                Game.ShowChatMessage("Usage: /trail <effect>", Color.Red, uid);
+                Game.ShowChatMessage("Usage: /trail [effect]", Color.Red, uid);
+                return;
+            }
+
+            if (args.User == null) return;
+
+            if (tokens.Length == 0)
+            {
+                TrailRule.ClearTrail(args.User.AccountName);
+
+                Game.ShowChatMessage("Trail effect cleared. Takes effect next round.", Color.Green, uid);
                 return;
             }
 
@@ -28,8 +38,6 @@ public partial class GameScript : GameScriptInterfaceExtended
 
                 return;
             }
-
-            if (args.User == null) return;
 
             TrailRule.SetTrail(args.User.AccountName, effect);
 

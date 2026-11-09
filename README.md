@@ -176,7 +176,7 @@ Light-hearted extras and visual gags. Permission varies per command.
 | `/img <index> [bg\|fg]` | Renders a stored image at your position. Moderator-only. |
 | `/effect <effect> [player]` | Plays an effect at a player's position, or yours if omitted. Moderator-only. |
 | `/sound <sound_id>` | Plays a sound. Moderator-only. |
-| `/trail <effect>` | Sets the trail effect. Moderator-only. |
+| `/trail [effect]` | Sets the trail effect, or clears it if omitted. Moderator-only. |
 
 ## 🖼️ Images
 

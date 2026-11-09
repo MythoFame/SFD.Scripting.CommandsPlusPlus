@@ -35,6 +35,12 @@ public partial class GameScript : GameScriptInterfaceExtended
             Game.LocalStorage.GetItem(GetKey(accountName)) as string;
 
         /// <summary>
+        /// Erases a user's saved trail effect.
+        /// </summary>
+        public static void ClearTrail(string accountName) =>
+            Game.LocalStorage.RemoveItem(GetKey(accountName));
+
+        /// <summary>
         /// Starts the update hook. Call once when the world is live.
         /// </summary>
         public static void Initialize()

@@ -49,7 +49,7 @@ public partial class GameScript : GameScriptInterfaceExtended
                 "<sound_id> - Plays a sound.",
                 permission: CommandHandler.Permission.ModeratorOnly);
             AddCommand("trail", Trail,
-                "<effect> - Sets the trail effect.",
+                "[effect] - Sets the trail effect, or clears it if omitted.",
                 permission: CommandHandler.Permission.ModeratorOnly);
         }
     }
