@@ -157,6 +157,7 @@ Moderator tools to directly control players, their gear and movement.
 | `/win <user>` | Makes a user win upon game over. Moderator-only. |
 | `/strength <player> [time]` | Gives a player a strength boost, optionally for the given time in ms (default 10000). Moderator-only. |
 | `/speed <player> [time]` | Gives a player a speed boost, optionally for the given time in ms (default 10000). Moderator-only. |
+| `/heal <player> [amount]` | Heals a player by the given amount, or to full health if omitted. Moderator-only. |
 
 ### Fun
 

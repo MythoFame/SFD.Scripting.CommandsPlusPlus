@@ -111,6 +111,9 @@ public partial class GameScript : GameScriptInterfaceExtended
             AddCommand("speed", Speed,
                 "<player> [time] - Gives a player a speed boost, optionally for the given time in ms (default 10000).",
                 permission: CommandHandler.Permission.ModeratorOnly);
+            AddCommand("heal", Heal,
+                "<player> [amount] - Heals a player by the given amount, or to full health if omitted.",
+                permission: CommandHandler.Permission.ModeratorOnly);
         }
     }
 }
